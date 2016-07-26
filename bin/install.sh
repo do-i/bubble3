@@ -5,7 +5,7 @@
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
 
-# update
+# skip package update if "skip" argument is specified.
 if [ "$1" != "skip" ]; then
   sudo apt-get -y update
 fi
@@ -14,7 +14,7 @@ fi
 sudo apt-get install -y dnsmasq hostapd
 
 # Check dnsmasq installation
-if [-f /etc/dnsmasq.conf ]; then
+if [ -f /etc/dnsmasq.conf ]; then
   echo "[Ok] dnsmasq"
 else
   echo "[Error] dnsmasq is not installed correctly"
@@ -69,7 +69,7 @@ sudo ifdown wlan0; sudo ifup wlan0
 if ifconfig | grep -q 192.168.8.64; then
   echo "wlan0 interface is up!"
 else
-  echo "Error: wlan0 interface configuration. Check the interfaces."
+  echo "[Error] wlan0 interface configuration. Check the interfaces."
   exit 1
 fi
 
@@ -141,15 +141,43 @@ bogus-priv
 dhcp-range=192.168.8.70,192.168.8.86,12h
 EOF
 
-
 # Set up IPV4 Forwarding so that device connected to pi via wlan0 can use eth0
-# TODO WIP
+sudo mv /etc/sysctl.conf /etc/sysctl.conf.orig
+sudo tee /etc/sysctl.conf <<EOF
+net.ipv4.ip_forward=1
+EOF
+
+# Activate IP Forwarding
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+# Allow wifi clients to access to internet via eth0
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+# Save iptables in file so the config is applied every time we reboot the Pi
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+sudo mv /etc/rc.local /etc/rc.local.orig
+sudo tee /etc/rc.local <<EOF
+#!/bin/sh -e
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+iptables-restore < /etc/iptables.ipv4.nat
+exit 0
+EOF
+
+# Restart Services
+sudo service hostapd start
+sudo service dnsmasq start
 
 # Install web server
 sudo apt-get install -y apache2
 
 if [ ! -d /var/www/html ]; then
-  echo "apache2 failed to install"
+  echo "[Error] apache2 failed to install"
   exit 1
 fi
 
@@ -189,7 +217,7 @@ curl -ksL https://github.com/do-i/bubble3/archive/master.tar.gz | tar xzv
 if [ -d bubble3-master ]; then
   echo "bubble3-master installed"
 else
-  echo "unable to install bubble3"
+  echo "[Error] unable to install bubble3"
   exit 1
 fi
 
@@ -198,7 +226,12 @@ cd bubble3-master/bin
 ./bd.sh clean
 
 # copy file_lister.py to /usr/local/bin/file_lister.py
-sudo cp ~/bubble3-master/bin/file_lister.py /usr/local/bin/file_lister.py
+if [ -f ~/bubble3-master/bin/file_lister.py ]; then
+  sudo cp ~/bubble3-master/bin/file_lister.py /usr/local/bin/file_lister.py
+else
+  echo "[Error] file_lister.py does not exit."
+  exit 1
+fi
 
 # ensure the python script is executable
 sudo chmod +x /usr/local/bin/file_lister.py
@@ -220,4 +253,4 @@ sudo mount -a
 # kick off generate script
 /usr/local/bin/file_lister.py
 
-echo "Bubble3 is installed ... [OK]"
+echo "[Ok] End of install script. Check for any errors."
