@@ -21,7 +21,6 @@ else
   exit 1
 fi
 
-
 # Disable DHCP
 if grep -q "denyinterfaces wlan0" /etc/dhcpcd.conf
 then
@@ -114,6 +113,29 @@ wpa_passphrase=raspberry
 # Use AES, instead of TKIP
 rsn_pairwise=CCMP
 EOF
+
+# Update hostapd
+sudo mv /etc/default/hostapd /etc/default/hostapd.orig
+sudo tee /etc/default/hostapd <<EOF
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+EOF
+
+# Configure dnsmasq
+# TODO reconsider DNS server IP Address
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+sudo tee /etc/dnsmasq.conf <<EOF
+interface=wlan0
+listen-address=192.168.8.64
+bind-interfaces
+server=8.8.8.8       # Forward DNS requests to Google DNS
+domain-needed
+bogus-priv
+dhcp-range=192.168.8.70,192.168.8.86,12h
+EOF
+
+
+# Set up IPV4 Forwarding so that device connected to pi via wlan0 can use eth0
+# TODO WIP
 
 # Install web server
 sudo apt-get install -y apache2
