@@ -1,3 +1,7 @@
+/*!
+ * Copyright 2016 Joji Doi
+ * Licensed under the MIT license
+ */
 $.getJSON("data/video_list.json", function(result) {
   $.each(result, function(i, item) {
     $("#mediafiles").append(new Option(item.substring(0, item.length - 4), item));

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Copyright (c) 2016 Joji Doi
 # This bash script automates manual installation of raspbian OS
 # Require sdcard to be unmounted and no partition should be allocated
 DEVICE_NAME="${1}"

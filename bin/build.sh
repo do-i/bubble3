@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Copyright (c) 2016 Joji Doi
 # This script creates a compressed tar file.
 # Run this script in bin/
 BIN_DIR=$(pwd)
