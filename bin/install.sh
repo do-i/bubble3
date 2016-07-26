@@ -13,11 +13,19 @@ fi
 # Install dnsmasq hostapd for access point
 sudo apt-get install -y dnsmasq hostapd
 
+# Check dnsmasq installation
+if [-f /etc/dnsmasq.conf ]; then
+  echo "[Ok] dnsmasq"
+else
+  echo "[Error] dnsmasq is not installed correctly"
+  exit 1
+fi
+
 # Check hostapd installation
 if [ -d /etc/hostapd ]; then
   echo "[Ok] hostapd"
 else
-  echo "[Error] hostapd not installed correctly"
+  echo "[Error] hostapd is not installed correctly"
   exit 1
 fi
 
