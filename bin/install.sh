@@ -8,6 +8,20 @@ if [ "$1" != "skip" ]; then
   sudo apt-get -y update
 fi
 
+# Install dnsmasq hostapd for access point
+sudo apt-get install -y dnsmasq hostapd
+
+# Disable DHCP
+if grep -q "denyinterfaces wlan0" /etc/dhcpcd.conf
+then
+  echo "Configuration is already done."
+else
+  echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
+fi
+
+# Static IP Address
+
+
 # Install software
 sudo apt-get install -y apache2
 
