@@ -181,7 +181,7 @@ sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo mv /etc/rc.local /etc/rc.local.orig
-sudo cp ${PI_HOME}/bin/config/rc.local /etc/rc.local
+sudo cp ${PI_HOME}/bubble3-master/bin/config/rc.local /etc/rc.local
 
 # Restart Services
 sudo service hostapd start
