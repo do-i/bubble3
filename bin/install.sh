@@ -162,15 +162,7 @@ sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo mv /etc/rc.local /etc/rc.local.orig
-sudo tee /etc/rc.local <<EOF
-#!/bin/sh -e
-_IP=$(hostname -I) || true
-if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
-fi
-iptables-restore < /etc/iptables.ipv4.nat
-exit 0
-EOF
+sudo cp ${PI_HOME}/bin/config/rc.local /etc/rc.local
 
 # Restart Services
 sudo service hostapd start
