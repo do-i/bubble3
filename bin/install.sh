@@ -6,6 +6,25 @@
 # and configure Bubble
 
 PI_HOME=/home/pi
+cd ${PI_HOME}
+
+# download the latest bubble3 repo in tar.gz and unpack the contents into bubble3-master
+if [ -d ${PI_HOME}/bubble3-master ]; then
+  rm -r ${PI_HOME}/bubble3-master
+fi
+
+curl -skL https://github.com/do-i/bubble3/archive/master.tar.gz | tar xzv
+
+if [ -d ${PI_HOME}/bubble3-master ]; then
+  echo "bubble3-master installed"
+else
+  echo "[Error] unable to install bubble3"
+  exit 1
+fi
+
+###
+# TODO move rest of script to other file so that install.sh is minimal
+###
 
 # skip package update if "skip" argument is specified.
 if [ "$1" != "skip" ]; then
@@ -202,19 +221,6 @@ for afile in $(ls /var/www/html); do
     rm -rf "/var/www/html/$afile"
   fi
 done
-
-# download the latest bubble3 repo in tar.gz and unpack the contents into bubble3-master
-if [ -d ${PI_HOME}/bubble3-master ]; then
-  rm -r ${PI_HOME}/bubble3-master
-fi
-curl -skL https://github.com/do-i/bubble3/archive/master.tar.gz | tar xzv
-
-if [ -d ${PI_HOME}/bubble3-master ]; then
-  echo "bubble3-master installed"
-else
-  echo "[Error] unable to install bubble3"
-  exit 1
-fi
 
 # build and deploy web to apache server /var/www/html
 cd ${PI_HOME}/bubble3-master/bin
