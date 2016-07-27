@@ -5,6 +5,8 @@
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
 
+PI_HOME=/home/pi
+
 # skip package update if "skip" argument is specified.
 if [ "$1" != "skip" ]; then
   sudo apt-get -y update
@@ -38,7 +40,7 @@ else
 fi
 
 # Static IP Address configuration
-sudo mv /etc/network/interfaces /etc/network/interfaces.orig
+sudo mv /etc/network/interfaces /etc/network/interfaces.old
 sudo tee /etc/network/interfaces <<EOF
 source-directory /etc/network/interfaces.d
 
@@ -123,14 +125,14 @@ rsn_pairwise=CCMP
 EOF
 
 # Update hostapd
-sudo mv /etc/default/hostapd /etc/default/hostapd.orig
+sudo mv /etc/default/hostapd /etc/default/hostapd.old
 sudo tee /etc/default/hostapd <<EOF
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 EOF
 
 # Configure dnsmasq
 # TODO reconsider DNS server IP Address
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old
 sudo tee /etc/dnsmasq.conf <<EOF
 interface=wlan0
 listen-address=192.168.8.64
@@ -139,10 +141,11 @@ server=8.8.8.8       # Forward DNS requests to Google DNS
 domain-needed
 bogus-priv
 dhcp-range=192.168.8.70,192.168.8.86,12h
+address=/bubble/192.168.8.64
 EOF
 
 # Set up IPV4 Forwarding so that device connected to pi via wlan0 can use eth0
-sudo mv /etc/sysctl.conf /etc/sysctl.conf.orig
+sudo mv /etc/sysctl.conf /etc/sysctl.conf.old
 sudo tee /etc/sysctl.conf <<EOF
 net.ipv4.ip_forward=1
 EOF
@@ -199,7 +202,7 @@ fi
 sudo mount -a
 
 # make sure that work directory is home directory
-cd ~
+cd ${PI_HOME}
 
 # delete previously installed pages except ext-content
 for afile in $(ls /var/www/html); do
@@ -209,12 +212,12 @@ for afile in $(ls /var/www/html); do
 done
 
 # download the latest bubble3 repo in tar.gz and unpack the contents into bubble3-master
-if [ -d bubble3-master ]; then
-  rm -r bubble3-master
+if [ -d ${PI_HOME}/bubble3-master ]; then
+  rm -r ${PI_HOME}/bubble3-master
 fi
-curl -ksL https://github.com/do-i/bubble3/archive/master.tar.gz | tar xzv
+curl -skL https://github.com/do-i/bubble3/archive/master.tar.gz | tar xzv
 
-if [ -d bubble3-master ]; then
+if [ -d ${PI_HOME}/bubble3-master ]; then
   echo "bubble3-master installed"
 else
   echo "[Error] unable to install bubble3"
@@ -222,12 +225,12 @@ else
 fi
 
 # build and deploy web to apache server /var/www/html
-cd bubble3-master/bin
+cd ${PI_HOME}/bubble3-master/bin
 ./bd.sh clean
 
 # copy file_lister.py to /usr/local/bin/file_lister.py
-if [ -f ~/bubble3-master/bin/file_lister.py ]; then
-  sudo cp ~/bubble3-master/bin/file_lister.py /usr/local/bin/file_lister.py
+if [ -f ${PI_HOME}/bubble3-master/bin/file_lister.py ]; then
+  sudo cp ${PI_HOME}/bubble3-master/bin/file_lister.py /usr/local/bin/file_lister.py
 else
   echo "[Error] file_lister.py does not exit."
   exit 1
