@@ -26,6 +26,7 @@ sudo reboot
 ```
 
 #### Step 5: Connect
-- Connect your device to BrightLink SSIDotyth, Password: raspberry
-- Open your web browser on 192.168.8.64 or [http://bubble](http://bubble "title")
-- Note: An article on [Pi Router](https://ronnyvdbr.github.io/r "title") (totally unrelated but interesting nonetheless)
+- Connect your device to WiFi Access Point
+  - SSID: BrightLink
+  - PASS: raspberry
+- Open your web browser on  [http://bubble](http://bubble "bubble")
