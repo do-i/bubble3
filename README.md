@@ -5,17 +5,17 @@
 - Check that the SD card does not have partitions
 - Example:
 ```sh
-curl -skL "https://raw.githubusercontent.com/do-i/bubble/master/raspbianizer3.sh" | sudo bash -s /dev/sdx"
+export BRANCH=<branch name> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/raspbianizer.sh" | sudo bash -s /dev/sdx
 ```
 
 #### Step 2: Boot-up Raspberry Pi3 using SD card & SSH
-- Take out the CD card from your computer and put it in the Raspberry Pi
+- Take out the SD card from your computer and put it in the Raspberry Pi
 - Check that the Cat 5 cable connects between your router and the Raspberry Pi
 - Ensure the USB holding your data is connected to the Pi before powering up
 
 #### Step 3: Install & Configure
 ```sh
-curl -skL "https://raw.githubusercontent.com/do-i/bubble3/master/bin/install.sh" | sudo bash
+export BRANCH=<branch name> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: A great [instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostpad/ "Title") on this step can be found at
 
