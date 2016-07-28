@@ -9,7 +9,7 @@ curl -skL "https://raw.githubusercontent.com/do-i/bubble/master/raspbianizer3.sh
 ```
 
 #### Step 2: Boot-up Raspberry Pi3 using SD card & SSH
-- Take out the CD card from your computer and put it in the Raspberry Pi
+- Take out the SD card from your computer and put it in the Raspberry Pi
 - Check that the Cat 5 cable connects between your router and the Raspberry Pi
 - Ensure the USB holding your data is connected to the Pi before powering up
 
