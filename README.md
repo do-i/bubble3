@@ -1,5 +1,5 @@
 # Bubble 3
-### Setup Raspberry Pi with Rappbian Jessie Lite (headless mode)
+### Setup Raspberry Pi with Raspbian Jessie Lite (headless mode)
 #### Step 1: Run raspbianizer3.sh
 - Specify the correct device path to the fresh SD card (e.g. /dev/sdd, /dev/sde, or /dev/sdx)
 - Check that the SD card does not have partitions
