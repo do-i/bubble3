@@ -5,7 +5,7 @@
 - Check that the SD card does not have partitions
 - Example:
 ```sh
-curl -skL "https://raw.githubusercontent.com/do-i/bubble/master/raspbianizer3.sh" | sudo bash -s /dev/sdx
+export BRANCH=<branch name> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/raspbianizer3.sh" | sudo bash -s /dev/sdx
 ```
 
 #### Step 2: Boot-up Raspberry Pi3 using SD card & SSH
