@@ -27,7 +27,7 @@ else
   exit 1
 fi
 
-bash ${BUBBLE_DIR}/bin/network_setup.bash ${BUBBLE_DIR} \
-&& bash ${BUBBLE_DIR}/bin/webapp_setup.bash ${BUBBLE_DIR}
+bash ${BUBBLE_DIR}/bin/network-setup.bash ${BUBBLE_DIR} \
+&& bash ${BUBBLE_DIR}/bin/webapp-setup.bash ${BUBBLE_DIR}
 
 echo "[Ok] End of install script. Check for any errors."
