@@ -15,7 +15,7 @@ curl -skL "https://raw.githubusercontent.com/do-i/bubble/master/raspbianizer3.sh
 
 #### Step 3: Install & Configure
 ```sh
-curl -skL "https://raw.githubusercontent.com/do-i/bubble3/master/bin/install.sh" | bash
+export BRANCH=<branch name> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: A great [instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostpad/ "Title") on this step can be found at
 

@@ -54,7 +54,7 @@ sudo chmod +x /usr/local/bin/file_lister.py
 sudo apt-get -y install upstart dbus-x11
 
 # create upstart job configuration file
-sudo cp ${BUBBLE_DIR}/bin/file_lister/file_lister.conf /etc/init/file_lister.conf
+sudo cp ${BUBBLE_DIR}/bin/config/file_lister.conf /etc/init/file_lister.conf
 
 # mount the usb device so that web page can acess to files on the usb thumb
 sudo mount -a
