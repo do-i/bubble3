@@ -4,8 +4,13 @@
 #
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
-PI_HOME=/home/pi
-cd ${PI_HOME}
+
+if [ "$1" == "" ]; then
+  echo "Specify <bubble_dir>"
+  exit 1
+fi
+
+${BUBBLE_DIR}=$1
 
 # Install web server
 sudo apt-get install -y apache2
@@ -29,12 +34,6 @@ if [ "" == "$(grep /dev/sda1 /etc/fstab)" ]; then
 EOF
 fi
 
-# mount the usb device so that web page can acess to files on the usb thumb
-sudo mount -a
-
-# make sure that work directory is home directory
-cd ${PI_HOME}
-
 # delete previously installed pages except ext-content
 for afile in $(ls /var/www/html); do
   if [ "$afile" != "ext-content" ]; then
@@ -43,16 +42,11 @@ for afile in $(ls /var/www/html); do
 done
 
 # build and deploy web to apache server /var/www/html
-cd ${PI_HOME}/bubble3-master/bin
-./bd.sh clean
+cd ${BUBBLE_DIR}/bin
+./bd.sh
 
 # copy file_lister.py to /usr/local/bin/file_lister.py
-if [ -f ${PI_HOME}/bubble3-master/bin/file_lister.py ]; then
-  sudo cp ${PI_HOME}/bubble3-master/bin/file_lister.py /usr/local/bin/file_lister.py
-else
-  echo "[Error] file_lister.py does not exit."
-  exit 1
-fi
+sudo cp ${BUBBLE_DIR}/bin/file_lister.py /usr/local/bin/file_lister.py
 
 # ensure the python script is executable
 sudo chmod +x /usr/local/bin/file_lister.py
@@ -61,9 +55,9 @@ sudo chmod +x /usr/local/bin/file_lister.py
 sudo apt-get -y install upstart dbus-x11
 
 # create upstart job configuration file
-sudo cp ${PI_HOME}/bubble3-master/bin/file_lister/file_lister.conf /etc/init/file_lister.conf
+sudo cp ${BUBBLE_DIR}/bin/file_lister/file_lister.conf /etc/init/file_lister.conf
 
-# mount USB drive
+# mount the usb device so that web page can acess to files on the usb thumb
 sudo mount -a
 
 # kick off generate script to create data file in json format
