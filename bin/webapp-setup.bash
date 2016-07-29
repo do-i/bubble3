@@ -4,13 +4,12 @@
 #
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
+# Usage: export BUBBLE_DIR=<bubble directory> && bash webapp-setup.bash
 
-if [ "$1" == "" ]; then
-  echo "Specify <bubble_dir>"
+if [ "${BUBBLE_DIR}" == "" ]; then
+  echo "Set BUBBLE_DIR variable"
   exit 1
 fi
-
-${BUBBLE_DIR}=$1
 
 # Install web server
 sudo apt-get install -y apache2

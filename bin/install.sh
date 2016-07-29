@@ -4,22 +4,26 @@
 #
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
-PI_HOME=/home/pi
-BRANCH="master"
-
-# TODO parametalize the branch
+#
+# Usage: bash install.sh [<github branch name>]
+#
 if [ "$1" != "" ]; then
   BRANCH="$1"
+else
+  # If no arg, then default to release branch.
+  BRANCH="master"
 fi
-BUBBLE_DIR=${PI_HOME}/bubble3-${BRANCH}
+export BUBBLE_DIR=/home/pi/bubble3-${BRANCH}
 
-# download the latest bubble3 repo in tar.gz and unpack the contents into bubble3-master
+# Remove previously install bubble if they exists
 if [ -d ${BUBBLE_DIR} ]; then
   rm -r ${BUBBLE_DIR}
 fi
 
+# Download the latest bubble3 on the specified branch in tar.gz and unpack the contents into bubble3-master
 curl -skL https://github.com/do-i/bubble3/archive/${BRANCH}.tar.gz | tar xzv
 
+# Check the download and untar was good
 if [ -d ${BUBBLE_DIR} ]; then
   echo "[Ok] Download and unpack bubble"
 else
@@ -27,7 +31,8 @@ else
   exit 1
 fi
 
-bash ${BUBBLE_DIR}/bin/network-setup.bash ${BUBBLE_DIR} \
-&& bash ${BUBBLE_DIR}/bin/webapp-setup.bash ${BUBBLE_DIR}
+# Run network setup and webapp setup scripts
+bash ${BUBBLE_DIR}/bin/network-setup.bash  \
+&& bash ${BUBBLE_DIR}/bin/webapp-setup.bash
 
 echo "[Ok] End of install script. Check for any errors."
