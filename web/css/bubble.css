@@ -2,10 +2,31 @@
  * Copyright 2016 Joji Doi
  * Licensed under MIT
  */
+
 body {
-  padding-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: black !important;
+    background: url("../img/bg3.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+.btn-bubble, .btn-bubble:focus, .btn-bubble:active {
+    font-weight: bold;
+    background: none;
+    padding: 11px 21px;
+    border-radius: 12px;
+    border: 2px solid #00E688;
+    color: #FCF8E3;
+}
+.btn-bubble:hover {
+    background: #3CA960;
+    color: #CBFBCF;
+}
+.top-margin-1 {
+    margin-top: 1%;
 }

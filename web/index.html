@@ -26,12 +26,16 @@
 </head>
 
 <body>
-  <label for="files">Select a video file</label>
-  <select name="files" id="mediafiles">
-    <option required="true" value="mediaUnselected">Select media file</option>
-  </select>
-  <div id="video_pane">
-    <video id="video_elm" width="640" height="360" preload="autoplay" controls></video>
+  <div id="video_files" class="row" />
+  <div id="video_modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <video id="video_elm" width="560" height="315" preload="autoplay" controls></video>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- scripts at the end so that the page loads faster -->
