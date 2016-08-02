@@ -22,6 +22,8 @@ body {
     border-radius: 12px;
     border: 2px solid #00E688;
     color: #FCF8E3;
+    white-space: normal !important;
+    word-wrap: break-word;
 }
 .btn-bubble:hover {
     background: #3CA960;
@@ -31,5 +33,9 @@ body {
     margin-top: 1%;
 }
 .modal-content-bubble {
-  background-color: #002301;
+    /* Dark Green for video popup */
+    background-color: #002301;
+}
+.modal-dialog-bubble {
+    width: 85%;
 }
