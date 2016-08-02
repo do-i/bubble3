@@ -39,3 +39,12 @@ body {
 .modal-dialog-bubble {
     width: 85%;
 }
+.close-bubble {
+  color: #CACACA;
+  opacity: 1.0;
+}
+.close-bubble:hover {
+  /*color: #D7E497;*/
+  color: #CACACA;
+  opacity: 0.5;
+}
