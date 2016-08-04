@@ -5,13 +5,24 @@
 # This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
 # and configure Bubble
 #
-# Usage: export BRANCH=<github branch name> && bash install.sh
+# Usage: export BRANCH=<github release tag version or branch> && bash install.sh
 #
 if [ "${BRANCH}" == "" ]; then
   echo "export BRANCH variable"
   exit 1
 fi
-export BUBBLE_DIR=/home/pi/bubble3-${BRANCH}
+
+# If BRANCH is a tag with prefix v, remove it.
+if [[ "${BRANCH}" =~ ^v[0-9].[0-9].[0-9] ]]; then
+  export BUBBLE_DIR=/home/pi/bubble3-${BRANCH:1}
+  echo "trimming v"
+else
+  export BUBBLE_DIR=/home/pi/bubble3-${BRANCH}
+  echo "no trimming"
+fi
+
+echo "BRANCH : ${BRANCH}"
+echo "BUBBLE_DIR : ${BUBBLE_DIR}"
 
 # Remove previously install bubble if they exists
 if [ -d ${BUBBLE_DIR} ]; then
