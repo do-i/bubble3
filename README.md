@@ -1,11 +1,11 @@
 # Bubble 3
 ### Setup Raspberry Pi with Raspbian Jessie Lite (headless mode)
-#### Step 1: Run raspbianizer3.sh
+#### Step 1: Run raspbianizer.sh
 - Specify the correct device path to the fresh SD card (e.g. /dev/sdd, /dev/sde, or /dev/sdx)
 - Check that the SD card does not have partitions
 - Example:
 ```sh
-export BRANCH=<release_version> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/raspbianizer.sh" | sudo bash -s /dev/sdx
+export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/raspbianizer.sh" | sudo bash -s /dev/sdx
 ```
 
 #### Step 2: Boot-up Raspberry Pi3 using SD card & SSH
@@ -15,7 +15,7 @@ export BRANCH=<release_version> && curl -skL "https://raw.githubusercontent.com/
 
 #### Step 3: Install & Configure
 ```sh
-export BRANCH=<release_version> && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
+export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: Thanks for a [great instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd) for WiFi configuration.
 
