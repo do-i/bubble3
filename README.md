@@ -12,6 +12,9 @@ export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble
 - Take out the SD card from your computer and put it in Raspberry Pi3
 - Check that an ethernet cable(Cat 5) connects between Raspberry Pi3 and the router(has Internet access)
 - Ensure that the USB flash drive holding your data is connected to the Pi3 before powering up
+```sh
+ssh pi@<IP Address>
+```
 
 #### Step 3: Install & Configure
 ```sh
