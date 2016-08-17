@@ -11,11 +11,19 @@ import json
   TODO CONTENTS_DIR can be specified via command line
 """
 
-if __name__ == "__main__":
+def create_file_list_json(extention, output_file):
     CONTENTS_DIR = "/mnt"
     #CONTENTS_DIR = "ext-content"
     all_files = os.listdir(CONTENTS_DIR)
-    video_files = sorted([a_file for a_file in all_files
-        if not a_file.startswith('.') and a_file.lower().endswith('.mp4')])
-    with open('/var/www/html/data/video_list.json', 'w') as the_file:
-        the_file.write(json.dumps(video_files))
+    content_files = sorted([a_file for a_file in all_files
+        if not a_file.startswith('.') and a_file.lower().endswith(extention)])
+    destination = os.path.join('/var/www/html/data/', output_file)
+    with open(destination, 'w') as the_file:
+        the_file.write(json.dumps(content_files))
+
+if __name__ == "__main__":
+    create_file_list_json('.mp4', 'video_list.json')
+    create_file_list_json('.jpg', 'jpg_list.json')
+    create_file_list_json('.png', 'png_list.json')
+    create_file_list_json('.pdf', 'pdf_list.json')
+    create_file_list_json('.mp3', 'mp3_list.json')

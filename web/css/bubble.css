@@ -2,7 +2,6 @@
  * Copyright 2016 Joji Doi
  * Licensed under MIT
  */
-
 body {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -40,11 +39,11 @@ body {
     width: 85%;
 }
 .close-bubble {
-  color: #CACACA;
-  opacity: 1.0;
+    color: #CACACA;
+    opacity: 1.0;
 }
 .close-bubble:hover {
-  /*color: #D7E497;*/
-  color: #CACACA;
-  opacity: 0.5;
+    /*color: #D7E497;*/
+    color: #CACACA;
+    opacity: 0.5;
 }
