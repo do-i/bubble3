@@ -41,16 +41,12 @@ $.getJSON("data/pdf_list.json", function(result) {
     var btn = $("<button></button>", {
       "type": "button",
       "class": "btn btn-bubble btn-lg btn-block",
-      "data-toggle": "modal",
-      "data-target": "#pdf_modal",
       "value": item
     }).appendTo(btnDiv);
     btn.html(item.substring(0, item.length - 4));
     btn.on("click", function() {
       var selection = $(this).val();
-      $("#pdf_elm").attr("data", "ext-content/" + selection);
-      $("#pdf_elm").attr("width", "100%");
-      $("#pdf_elm").attr("height", $(window).height());
+      window.location = "ext-content/" + selection;
     });
   });
 });
