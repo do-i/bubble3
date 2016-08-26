@@ -60,8 +60,7 @@ else
 fi
 
 # Configure hostapd
-# TODO Change ssid and wpa_passphrase values to something else
-sudo cp ${BUBBLE_DIR}/bin/config/hostapd.conf /etc/hostapd/hostapd.conf
+source ${BUBBLE_DIR}/bin/override.bash && copy_hostapd_conf
 
 # Update hostapd
 sudo mv /etc/default/hostapd /etc/default/hostapd.old
