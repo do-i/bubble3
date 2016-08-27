@@ -21,6 +21,15 @@ ssh pi@<IP Address>
 export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: Thanks for a [great instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd) for WiFi configuration.
+- Override Options
+  - WIFI SSID (alphanumeric 1-32 characters)
+  ```sh
+  export SSID=MyBubble
+  ```
+  - WPA Passphrase (alphanumeric 8-63 characters)
+  ```sh
+  export PASS=MySecretPassPhrase2016
+  ```
 
 #### Step 4: Check for Errors & Reboot
 - Check for any errors. If everything looks good, then run the following command:
