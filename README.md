@@ -39,7 +39,7 @@ sudo reboot
 
 #### Step 5: Connect
 - Disconnect ethernet cable from Raspberry Pi3
-- Connect your device(s) to WiFi Access Point
+- Connect your device(s) to WiFi Access Point (If you did not override SSID and PASS in Step 3, here are default values.)
   - SSID: BrightLink
   - PASS: raspberry
 - Open your web browser on  [http://bubble](http://bubble "bubble")
