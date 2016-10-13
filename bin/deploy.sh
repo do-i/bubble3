@@ -7,7 +7,7 @@ BIN_DIR=$(pwd)
 WORK_DIR=$(dirname "${BIN_DIR}")
 LATEST_BUILD=$(ls -t ${WORK_DIR}/tmp | head -1)
 
-cd /var/www/html
+cd /var/www/html/bubble3
 tar xvf ${WORK_DIR}/tmp/${LATEST_BUILD}
 
 cd ${WORK_DIR}
