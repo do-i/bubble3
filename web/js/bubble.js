@@ -4,10 +4,10 @@
  */
 
 /*
- * Load the video list from the json file
+ * Load media_list from the json file
  */
-$.getJSON("data/video_list.json", function(result) {
-  $.each(result, function(i, item) {
+$.getJSON("data/media_files_list.json", function(result) {
+  $.each(result['videos'], function(i, item) {
     var btnDiv = $("<div></div>", {
       "class": "col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-1"
     }).appendTo("#files_list");
@@ -19,21 +19,19 @@ $.getJSON("data/video_list.json", function(result) {
       "data-target": "#video_modal",
       "value": item
     }).appendTo(btnDiv);
-    btn.html(item.substring(0, item.length - 4));
+    btn.html(item.substring(0, item.lastIndexOf('.')));
     btn.on("click", function() {
       var selection = $(this).val();
       $("#video_elm").empty(); // clear previous source element
       var video_src = $("<source/>", {
-        "src": "ext-content/" + selection,
+        "src": "ext-content/Videos/" + selection,
         "type": "video/mp4"
       }).appendTo("#video_elm");
       $("#video_elm").load();
     });
   });
-});
 
-$.getJSON("data/pdf_list.json", function(result) {
-  $.each(result, function(i, item) {
+  $.each(result['documents'], function(i, item) {
     var btnDiv = $("<div></div>", {
       "class": "col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-1"
     }).appendTo("#files_list");
@@ -43,10 +41,10 @@ $.getJSON("data/pdf_list.json", function(result) {
       "class": "btn btn-bubble btn-lg btn-block",
       "value": item
     }).appendTo(btnDiv);
-    btn.html(item.substring(0, item.length - 4));
+    btn.html(item.substring(0, item.lastIndexOf('.')));
     btn.on("click", function() {
       var selection = $(this).val();
-      window.location = "ext-content/" + selection;
+      window.location = "ext-content/Documents/" + selection;
     });
   });
 });
