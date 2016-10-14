@@ -10,8 +10,8 @@ import json
   script to list all movie files in the CONTENTS_DIR
 """
 CONTENTS_DIR = "/mnt"
-""" TODO pass override value for CONTENTS_DIR """
-CONTENTS_DIR = "../test"
+#TODO pass override value for CONTENTS_DIR
+#CONTENTS_DIR = "../test"
 
 """ MEDIA_TYPES -- key is folder name, value is a tuple of supported file extensions """
 MEDIA_TYPES = {
