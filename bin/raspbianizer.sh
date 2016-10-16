@@ -4,7 +4,7 @@
 # Require sdcard to be unmounted and no partition should be allocated
 OS=$(uname)
 DEVICE_NAME="${1}"
-RASPBIAN="2016-05-27-raspbian-jessie-lite"
+RASPBIAN="2016-09-23-raspbian-jessie-lite"
 WORK_DIR=$(pwd)
 
 ## check if the ${DEVICE_NAME} exists
