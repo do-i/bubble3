@@ -4,7 +4,8 @@
 # Require sdcard to be unmounted and no partition should be allocated
 OS=$(uname)
 DEVICE_NAME="${1}"
-RASPBIAN="2016-05-27-raspbian-jessie-lite"
+RASPBIAN="2016-09-23-raspbian-jessie-lite"
+RASPBIAN_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-09-28/2016-09-23-raspbian-jessie-lite.zip"
 WORK_DIR=$(pwd)
 
 ## check if the ${DEVICE_NAME} exists
@@ -68,7 +69,7 @@ function download_upzip() {
   if [ ! -f ${WORK_DIR}/${RASPBIAN}.img ]; then
     if [ ! -f ${WORK_DIR}/${RASPBIAN}.zip ]; then
       echo "Donwloading ${RASPBIAN} (~300MB)... takes a several minutes."
-      curl -skL "http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-05-31/2016-05-27-raspbian-jessie-lite.zip" --output "${WORK_DIR}/${RASPBIAN}.zip"
+      curl -skL "${RASPBIAN_URL}" --output "${WORK_DIR}/${RASPBIAN}.zip"
       ## verify the downloads
       if [ ! -e "${WORK_DIR}/${RASPBIAN}.zip" ]; then
         echo "download failed..."

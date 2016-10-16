@@ -52,7 +52,7 @@ sudo service dhcpcd restart
 sudo ifdown wlan0; sudo ifup wlan0
 
 # Check the wlan0 interface
-if ifconfig | grep -q 192.168.8.64; then
+if ifconfig | grep -q 2.4.8.16; then
   echo "wlan0 interface is up!"
 else
   echo "[Error] wlan0 interface configuration. Check the interfaces."
