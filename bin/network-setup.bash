@@ -12,7 +12,7 @@ if [ "${BUBBLE_DIR}" == "" ]; then
 fi
 
 # Update package list
-sudo apt-get -y update
+# sudo apt-get -y update
 
 # Install dnsmasq hostapd for access point
 sudo apt-get install -y dnsmasq hostapd
