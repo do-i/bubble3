@@ -1,0 +1,10 @@
+[Unit]
+Description=Media Discovery Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /home/pi/file_lister.py
+
+[Install]
+WantedBy=multi-user.target

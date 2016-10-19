@@ -44,20 +44,21 @@ done
 cd ${BUBBLE_DIR}/bin
 ./bd.sh
 
-# copy file_lister.py to /usr/local/bin/file_lister.py
-sudo cp ${BUBBLE_DIR}/bin/file_lister.py /usr/local/bin/file_lister.py
+# copy file_lister.py to ~/file_lister.py
+sudo cp ${BUBBLE_DIR}/bin/file_lister.py /home/pi/file_lister.py
 
 # ensure the python script is executable
-sudo chmod +x /usr/local/bin/file_lister.py
+sudo chmod +x /home/pi/file_lister.py
 
-# install libraries for upstart
-sudo apt-get -y install upstart dbus-x11
+# create systemd service file (aka Unit File)
+sudo cp ${BUBBLE_DIR}/bin/config/media-discovery.service /lib/systemd/system
 
-# create upstart job configuration file
-sudo cp ${BUBBLE_DIR}/bin/config/file_lister.conf /etc/init/file_lister.conf
+# enable the systemd service
+sudo systemctl daemon-reload
+sudo systemctl enable media-discovery.service
 
 # mount the usb device so that web page can acess to files on the usb thumb
 sudo mount -a
 
 # kick off generate script to create data file in json format
-/usr/local/bin/file_lister.py
+/home/pi/file_lister.py
