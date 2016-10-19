@@ -20,10 +20,10 @@ function copy_hostapd_conf() {
 function replace_ssid() {
   # alphanumeric at least one character and at most 32 characters
   if [[ "${SSID}" =~ ^[a-zA-Z0-9]{1,32}$ ]]; then
-    # Replace 'ssid=BrightLink' with ${SSID} in hostapd.conf
+    # Replace 'ssid=SimpleBubble' with ${SSID} in hostapd.conf
     # -pi: replace original input file in place (i.bak will save original file as hostapd.conf.bak)
     # -e: expression of string replace
-    sudo perl -pi -e s/ssid=BrightLink/ssid=${SSID}/g /etc/hostapd/hostapd.conf
+    sudo perl -pi -e s/ssid=SimpleBubble/ssid=${SSID}/g /etc/hostapd/hostapd.conf
     if grep -q ${SSID} /etc/hostapd/hostapd.conf; then
       echo "Override SSID to ${SSID}."
     else
