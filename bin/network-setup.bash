@@ -39,6 +39,7 @@ then
   echo "[Skip] Disabled DHCP on wlan1 interfaces"
 else
   echo "denyinterfaces wlan1" | sudo tee -a /etc/dhcpcd.conf
+  echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
 fi
 
 # Static IP Address configuration
