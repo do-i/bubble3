@@ -34,11 +34,11 @@ else
 fi
 
 # Disable DHCP
-if grep -q "denyinterfaces wlan0" /etc/dhcpcd.conf
+if grep -q "denyinterfaces wlan1" /etc/dhcpcd.conf
 then
-  echo "[Skip] Disabled DHCP on wlan0 interfaces"
+  echo "[Skip] Disabled DHCP on wlan1 interfaces"
 else
-  echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
+  echo "denyinterfaces wlan1" | sudo tee -a /etc/dhcpcd.conf
 fi
 
 # Static IP Address configuration
@@ -48,14 +48,14 @@ sudo cp ${BUBBLE_DIR}/bin/config/interfaces /etc/network/interfaces
 # Restart dhcpcd
 sudo service dhcpcd restart
 
-# Reload the configuration for wlan0
-sudo ifdown wlan0; sudo ifup wlan0
+# Reload the configuration for wlan1
+sudo ifdown wlan1; sudo ifup wlan1
 
-# Check the wlan0 interface
+# Check the wlan1 interface
 if ifconfig | grep -q 2.4.8.16; then
-  echo "wlan0 interface is up!"
+  echo "wlan1 interface is up!"
 else
-  echo "[Error] wlan0 interface configuration. Check the interfaces."
+  echo "[Error] wlan1 interface configuration. Check the interfaces."
   exit 1
 fi
 
@@ -71,7 +71,7 @@ sudo cp ${BUBBLE_DIR}/bin/config/hostapd /etc/default/hostapd
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old
 sudo cp ${BUBBLE_DIR}/bin/config/dnsmasq.conf /etc/dnsmasq.conf
 
-# Set up IPV4 Forwarding so that device connected to pi via wlan0 can use eth0
+# Set up IPV4 Forwarding so that device connected to pi via wlan1 can use eth0
 sudo mv /etc/sysctl.conf /etc/sysctl.conf.old
 sudo cp ${BUBBLE_DIR}/bin/config/sysctl.conf /etc/sysctl.conf
 
@@ -80,8 +80,8 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 # Allow wifi clients to access to internet via eth0
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan1 -o eth0 -j ACCEPT
 
 # Save iptables in file so the config is applied every time we reboot the Pi
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
