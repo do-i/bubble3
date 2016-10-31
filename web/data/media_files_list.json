@@ -1,1 +1,86 @@
-{"photos": {"files": ["contact-bg.jpg", "favicon.png", "header-bg-ppl-8s.png"], "dir": "photos"}, "documents": {"files": ["sample01.pdf", "sample02.pdf", "sample03.pdf"], "dir": "Documents"}, "music": {"files": ["audio-1.mp3", "audio-2.ogg"], "dir": "music"}, "videos": {"files": ["video-1.mp4", "video-2.mp4", "video-3.mp4", "video-4.webm"], "dir": "Videos"}}
+[
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 0,
+    "dir": "Photos",
+    "title": "contact-bg"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".png",
+    "id": 1,
+    "dir": "Photos",
+    "title": "favicon"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".png",
+    "id": 2,
+    "dir": "Photos",
+    "title": "header-bg-ppl-8s"
+  },
+  {
+    "category": "music",
+    "file_ext": ".mp3",
+    "id": 3,
+    "dir": "Music",
+    "title": "audio-1"
+  },
+  {
+    "category": "music",
+    "file_ext": ".ogg",
+    "id": 4,
+    "dir": "Music",
+    "title": "audio-2"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 5,
+    "dir": "Videos",
+    "title": "video-1"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 6,
+    "dir": "Videos",
+    "title": "video-2"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 7,
+    "dir": "Videos",
+    "title": "video-3"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".webm",
+    "id": 8,
+    "dir": "Videos",
+    "title": "video-4"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".pdf",
+    "id": 9,
+    "dir": "Documents",
+    "title": "sample01"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".pdf",
+    "id": 10,
+    "dir": "Documents",
+    "title": "sample02"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".pdf",
+    "id": 11,
+    "dir": "Documents",
+    "title": "sample03"
+  }
+]
