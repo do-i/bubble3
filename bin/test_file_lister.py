@@ -5,7 +5,10 @@ import os
 import json
 
 class TestFileLister(unittest.TestCase):
-
+    """
+    Unit tests for file_lister.py module.
+    Usage: $ python -m unittest test_file_lister
+    """
     TMP_BUBBLE_DIR = '/tmp/bubble'
     MEDIA_FILES_LIST = TMP_BUBBLE_DIR + '/media_files_list.json'
 
@@ -18,7 +21,7 @@ class TestFileLister(unittest.TestCase):
         shutil.rmtree(TestFileLister.TMP_BUBBLE_DIR)
 
     def test_list_media_dirs(self):
-        self.assertEqual(sorted(file_lister.list_media_dirs('../test')), ['Documents', 'Music', 'Photos', 'Videos'])
+        self.assertEqual(file_lister.list_media_dirs('../test'), ['Documents', 'Music', 'Photos', 'Videos'])
 
     def test_list_media_dirs__not_found(self):
         self.assertEqual(file_lister.list_media_dirs('../test/misc'), [])
@@ -56,6 +59,23 @@ class TestFileLister(unittest.TestCase):
         self.assertTrue(os.path.isfile(TestFileLister.MEDIA_FILES_LIST))
         output_json = json.loads(open(TestFileLister.MEDIA_FILES_LIST).read())
         self.assertEqual(output_json, input_json)
+
+    def test_list_media_files(self):
+        expected_json = [{'category': 'documents', 'file_ext': '.pdf', 'id': 0, 'dir': 'Documents', 'title': 'sample01'},
+            {'category': 'documents', 'file_ext': '.pdf', 'id': 1, 'dir': 'Documents', 'title': 'sample02'},
+            {'category': 'documents', 'file_ext': '.pdf', 'id': 2, 'dir': 'Documents', 'title': 'sample03'},
+            {'category': 'music', 'file_ext': '.mp3', 'id': 3, 'dir': 'Music', 'title': 'audio-1'},
+            {'category': 'music', 'file_ext': '.ogg', 'id': 4, 'dir': 'Music', 'title': 'audio-2'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 5, 'dir': 'Photos', 'title': 'contact-bg'},
+            {'category': 'photos', 'file_ext': '.png', 'id': 6, 'dir': 'Photos', 'title': 'favicon'},
+            {'category': 'photos', 'file_ext': '.png', 'id': 7, 'dir': 'Photos', 'title': 'header-bg-ppl-8s'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 8, 'dir': 'Videos', 'title': 'video-1'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 9, 'dir': 'Videos', 'title': 'video-2'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 10, 'dir': 'Videos', 'title': 'video-3'},
+            {'category': 'videos', 'file_ext': '.webm', 'id': 11, 'dir': 'Videos', 'title': 'video-4'}]
+        media_list = file_lister.list_media_files('../test', ['Documents', 'Music', 'Photos', 'Videos'])
+        self.assertEqual(len(media_list), len(expected_json))
+        self.assertEqual(media_list, expected_json)
 
 if __name__ == '__main__':
     unittest.main()

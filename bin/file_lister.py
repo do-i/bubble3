@@ -26,40 +26,6 @@ def create_file_list_json(output_dir, media_files):
     """
         Create a media file list in json format.
         Example output
-        {
-          "photos": {
-            "files": [
-              "contact-bg.jpg",
-              "favicon.png",
-              "header-bg-ppl-8s.png"
-            ],
-            "dir": "Photos"
-          },
-          "documents": {
-            "files": [
-              "sample01.pdf",
-              "sample02.pdf",
-              "sample03.pdf"
-            ],
-            "dir": "Documents"
-          },
-          "music": {
-            "files": [
-              "audio-1.mp3",
-              "audio-2.ogg"
-            ],
-            "dir": "Music"
-          },
-          "videos": {
-            "files": [
-              "video-1.mp4",
-              "video-2.mp4",
-              "video-3.mp4",
-              "video-4.webm"
-            ],
-            "dir": "Videos"
-          }
-        }
     """
     with open(output_dir + '/media_files_list.json', 'w') as the_file:
         the_file.write(json.dumps(media_files))
@@ -90,7 +56,27 @@ def list_media_dirs(media_root):
     media_root = os.path.abspath(media_root);
     all_dirs = [ dirs for dirs in os.listdir(media_root)
         if os.path.isdir(os.path.join(media_root, dirs)) ]
-    return filter(media_filter, all_dirs)
+    return sorted(filter(media_filter, all_dirs))
+
+def list_media_files(media_root, media_folders):
+    """
+        Returns a list of media files in the given folders
+        arguments:
+        media_root    -- root directory for the media_folders
+        media_folders -- directories to be scanned
+
+        Example output:
+        [{"id": "1", "title":"Tears of Steel","file_ext":"mp4","category":"videos","dir":"Videos"}]
+    """
+    output = []
+    id = 0
+    for folder in media_folders:
+        lowercase_folder = folder.lower()
+        for media_file in list_files(media_root, folder, file_filter(MEDIA_TYPES[lowercase_folder])):
+            name, ext = os.path.splitext(media_file)
+            output.append({"id": id, "category": lowercase_folder, "title": name, "file_ext": ext, "dir": folder})
+            id += 1
+    return output
 
 
 if __name__ == "__main__":
@@ -103,9 +89,4 @@ if __name__ == "__main__":
     output_dir = args.output_dir
 
     media_folders = list_media_dirs(media_root)
-    output = {}
-    for folder in media_folders:
-        lowercase_folder = folder.lower()
-        output[lowercase_folder] = {"dir": folder,
-            "files": list_files(media_root, folder, file_filter(MEDIA_TYPES[lowercase_folder]))}
-    create_file_list_json(output_dir, output)
+    create_file_list_json(output_dir, list_media_files(media_root, media_folders))
