@@ -8,40 +8,21 @@
   <meta name="description" content="This is UI for BUBBLE">
   <meta name="author" content="dusteacup">
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Webix -->
+  <link rel="stylesheet" href="webix/webix.css" type="text/css" media="screen" charset="utf-8">
 
   <!-- Custom styles for this template -->
   <link href="css/bubble.css" rel="stylesheet">
 
-  <!-- Fav and touch icons -->
-  <!-- TODO create icons
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-  source http://www.flaticon.com/free-icon/network_149181
-  -->
+  <!-- favicon Bubble icon -->
   <link rel="shortcut icon" href="img/favicon.png">
 </head>
 
 <body>
-  <div id="files_list" class="row" />
-  <!-- Video Modal Dialog -->
-  <div id="video_modal" class="modal fade">
-    <div class="modal-dialog modal-dialog-bubble">
-      <div class="modal-content modal-content-bubble">
-        <div class="modal-body">
-          <button type="button" class="close close-bubble" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <video id="video_elm" width="100%" preload="autoplay" controls></video>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <div id="media_list" />
   <!-- scripts at the end so that the page loads faster -->
   <script src="js/jquery-2.2.4.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="webix/webix_debug.js"></script>
   <script src="js/bubble.js"></script>
 </body>
 

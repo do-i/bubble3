@@ -7,12 +7,14 @@ body {
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: black !important;
-    background: url("../img/bg3.png");
+    background-color: white !important;
+    background: url("../img/logo.png");
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
 }
 .btn-bubble, .btn-bubble:focus, .btn-bubble:active {
     font-weight: bold;

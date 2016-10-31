@@ -1,1 +1,100 @@
-{"photos": {"files": ["contact-bg.jpg", "favicon.png", "header-bg-ppl-8s.png"], "dir": "photos"}, "documents": {"files": ["sample01.pdf", "sample02.pdf", "sample03.pdf"], "dir": "Documents"}, "music": {"files": ["audio-1.mp3", "audio-2.ogg"], "dir": "music"}, "videos": {"files": ["video-1.mp4", "video-2.mp4", "video-3.mp4", "video-4.webm"], "dir": "Videos"}}
+[
+  {
+    "category": "books",
+    "file_ext": ".pdf",
+    "id": 0,
+    "dir": "Books",
+    "title": "sample03"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".txt",
+    "id": 1,
+    "dir": "Documents",
+    "title": "donreadme"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".pdf",
+    "id": 2,
+    "dir": "Documents",
+    "title": "sample01"
+  },
+  {
+    "category": "documents",
+    "file_ext": ".pdf",
+    "id": 3,
+    "dir": "Documents",
+    "title": "sample02"
+  },
+  {
+    "category": "music",
+    "file_ext": ".mp3",
+    "id": 4,
+    "dir": "Music",
+    "title": "audio-1"
+  },
+  {
+    "category": "music",
+    "file_ext": ".ogg",
+    "id": 5,
+    "dir": "Music",
+    "title": "audio-2"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 6,
+    "dir": "Photos",
+    "title": "contact-bg"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".png",
+    "id": 7,
+    "dir": "Photos",
+    "title": "favicon"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".png",
+    "id": 8,
+    "dir": "Photos",
+    "title": "header-bg-ppl-8s"
+  },
+  {
+    "category": "tv",
+    "file_ext": ".mp4",
+    "id": 9,
+    "dir": "TV",
+    "title": "white space"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 10,
+    "dir": "Videos",
+    "title": "video-1"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 11,
+    "dir": "Videos",
+    "title": "video-2"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".mp4",
+    "id": 12,
+    "dir": "Videos",
+    "title": "video-3"
+  },
+  {
+    "category": "videos",
+    "file_ext": ".webm",
+    "id": 13,
+    "dir": "Videos",
+    "title": "video-4"
+  }
+]
