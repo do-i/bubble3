@@ -31,43 +31,54 @@ $.getJSON("data/media_files_list.json", function(result) {
       },
       on: {
         onSelectChange: function() {
-          var media_item = this.getSelectedItem();
-          console.log(media_item);
-          console.log(media_item.title);
-          console.log(media_item.file_ext);
-          console.log(media_item.dir);
+          var mediaItem = this.getSelectedItem();
+          if (mediaItem.category == 'videos') {
+            rendarVideo(mediaItem);
+          } else if (mediaItem.category == 'documents') {
+            rendarPdf(mediaItem);
+          }
         }
       },
       data: webix.copy(result)
     }]
   });
 
-  //
-  // if (result.hasOwnProperty("videos")) {
-  //   $.each(result["videos"]["files"], function(i, item) {
-  //     var btnDiv = $("<div></div>", {
-  //       "class": "col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-1"
-  //     }).appendTo("#files_list");
-  //
-  //     var btn = $("<button></button>", {
-  //       "type": "button",
-  //       "class": "btn btn-bubble btn-lg btn-block",
-  //       "data-toggle": "modal",
-  //       "data-target": "#video_modal",
-  //       "value": item
-  //     }).appendTo(btnDiv);
-  //     btn.html(item.substring(0, item.lastIndexOf('.')));
-  //     btn.on("click", function() {
-  //       var selection = $(this).val();
-  //       $("#video_elm").empty(); // clear previous source element
-  //       var video_src = $("<source/>", {
-  //         "src": "ext-content/" + result['videos']['dir'] + '/' + selection,
-  //         "type": "video/mp4"
-  //       }).appendTo("#video_elm");
-  //       $("#video_elm").load();
-  //     });
-  //   });
-  // } // end if json has videos section
+  function getMediaFilePath(mediaItem) {
+    return "ext-content/" + mediaItem.dir + '/' + mediaItem.title +
+      mediaItem.file_ext;
+  }
+
+  function rendarPdf(mediaItem) {
+    window.location = getMediaFilePath(mediaItem);
+  }
+
+  function rendarVideo(mediaItem) {
+    webix.ui({
+      view: "window",
+      id: "video_window",
+      fullscreen: true,
+      head: {
+        view: "toolbar",
+        margin: -4,
+        cols: [{
+          view: "label",
+          label: mediaItem.title
+        }, {
+          view: "icon",
+          icon: "times-circle",
+          click: "$$('video_window').close();"
+        }]
+      },
+      body: {
+        padding: 1,
+        rows: [{
+          template: '<video id="video_elm" width="100%" preload="autoplay" controls><source src=' +
+            getMediaFilePath(mediaItem) + ' type="video/mp4"/></video>'
+        }]
+      }
+    }).show();
+  }
+
   //
   // if (result.hasOwnProperty("documents")) {
   //   $.each(result["documents"]["files"], function(i, item) {
@@ -88,10 +99,3 @@ $.getJSON("data/media_files_list.json", function(result) {
   //   });
   // } // end if json has documents section
 }); // end of getJSON()
-
-/*
- * Pause the video when bootstrap modal is hidden.
- */
-$("#video_modal").on("hide.bs.modal", function(e) {
-  $("#video_elm")[0].pause();
-})
