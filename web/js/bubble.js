@@ -114,11 +114,27 @@ $.getJSON("data/media_files_list.json", function(result) {
     cols: [{
       container: "media_list",
       view: "grouplist",
-      templateBack: " Category #category#",
-      templateGroup: " Category #value#",
+      templateBack: "{common.categoryIcon()} #value#",
+      templateGroup: "{common.categoryIcon()} #value#",
       templateItem: "#title#",
       select: true,
       scroll: true,
+      type: {
+        categoryIcon: function(mediaItem) {
+          switch (mediaItem.value) {
+            case "videos":
+              return "<span class='webix_icon fa-film'></span>";
+            case "documents":
+              return "<span class='webix_icon fa-glass'></span>";
+            case "music":
+              return "<span class='webix_icon fa-music'></span>";
+            case "photos":
+              return "<span class='webix_icon fa-image'></span>";
+            default:
+              return "<span class='webix_icon fa-question'></span>";
+          }
+        }
+      },
       scheme: {
         $group: {
           by: 'category'
