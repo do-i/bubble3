@@ -3,22 +3,122 @@
  * Licensed under the MIT license
  */
 
+function getMediaFilePath(mediaItem) {
+  return "ext-content/" + mediaItem.dir + '/' + mediaItem.title +
+    mediaItem.file_ext;
+}
+
+function rendarMedia(id, headerTitle, mediaElement) {
+  webix.ui({
+    view: "window",
+    id: "media_window",
+    fullscreen: true,
+    head: {
+      view: "toolbar",
+      margin: -10,
+      cols: [{
+        view: "label",
+        label: headerTitle
+      }, {
+        view: "icon",
+        icon: "times-circle",
+        click: function() {
+          $(id)[0].pause();
+          $$('media_window').close();
+        }
+      }]
+    },
+    body: {
+      padding: 1,
+      rows: [{
+        // Ensures URL encoding is applied to the src URL
+        template: mediaElement.get(0).outerHTML
+      }]
+    }
+  }).show();
+}
+
+function rendarPdf(mediaItem) {
+  window.location = getMediaFilePath(mediaItem);
+}
+
+function rendarAudio(mediaItem) {
+  rendarMedia("#audio_elm", mediaItem.title, $("<audio/>", {
+    id: "audio_elm",
+    src: getMediaFilePath(mediaItem),
+    type: "audio/mp3",
+    width: "100%",
+    controls: true
+  }));
+}
+
+function rendarVideo(mediaItem) {
+  rendarMedia("#video_elm", mediaItem.title, $("<video/>", {
+    id: "video_elm",
+    src: getMediaFilePath(mediaItem),
+    type: "video/mp4",
+    width: "100%",
+    controls: true
+  }));
+}
+
+function rendarPhoto(mediaItem) {
+  function img(obj) {
+    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
+  }
+  var mediaPath = getMediaFilePath(mediaItem);
+  webix.ui({
+    view: "window",
+    body: {
+      view: "carousel",
+      id: "carousel",
+      width: 464,
+      height: 275,
+      cols: [{
+        css: "image",
+        template: img,
+        data: {
+          src: mediaPath
+        }
+      }, {
+        css: "image",
+        template: img,
+        data: {
+          src: mediaPath
+        }
+      }]
+    },
+    head: {
+      view: "toolbar",
+      type: "MainBar",
+      elements: [{
+        view: "label",
+        label: "Photobook",
+        align: 'left'
+      }]
+    }
+  }).show();
+}
+
+
 /*
  * Load media_list from the json file
  */
 $.getJSON("data/media_files_list.json", function(result) {
+
   webix.ui({
     margin: 5,
     padding: 0,
     type: "wide",
     view: "flexlayout",
     cols: [{
-      container: "media_list_poc",
+      container: "media_list",
       view: "grouplist",
       templateBack: " Category #category#",
       templateGroup: " Category #value#",
       templateItem: "#title#",
       select: true,
+      scroll: true,
       scheme: {
         $group: {
           by: 'category'
@@ -31,63 +131,26 @@ $.getJSON("data/media_files_list.json", function(result) {
       on: {
         onSelectChange: function() {
           var mediaItem = this.getSelectedItem();
+          if (mediaItem == undefined) {
+            // Case unselectAll event happens.
+            return;
+          }
           if (mediaItem.category == 'videos') {
             rendarVideo(mediaItem);
           } else if (mediaItem.category == 'documents') {
             rendarPdf(mediaItem);
+          } else if (mediaItem.category == 'music') {
+            rendarAudio(mediaItem);
+          } else if (mediaItem.category == 'photos') {
+            // rendarPhoto(mediaItem);
+            webix.message("Feature is coming soon!");
           } else {
-            console.log("unsupported type " + mediaItem.category);
+            webix.message("unsupported type");
           }
+          $$(this).unselectAll();
         }
       },
       data: webix.copy(result)
     }]
   });
 }); // end of getJSON()
-
-function getMediaFilePath(mediaItem) {
-  return "ext-content/" + mediaItem.dir + '/' + mediaItem.title +
-    mediaItem.file_ext;
-}
-
-function rendarPdf(mediaItem) {
-  window.location = getMediaFilePath(mediaItem);
-}
-
-function rendarVideo(mediaItem) {
-  // Make sure URL encoding is applied to the src URL
-  var videoElement = $("<video/>", {
-    id: "video_elm",
-    src: getMediaFilePath(mediaItem),
-    type: "video/mp4",
-    width: "100%",
-    controls: true
-  }).get(0).outerHTML;
-
-  webix.ui({
-    view: "window",
-    id: "video_window",
-    fullscreen: true,
-    head: {
-      view: "toolbar",
-      margin: -10,
-      cols: [{
-        view: "label",
-        label: mediaItem.title
-      }, {
-        view: "icon",
-        icon: "times-circle",
-        click: function() {
-          $("#video_elm")[0].pause();
-          $$('video_window').close();
-        }
-      }]
-    },
-    body: {
-      padding: 1,
-      rows: [{
-        template: videoElement
-      }]
-    }
-  }).show();
-}
