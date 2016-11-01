@@ -60,8 +60,10 @@ function rendarVideo(mediaItem) {
     id: "video",
     src: getMediaFilePath(mediaItem),
     type: "video/mp4",
+    width: "100%",
     controls: true
   }).get(0).outerHTML;
+
   webix.ui({
     view: "window",
     id: "video_window",
