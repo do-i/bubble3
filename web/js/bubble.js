@@ -57,7 +57,7 @@ function rendarPdf(mediaItem) {
 function rendarVideo(mediaItem) {
   // Make sure URL encoding is applied to the src URL
   var videoElement = $("<video/>", {
-    id: "video",
+    id: "video_elm",
     src: getMediaFilePath(mediaItem),
     type: "video/mp4",
     width: "100%",
@@ -77,7 +77,10 @@ function rendarVideo(mediaItem) {
       }, {
         view: "icon",
         icon: "times-circle",
-        click: "$$('video_window').close();"
+        click: function() {
+          $("#video_elm")[0].pause();
+          $$('video_window').close();
+        }
       }]
     },
     body: {
