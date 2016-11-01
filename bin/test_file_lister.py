@@ -29,7 +29,7 @@ class TestFileLister(unittest.TestCase):
     def test_list_files(self):
         media_filter = file_lister.file_filter(('.mp4', '.webm'));
         self.assertEqual(file_lister.list_files('../test', 'Videos', media_filter),
-            ['video-1.mp4', 'video-2.mp4', 'video-3.mp4', 'video-4.webm'])
+            ['video-1.mp4', 'video-2.mp4', 'video-3.mp4', 'video-4.webm', 'white space.mp4'])
 
     def test_list_files__no_match_found(self):
         media_filter = file_lister.file_filter(('.mkv'));
@@ -61,7 +61,8 @@ class TestFileLister(unittest.TestCase):
         self.assertEqual(output_json, input_json)
 
     def test_list_media_files(self):
-        expected_json = [{'category': 'documents', 'file_ext': '.pdf', 'id': 0, 'dir': 'Documents', 'title': 'sample01'},
+        expected_json = [
+            {'category': 'documents', 'file_ext': '.pdf', 'id': 0, 'dir': 'Documents', 'title': 'sample01'},
             {'category': 'documents', 'file_ext': '.pdf', 'id': 1, 'dir': 'Documents', 'title': 'sample02'},
             {'category': 'documents', 'file_ext': '.pdf', 'id': 2, 'dir': 'Documents', 'title': 'sample03'},
             {'category': 'music', 'file_ext': '.mp3', 'id': 3, 'dir': 'Music', 'title': 'audio-1'},
@@ -72,7 +73,9 @@ class TestFileLister(unittest.TestCase):
             {'category': 'videos', 'file_ext': '.mp4', 'id': 8, 'dir': 'Videos', 'title': 'video-1'},
             {'category': 'videos', 'file_ext': '.mp4', 'id': 9, 'dir': 'Videos', 'title': 'video-2'},
             {'category': 'videos', 'file_ext': '.mp4', 'id': 10, 'dir': 'Videos', 'title': 'video-3'},
-            {'category': 'videos', 'file_ext': '.webm', 'id': 11, 'dir': 'Videos', 'title': 'video-4'}]
+            {'category': 'videos', 'file_ext': '.webm', 'id': 11, 'dir': 'Videos', 'title': 'video-4'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 12, 'dir': 'Videos', 'title': 'white space'}]
+
         media_list = file_lister.list_media_files('../test', ['Documents', 'Music', 'Photos', 'Videos'])
         self.assertEqual(len(media_list), len(expected_json))
         self.assertEqual(media_list, expected_json)

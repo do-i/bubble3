@@ -55,6 +55,13 @@ function rendarPdf(mediaItem) {
 }
 
 function rendarVideo(mediaItem) {
+  // Make sure URL encoding is applied to the src URL
+  var videoElement = $("<video/>", {
+    id: "video",
+    src: getMediaFilePath(mediaItem),
+    type: "video/mp4",
+    controls: true
+  }).get(0).outerHTML;
   webix.ui({
     view: "window",
     id: "video_window",
@@ -74,8 +81,7 @@ function rendarVideo(mediaItem) {
     body: {
       padding: 1,
       rows: [{
-        template: '<video id="video_elm" width="100%" preload="autoplay" controls><source src=' +
-          getMediaFilePath(mediaItem) + ' type="video/mp4"/></video>'
+        template: videoElement
       }]
     }
   }).show();
