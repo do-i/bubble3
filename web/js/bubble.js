@@ -125,7 +125,7 @@ $.getJSON("data/media_files_list.json", function(result) {
             case "videos":
               return "<span class='webix_icon fa-film'></span>";
             case "documents":
-              return "<span class='webix_icon fa-glass'></span>";
+              return "<span class='webix_icon fa-file-text-o'></span>";
             case "music":
               return "<span class='webix_icon fa-music'></span>";
             case "photos":
