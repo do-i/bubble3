@@ -121,18 +121,26 @@ $.getJSON("data/media_files_list.json", function(result) {
       scroll: true,
       type: {
         categoryIcon: function(mediaItem) {
+          var icon_class;
           switch (mediaItem.value) {
             case "videos":
-              return "<span class='webix_icon fa-film'></span>";
+              icon_class = "fa-film";
             case "documents":
-              return "<span class='webix_icon fa-file-pdf-o'></span>";
+              icon_class = "fa-file-pdf-o";
+            case "books":
+              icon_class = "fa-book";
             case "music":
-              return "<span class='webix_icon fa-music'></span>";
+              icon_class = "fa-music";
+            case "tv":
+              icon_class = "fa-tv";
             case "photos":
-              return "<span class='webix_icon fa-image'></span>";
+              icon_class = "fa-image";
             default:
-              return "<span class='webix_icon fa-question'></span>";
+              icon_class = "fa-github";
           }
+          return $('<span/>', {
+            "class": "webix_icon"
+          }).addClass(icon_class).icon_span.get(0).outerHTML;
         }
       },
       scheme: {
@@ -161,7 +169,7 @@ $.getJSON("data/media_files_list.json", function(result) {
             // rendarPhoto(mediaItem);
             webix.message("Feature is coming soon!");
           } else {
-            webix.message("unsupported type");
+            webix.message("Unsupported type" + mediaItem.category);
           }
           $$(this).unselectAll();
         }
