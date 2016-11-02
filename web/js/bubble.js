@@ -17,7 +17,7 @@ function createIconSpan(iconClass) {
   }).addClass(iconClass).get(0).outerHTML;
 }
 
-function rendarMedia(id, headerTitle, mediaElement) {
+function renderMedia(id, headerTitle, mediaElement) {
   webix.ui({
     view: "window",
     id: "media_window",
@@ -38,7 +38,7 @@ function rendarMedia(id, headerTitle, mediaElement) {
       }]
     },
     body: {
-      padding: 1,
+      padding: 0,
       rows: [{
         // Ensures URL encoding is applied to the src URL
         template: mediaElement.get(0).outerHTML
@@ -47,31 +47,35 @@ function rendarMedia(id, headerTitle, mediaElement) {
   }).show();
 }
 
-function rendarPdf(mediaItem) {
+function renderPdf(mediaItem) {
   window.location = getMediaFilePath(mediaItem);
 }
 
-function rendarAudio(mediaItem) {
-  rendarMedia("#audio_elm", mediaItem.title, $("<audio/>", {
+function renderAudio(mediaItem) {
+  renderMedia("#audio_elm", mediaItem.title, $("<audio/>", {
     id: "audio_elm",
     src: getMediaFilePath(mediaItem),
-    type: "audio/mp3",
+    type: "audio/mp3", // TODO  mediaItem.file_ext.toString().substring(1).toLowerCase();
     width: "100%",
     controls: true
   }));
 }
 
-function rendarVideo(mediaItem) {
-  rendarMedia("#video_elm", mediaItem.title, $("<video/>", {
+function renderVideo(mediaItem) {
+  renderMedia("#video_elm", mediaItem.title, $("<video/>", {
     id: "video_elm",
     src: getMediaFilePath(mediaItem),
-    type: "video/mp4",
+    type: "video/mp4", // TODO  mediaItem.file_ext.toString().substring(1).toLowerCase();
     width: "100%",
     controls: true
   }));
 }
 
-function rendarPhoto(mediaItem) {
+//
+// Photo viewer is still under construction.
+//
+
+function renderPhoto(mediaItem) {
   function img(obj) {
     return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
   }
@@ -108,7 +112,6 @@ function rendarPhoto(mediaItem) {
     }
   }).show();
 }
-
 
 /*
  * Load media_list from the json file
@@ -207,14 +210,15 @@ $.getJSON("data/media_files_list.json", function(result) {
             // Case unselectAll event happens.
             return;
           }
-          if (mediaItem.category == 'videos') {
-            rendarVideo(mediaItem);
-          } else if (mediaItem.category == 'documents') {
-            rendarPdf(mediaItem);
+          if (mediaItem.category == 'videos' || mediaItem.category == 'tv') {
+            renderVideo(mediaItem);
+          } else if (mediaItem.category == 'documents' || mediaItem.category ==
+            'books') {
+            renderPdf(mediaItem);
           } else if (mediaItem.category == 'music') {
-            rendarAudio(mediaItem);
+            renderAudio(mediaItem);
           } else if (mediaItem.category == 'photos') {
-            // rendarPhoto(mediaItem);
+            // renderPhoto(mediaItem);
             webix.message("Feature is coming soon!");
           } else {
             webix.message("Unsupported type" + mediaItem.category);
