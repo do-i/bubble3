@@ -144,7 +144,7 @@ $.getJSON("data/media_files_list.json", function(result) {
               faIconClass = "fa-file-pdf-o";
               break;
             case ".txt":
-              faIconClass = "fa-file-txt-o";
+              faIconClass = "fa-file-text-o";
               break;
             case ".mp4":
             case ".webm":

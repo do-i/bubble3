@@ -63,18 +63,19 @@ class TestFileLister(unittest.TestCase):
     def test_list_media_files(self):
         expected_json = [
             {'category': 'books', 'file_ext': '.pdf', 'id': 0, 'dir': 'Books', 'title': 'sample03'},
-            {'category': 'documents', 'file_ext': '.pdf', 'id': 1, 'dir': 'Documents', 'title': 'sample01'},
-            {'category': 'documents', 'file_ext': '.pdf', 'id': 2, 'dir': 'Documents', 'title': 'sample02'},
-            {'category': 'music', 'file_ext': '.mp3', 'id': 3, 'dir': 'Music', 'title': 'audio-1'},
-            {'category': 'music', 'file_ext': '.ogg', 'id': 4, 'dir': 'Music', 'title': 'audio-2'},
-            {'category': 'photos', 'file_ext': '.jpg', 'id': 5, 'dir': 'Photos', 'title': 'contact-bg'},
-            {'category': 'photos', 'file_ext': '.png', 'id': 6, 'dir': 'Photos', 'title': 'favicon'},
-            {'category': 'photos', 'file_ext': '.png', 'id': 7, 'dir': 'Photos', 'title': 'header-bg-ppl-8s'},
-            {'category': 'tv', 'file_ext': '.mp4', 'id': 8, 'dir': 'TV', 'title': 'white space'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 9, 'dir': 'Videos', 'title': 'video-1'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 10, 'dir': 'Videos', 'title': 'video-2'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 11, 'dir': 'Videos', 'title': 'video-3'},
-            {'category': 'videos', 'file_ext': '.webm', 'id': 12, 'dir': 'Videos', 'title': 'video-4'}]
+            {'category': 'documents', 'file_ext': '.txt', 'id': 1, 'dir': 'Documents', 'title': 'donreadme'},
+            {'category': 'documents', 'file_ext': '.pdf', 'id': 2, 'dir': 'Documents', 'title': 'sample01'},
+            {'category': 'documents', 'file_ext': '.pdf', 'id': 3, 'dir': 'Documents', 'title': 'sample02'},
+            {'category': 'music', 'file_ext': '.mp3', 'id': 4, 'dir': 'Music', 'title': 'audio-1'},
+            {'category': 'music', 'file_ext': '.ogg', 'id': 5, 'dir': 'Music', 'title': 'audio-2'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 6, 'dir': 'Photos', 'title': 'contact-bg'},
+            {'category': 'photos', 'file_ext': '.png', 'id': 7, 'dir': 'Photos', 'title': 'favicon'},
+            {'category': 'photos', 'file_ext': '.png', 'id': 8, 'dir': 'Photos', 'title': 'header-bg-ppl-8s'},
+            {'category': 'tv', 'file_ext': '.mp4', 'id': 9, 'dir': 'TV', 'title': 'white space'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 10, 'dir': 'Videos', 'title': 'video-1'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 11, 'dir': 'Videos', 'title': 'video-2'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 12, 'dir': 'Videos', 'title': 'video-3'},
+            {'category': 'videos', 'file_ext': '.webm', 'id': 13, 'dir': 'Videos', 'title': 'video-4'}]
 
         media_list = file_lister.list_media_files('../test', ['Books', 'Documents', 'Music', 'Photos', 'TV', 'Videos'])
         self.assertEqual(len(media_list), len(expected_json))
