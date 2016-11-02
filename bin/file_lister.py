@@ -14,8 +14,10 @@ import json
 """ MEDIA_TYPES -- key is supported folder name, value is a tuple of supported file extensions """
 MEDIA_TYPES = {
     "documents": ('.pdf', '.txt'),
+    "books": ('.pdf', '.txt'),
     "music": ('.mp3', '.ogg'),
     "photos": ('.png', '.jpg'),
+    "tv": ('.mp4', '.webm'),
     "videos": ('.mp4', '.webm')
     }
 
