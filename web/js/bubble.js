@@ -8,6 +8,15 @@ function getMediaFilePath(mediaItem) {
     mediaItem.file_ext;
 }
 
+/*
+ * Parameter -- iconClass is a string name of fontawesome class name.
+ */
+function createIconSpan(iconClass) {
+  return $('<span/>', {
+    "class": "webix_icon"
+  }).addClass(iconClass).get(0).outerHTML;
+}
+
 function rendarMedia(id, headerTitle, mediaElement) {
   webix.ui({
     view: "window",
@@ -116,31 +125,70 @@ $.getJSON("data/media_files_list.json", function(result) {
       view: "grouplist",
       templateBack: "{common.categoryIcon()} #value#",
       templateGroup: "{common.categoryIcon()} #value#",
-      templateItem: "#title#",
+      templateItem: "{common.fileIcon()} #title#",
       select: true,
       scroll: true,
       type: {
-        categoryIcon: function(mediaItem) {
-          var icon_class;
-          switch (mediaItem.value) {
-            case "videos":
-              icon_class = "fa-film";
-            case "documents":
-              icon_class = "fa-file-pdf-o";
-            case "books":
-              icon_class = "fa-book";
-            case "music":
-              icon_class = "fa-music";
-            case "tv":
-              icon_class = "fa-tv";
-            case "photos":
-              icon_class = "fa-image";
+        /*
+            "documents": ('.pdf', '.txt'),
+            "books": ('.pdf', '.txt'),
+            "music": ('.mp3', '.ogg'),
+            "photos": ('.png', '.jpg'),
+            "tv": ('.mp4', '.webm'),
+            "videos": ('.mp4', '.webm')
+         */
+        fileIcon: function(mediaItem) {
+          var faIconClass;
+          switch (mediaItem.file_ext.toString().toLowerCase()) {
+            case ".pdf":
+              faIconClass = "fa-file-pdf-o";
+              break;
+            case ".txt":
+              faIconClass = "fa-file-txt-o";
+              break;
+            case ".mp4":
+            case ".webm":
+              faIconClass = "fa-file-movie-o";
+              break;
+            case ".mp3":
+            case ".ogg":
+              faIconClass = "fa-file-audio-o";
+              break;
+            case ".png":
+            case ".jpg":
+              faIconClass = "fa-file-picture-o";
+              break;
             default:
-              icon_class = "fa-github";
+              faIconClass = "fa-file";
           }
-          return $('<span/>', {
-            "class": "webix_icon"
-          }).addClass(icon_class).icon_span.get(0).outerHTML;
+          return createIconSpan(faIconClass);
+        },
+        categoryIcon: function(mediaItem) {
+          var faIconClass;
+          switch (mediaItem.value.toString().toLowerCase()) {
+            case "videos":
+              faIconClass = "fa-film";
+              break;
+            case "documents":
+              faIconClass = "fa-file-o";
+              break;
+            case "books":
+              faIconClass = "fa-book";
+              break;
+            case "music":
+              faIconClass = "fa-music";
+              break;
+            case "tv":
+              faIconClass = "fa-desktop"; // webix does not support fa-tv yet.
+              break;
+            case "photos":
+              faIconClass = "fa-image";
+              break;
+            default:
+              faIconClass = "fa-github";
+              break;
+          }
+          return createIconSpan(faIconClass);
         }
       },
       scheme: {
