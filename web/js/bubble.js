@@ -79,14 +79,32 @@ function renderPhoto(mediaItem) {
   function img(obj) {
     return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
   }
+  // TODO get all photo files from webix.ui("#media_list_renderer").getData();
+
+  // current selection and start from here.
   var mediaPath = getMediaFilePath(mediaItem);
   webix.ui({
     view: "window",
+    id: "media_window",
+    fullscreen: true,
+    head: {
+      view: "toolbar",
+      margin: -10,
+      cols: [{
+        view: "label",
+        label: "~~ Images ~~"
+      }, {
+        view: "icon",
+        icon: "times-circle",
+        click: function() {
+          $$('media_window').close();
+        }
+      }]
+    },
     body: {
       view: "carousel",
       id: "carousel",
-      width: 464,
-      height: 275,
+      width: "100%",
       cols: [{
         css: "image",
         template: img,
@@ -100,15 +118,6 @@ function renderPhoto(mediaItem) {
           src: mediaPath
         }
       }]
-    },
-    head: {
-      view: "toolbar",
-      type: "MainBar",
-      elements: [{
-        view: "label",
-        label: "Photobook",
-        align: 'left'
-      }]
     }
   }).show();
 }
@@ -119,6 +128,7 @@ function renderPhoto(mediaItem) {
 $.getJSON("data/media_files_list.json", function(result) {
 
   webix.ui({
+    id: "media_list_renderer",
     margin: 5,
     padding: 0,
     type: "wide",
@@ -218,8 +228,8 @@ $.getJSON("data/media_files_list.json", function(result) {
           } else if (mediaItem.category == 'music') {
             renderAudio(mediaItem);
           } else if (mediaItem.category == 'photos') {
-            // renderPhoto(mediaItem);
-            webix.message("Feature is coming soon!");
+            renderPhoto(mediaItem);
+            // webix.message("Feature is coming soon!");
           } else {
             webix.message("Unsupported type" + mediaItem.category);
           }
