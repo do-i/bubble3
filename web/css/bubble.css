@@ -2,6 +2,7 @@
  * Copyright 2016 Joji Doi
  * Licensed under MIT
  */
+
 body {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -24,7 +25,7 @@ body {
     border: 2px solid #00E688;
     color: #FCF8E3;
     white-space: nowrap;
-    overflow:hidden !important;
+    overflow: hidden !important;
     text-overflow: ellipsis;
 }
 .btn-bubble:hover {
@@ -49,4 +50,24 @@ body {
     /*color: #D7E497;*/
     color: #CACACA;
     opacity: 0.5;
+}
+
+/* below are for webix carousel styles */
+
+.content {
+    /* TODO dispaly small image to original size */
+    width: 100%;
+    height: auto;
+}
+.image .webix_template {
+    position: relative;
+    background: #111;
+    padding: 2px 2px;
+}
+.title {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    color: #ABC;
+    font-size: 12px;
 }

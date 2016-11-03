@@ -17,7 +17,7 @@ function createIconSpan(iconClass) {
   }).addClass(iconClass).get(0).outerHTML;
 }
 
-function renderMedia(id, headerTitle, mediaElement) {
+function renderMedia(headerTitle, mediaElement, onCloseAction) {
   webix.ui({
     view: "window",
     id: "media_window",
@@ -32,7 +32,7 @@ function renderMedia(id, headerTitle, mediaElement) {
         view: "icon",
         icon: "times-circle",
         click: function() {
-          $(id)[0].pause();
+          onCloseAction();
           $$('media_window').close();
         }
       }]
@@ -48,27 +48,65 @@ function renderMedia(id, headerTitle, mediaElement) {
 }
 
 function renderPdf(mediaItem) {
-  window.location = getMediaFilePath(mediaItem);
+  renderMedia(mediaItem.title, $("<embed/>", {
+    id: "embed_pdf_elm",
+    src: getMediaFilePath(mediaItem),
+    type: "application/pdf",
+    width: "100%",
+    height: "100%"
+  }), function() {
+    // no-op
+  });
+}
+
+function renderText(mediaItem) {
+  renderMedia(mediaItem.title, $("<iframe/>", {
+    id: "iframe_elm",
+    src: getMediaFilePath(mediaItem),
+    type: "application/text",
+    width: "100%",
+    height: "100%"
+  }), function() {
+    // no-op
+  });
+}
+
+function renderDoc(mediaItem) {
+  var mediaType = mediaItem.file_ext.toString().toLowerCase();
+  switch (mediaType) {
+    case ".pdf":
+      renderPdf(mediaItem);
+      break;
+    case ".txt":
+      renderText(mediaItem);
+      break;
+    default:
+      console.log("Unsupported media type " + mediaType);
+  }
 }
 
 function renderAudio(mediaItem) {
-  renderMedia("#audio_elm", mediaItem.title, $("<audio/>", {
+  renderMedia(mediaItem.title, $("<audio/>", {
     id: "audio_elm",
     src: getMediaFilePath(mediaItem),
     type: "audio/mp3", // TODO  mediaItem.file_ext.toString().substring(1).toLowerCase();
     width: "100%",
     controls: true
-  }));
+  }), function() {
+    $("#audio_elm")[0].pause();
+  });
 }
 
 function renderVideo(mediaItem) {
-  renderMedia("#video_elm", mediaItem.title, $("<video/>", {
+  renderMedia(mediaItem.title, $("<video/>", {
     id: "video_elm",
     src: getMediaFilePath(mediaItem),
     type: "video/mp4", // TODO  mediaItem.file_ext.toString().substring(1).toLowerCase();
     width: "100%",
     controls: true
-  }));
+  }), function() {
+    $("#video_elm")[0].pause();
+  });
 }
 
 //
@@ -76,49 +114,78 @@ function renderVideo(mediaItem) {
 //
 
 function renderPhoto(mediaItem) {
-  function img(obj) {
-    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
-  }
-  var mediaPath = getMediaFilePath(mediaItem);
   webix.ui({
     view: "window",
-    body: {
-      view: "carousel",
-      id: "carousel",
-      width: 464,
-      height: 275,
+    id: "image_window",
+    fullscreen: true,
+    head: {
+      view: "toolbar",
+      margin: -10,
       cols: [{
-        css: "image",
-        template: img,
-        data: {
-          src: mediaPath
-        }
+        view: "label",
+        label: "~~ Images Beta ~~"
       }, {
-        css: "image",
-        template: img,
-        data: {
-          src: mediaPath
+        view: "icon",
+        icon: "times-circle",
+        click: function() {
+          $$('image_window').close();
         }
       }]
     },
-    head: {
-      view: "toolbar",
-      type: "MainBar",
-      elements: [{
-        view: "label",
-        label: "Photobook",
-        align: 'left'
-      }]
+    body: {
+      view: "carousel",
+      id: "bubble_carousel",
+      fullscreen: true,
+      cols: getImageFilePathsFromCache()
     }
-  }).show();
+  });
+  $$("bubble_carousel").setActive(mediaItem.id);
+  $$("image_window").show();
+}
+
+/*
+ * Retrieve cached image file path data.
+ * See cacheImageFilePaths(media_file_list) function for cache creation.
+ */
+function getImageFilePathsFromCache() {
+  return $("body").data("image file list");
+}
+
+/*
+ * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
+ */
+function cacheImageFilePaths(media_file_list) {
+  function img(obj) {
+    return '<img src="' + obj.src +
+      '" class="content" ondragstart="return false"/><div class="title">' + obj.title +
+      '</div>';
+  }
+  console.log("This should be called only once.");
+  var imageFilePaths = [];
+  media_file_list.forEach(function(media_file) {
+    if (media_file.category.toString().toLowerCase() == "photos") {
+      imageFilePaths.push({
+        id: media_file.id,
+        css: "image",
+        template: img,
+        data: webix.copy({
+          src: getMediaFilePath(media_file),
+          title: media_file.title
+        })
+      });
+    }
+  });
+  $("body").data("image file list", imageFilePaths);
 }
 
 /*
  * Load media_list from the json file
  */
 $.getJSON("data/media_files_list.json", function(result) {
-
+  // keep the retrieved data in a cache for later use.
+  cacheImageFilePaths(result);
   webix.ui({
+    id: "media_list_renderer",
     margin: 5,
     padding: 0,
     type: "wide",
@@ -214,12 +281,12 @@ $.getJSON("data/media_files_list.json", function(result) {
             renderVideo(mediaItem);
           } else if (mediaItem.category == 'documents' || mediaItem.category ==
             'books') {
-            renderPdf(mediaItem);
+            renderDoc(mediaItem);
           } else if (mediaItem.category == 'music') {
             renderAudio(mediaItem);
           } else if (mediaItem.category == 'photos') {
-            // renderPhoto(mediaItem);
-            webix.message("Feature is coming soon!");
+            renderPhoto(mediaItem);
+            // webix.message("Feature is coming soon!");
           } else {
             webix.message("Unsupported type" + mediaItem.category);
           }
