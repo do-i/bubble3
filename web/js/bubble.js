@@ -48,7 +48,8 @@ function renderMedia(headerTitle, mediaElement, onCloseAction) {
 }
 
 function renderPdf(mediaItem) {
-  renderMedia(mediaItem.title, $("<embed/>", {
+  // Note embed is not supported by some browsers yet. So, for now use iframe.
+  renderMedia(mediaItem.title, $("<iframe/>", {
     id: "embed_pdf_elm",
     src: getMediaFilePath(mediaItem),
     type: "application/pdf",
