@@ -48,16 +48,8 @@ function renderMedia(headerTitle, mediaElement, onCloseAction) {
 }
 
 function renderPdf(mediaItem) {
-  // Note embed is not supported by some browsers yet. So, for now use iframe.
-  renderMedia(mediaItem.title, $("<iframe/>", {
-    id: "embed_pdf_elm",
-    src: getMediaFilePath(mediaItem),
-    type: "application/pdf",
-    width: "100%",
-    height: "100%"
-  }), function() {
-    // no-op
-  });
+  // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
+  window.location = getMediaFilePath(mediaItem);
 }
 
 function renderText(mediaItem) {
