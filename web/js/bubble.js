@@ -76,53 +76,33 @@ function renderVideo(mediaItem) {
 //
 
 function renderPhoto(mediaItem) {
-  function img(obj) {
-    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
-  }
-  // TODO get all photo files from webix.ui("#media_list_renderer").getData();
-  var image_file_list = getImageFilePathsFromCache();
-  console.log("All media " + image_file_list);
-  // current selection and start from here.
-  var mediaPath = getMediaFilePath(mediaItem);
   webix.ui({
     view: "window",
-    id: "media_window",
+    id: "image_window",
     fullscreen: true,
     head: {
       view: "toolbar",
       margin: -10,
       cols: [{
         view: "label",
-        label: "~~ Images ~~"
+        label: "~~ Images Beta ~~"
       }, {
         view: "icon",
         icon: "times-circle",
         click: function() {
-          $$('media_window').close();
+          $$('image_window').close();
         }
       }]
     },
     body: {
       view: "carousel",
       id: "bubble_carousel",
-      width: "100%",
-      cols: [{
-        css: "image",
-        template: img,
-        data: {
-          src: mediaPath
-        }
-      }, {
-        css: "image",
-        template: img,
-        data: {
-          src: "ext-content/Photos/header-bg-ppl-8s.png"
-        }
-      }]
+      fullscreen: true,
+      cols: getImageFilePathsFromCache()
     }
   });
-  $$("bubble_carousel").setActiveIndex(0);
-  $$("media_window").show();
+  $$("bubble_carousel").setActive(mediaItem.id);
+  $$("image_window").show();
 }
 
 /*
@@ -130,21 +110,34 @@ function renderPhoto(mediaItem) {
  * See cacheImageFilePaths(media_file_list) function for cache creation.
  */
 function getImageFilePathsFromCache() {
-  return $("body").data("media file list");
+  return $("body").data("image file list");
 }
 
 /*
  * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
  */
 function cacheImageFilePaths(media_file_list) {
+  function img(obj) {
+    return '<img src="' + obj.src +
+      '" class="content" ondragstart="return false"/><div class="title">' + obj.title +
+      '</div>';
+  }
   console.log("This should be called only once.");
   var imageFilePaths = [];
   media_file_list.forEach(function(media_file) {
     if (media_file.category.toString().toLowerCase() == "photos") {
-      imageFilePaths.push(media_file);
+      imageFilePaths.push({
+        id: media_file.id,
+        css: "image",
+        template: img,
+        data: webix.copy({
+          src: getMediaFilePath(media_file),
+          title: media_file.title
+        })
+      });
     }
   });
-  $("body").data("media file list", imageFilePaths);
+  $("body").data("image file list", imageFilePaths);
 }
 
 /*
