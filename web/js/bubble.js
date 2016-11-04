@@ -80,7 +80,8 @@ function renderPhoto(mediaItem) {
     return '<img src="' + obj.src + '" class="content" ondragstart="return false"/>'
   }
   // TODO get all photo files from webix.ui("#media_list_renderer").getData();
-
+  var image_file_list = getImageFilePathsFromCache();
+  console.log("All media " + image_file_list);
   // current selection and start from here.
   var mediaPath = getMediaFilePath(mediaItem);
   webix.ui({
@@ -103,7 +104,7 @@ function renderPhoto(mediaItem) {
     },
     body: {
       view: "carousel",
-      id: "carousel",
+      id: "bubble_carousel",
       width: "100%",
       cols: [{
         css: "image",
@@ -115,18 +116,43 @@ function renderPhoto(mediaItem) {
         css: "image",
         template: img,
         data: {
-          src: mediaPath
+          src: "ext-content/Photos/header-bg-ppl-8s.png"
         }
       }]
     }
-  }).show();
+  });
+  $$("bubble_carousel").setActiveIndex(0);
+  $$("media_window").show();
+}
+
+/*
+ * Retrieve cached image file path data.
+ * See cacheImageFilePaths(media_file_list) function for cache creation.
+ */
+function getImageFilePathsFromCache() {
+  return $("body").data("media file list");
+}
+
+/*
+ * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
+ */
+function cacheImageFilePaths(media_file_list) {
+  console.log("This should be called only once.");
+  var imageFilePaths = [];
+  media_file_list.forEach(function(media_file) {
+    if (media_file.category.toString().toLowerCase() == "photos") {
+      imageFilePaths.push(media_file);
+    }
+  });
+  $("body").data("media file list", imageFilePaths);
 }
 
 /*
  * Load media_list from the json file
  */
 $.getJSON("data/media_files_list.json", function(result) {
-
+  // keep the retrieved data in a cache for later use.
+  cacheImageFilePaths(result);
   webix.ui({
     id: "media_list_renderer",
     margin: 5,
