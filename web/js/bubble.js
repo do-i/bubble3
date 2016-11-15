@@ -178,115 +178,114 @@ $.getJSON("data/media_files_list.json", function(result) {
   // keep the retrieved data in a cache for later use.
   cacheImageFilePaths(result);
   webix.ui({
-    id: "media_list_renderer",
-    margin: 5,
-    padding: 0,
-    type: "wide",
-    view: "flexlayout",
-    cols: [{
-      container: "media_list",
-      view: "grouplist",
-      templateBack: "{common.categoryIcon()} #value#",
-      templateGroup: "{common.categoryIcon()} #value#",
-      templateItem: "{common.fileIcon()} #title#",
-      select: true,
-      scroll: true,
-      type: {
-        /*
-            "documents": ('.pdf', '.txt'),
-            "books": ('.pdf', '.txt'),
-            "music": ('.mp3', '.ogg'),
-            "photos": ('.png', '.jpg'),
-            "tv": ('.mp4', '.webm'),
-            "videos": ('.mp4', '.webm')
-         */
-        fileIcon: function(mediaItem) {
-          var faIconClass;
-          switch (mediaItem.file_ext.toString().toLowerCase()) {
-            case ".pdf":
-              faIconClass = "fa-file-pdf-o";
-              break;
-            case ".txt":
-              faIconClass = "fa-file-text-o";
-              break;
-            case ".mp4":
-            case ".webm":
-              faIconClass = "fa-file-movie-o";
-              break;
-            case ".mp3":
-            case ".ogg":
-              faIconClass = "fa-file-audio-o";
-              break;
-            case ".png":
-            case ".jpg":
-              faIconClass = "fa-file-picture-o";
-              break;
-            default:
-              faIconClass = "fa-file";
-          }
-          return createIconSpan(faIconClass);
-        },
-        categoryIcon: function(mediaItem) {
-          var faIconClass;
-          switch (mediaItem.value.toString().toLowerCase()) {
-            case "videos":
-              faIconClass = "fa-film";
-              break;
-            case "documents":
-              faIconClass = "fa-file-o";
-              break;
-            case "books":
-              faIconClass = "fa-book";
-              break;
-            case "music":
-              faIconClass = "fa-music";
-              break;
-            case "tv":
-              faIconClass = "fa-desktop"; // webix does not support fa-tv yet.
-              break;
-            case "photos":
-              faIconClass = "fa-image";
-              break;
-            default:
-              faIconClass = "fa-github";
-              break;
-          }
-          return createIconSpan(faIconClass);
+    // id: "media_list_renderer",
+    // margin: 5,
+    // padding: 0,
+    // type: "wide",
+    // view: "flexlayout",
+    // cols: [{
+    container: "media_list",
+    view: "grouplist",
+    templateBack: "{common.categoryIcon()} #value#",
+    templateGroup: "{common.categoryIcon()} #value#",
+    templateItem: "{common.fileIcon()} #title#",
+    select: true,
+    scroll: true,
+    type: {
+      /*
+          "documents": ('.pdf', '.txt'),
+          "books": ('.pdf', '.txt'),
+          "music": ('.mp3', '.ogg'),
+          "photos": ('.png', '.jpg'),
+          "tv": ('.mp4', '.webm'),
+          "videos": ('.mp4', '.webm')
+       */
+      fileIcon: function(mediaItem) {
+        var faIconClass;
+        switch (mediaItem.file_ext.toString().toLowerCase()) {
+          case ".pdf":
+            faIconClass = "fa-file-pdf-o";
+            break;
+          case ".txt":
+            faIconClass = "fa-file-text-o";
+            break;
+          case ".mp4":
+          case ".webm":
+            faIconClass = "fa-file-movie-o";
+            break;
+          case ".mp3":
+          case ".ogg":
+            faIconClass = "fa-file-audio-o";
+            break;
+          case ".png":
+          case ".jpg":
+            faIconClass = "fa-file-picture-o";
+            break;
+          default:
+            faIconClass = "fa-file";
         }
+        return createIconSpan(faIconClass);
       },
-      scheme: {
-        $group: {
-          by: 'category'
-        },
-        $sort: {
-          by: "value",
-          dir: "desc"
+      categoryIcon: function(mediaItem) {
+        var faIconClass;
+        switch (mediaItem.value.toString().toLowerCase()) {
+          case "videos":
+            faIconClass = "fa-film";
+            break;
+          case "documents":
+            faIconClass = "fa-file-o";
+            break;
+          case "books":
+            faIconClass = "fa-book";
+            break;
+          case "music":
+            faIconClass = "fa-music";
+            break;
+          case "tv":
+            faIconClass = "fa-desktop"; // webix does not support fa-tv yet.
+            break;
+          case "photos":
+            faIconClass = "fa-image";
+            break;
+          default:
+            faIconClass = "fa-github";
+            break;
         }
+        return createIconSpan(faIconClass);
+      }
+    },
+    scheme: {
+      $group: {
+        by: 'category'
       },
-      on: {
-        onSelectChange: function() {
-          var mediaItem = this.getSelectedItem();
-          if (mediaItem == undefined) {
-            // Case unselectAll event happens.
-            return;
-          }
-          if (mediaItem.category == 'videos' || mediaItem.category == 'tv') {
-            renderVideo(mediaItem);
-          } else if (mediaItem.category == 'documents' || mediaItem.category ==
-            'books') {
-            renderDoc(mediaItem);
-          } else if (mediaItem.category == 'music') {
-            renderAudio(mediaItem);
-          } else if (mediaItem.category == 'photos') {
-            renderPhoto(mediaItem);
-            // webix.message("Feature is coming soon!");
-          } else {
-            webix.message("Unsupported type" + mediaItem.category);
-          }
-          $$(this).unselectAll();
+      $sort: {
+        by: "value",
+        dir: "desc"
+      }
+    },
+    on: {
+      onSelectChange: function() {
+        var mediaItem = this.getSelectedItem();
+        if (mediaItem == undefined) {
+          // Case unselectAll event happens.
+          return;
         }
-      },
-      data: webix.copy(result)
-    }]
+        if (mediaItem.category == 'videos' || mediaItem.category == 'tv') {
+          renderVideo(mediaItem);
+        } else if (mediaItem.category == 'documents' || mediaItem.category ==
+          'books') {
+          renderDoc(mediaItem);
+        } else if (mediaItem.category == 'music') {
+          renderAudio(mediaItem);
+        } else if (mediaItem.category == 'photos') {
+          renderPhoto(mediaItem);
+          // webix.message("Feature is coming soon!");
+        } else {
+          webix.message("Unsupported type" + mediaItem.category);
+        }
+        $$(this).unselectAll();
+      }
+    },
+    data: webix.copy(result)
   });
 }); // end of getJSON()
