@@ -8,8 +8,8 @@ body {
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: white !important;
-    background: url("../img/logo.png");
+    /*background-color: white !important;*/
+    /*background: url("../img/logo.png");*/
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
