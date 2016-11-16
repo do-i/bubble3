@@ -52,6 +52,11 @@ body {
     opacity: 0.5;
 }
 
+/* bubble3 styles */
+.categories {
+  margin: 20px;
+}
+
 /* below are for webix carousel styles */
 
 .content {
