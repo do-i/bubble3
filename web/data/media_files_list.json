@@ -46,21 +46,84 @@
     "file_ext": ".jpg",
     "id": 6,
     "dir": "Photos",
-    "title": "contact-bg"
+    "title": "sample01"
   },
   {
     "category": "photos",
-    "file_ext": ".png",
+    "file_ext": ".jpg",
     "id": 7,
     "dir": "Photos",
-    "title": "favicon"
+    "title": "sample02"
   },
   {
     "category": "photos",
-    "file_ext": ".png",
+    "file_ext": ".jpg",
     "id": 8,
     "dir": "Photos",
-    "title": "header-bg-ppl-8s"
+    "title": "sample03"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample04"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample05"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample06"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample07"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample08"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample09"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample10"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample11"
+  },
+  {
+    "category": "photos",
+    "file_ext": ".jpg",
+    "id": 8,
+    "dir": "Photos",
+    "title": "sample12"
   },
   {
     "category": "tv",
