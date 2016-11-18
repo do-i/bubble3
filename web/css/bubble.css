@@ -28,6 +28,7 @@ body {
     overflow: hidden !important;
     text-overflow: ellipsis;
 }
+
 .btn-bubble:hover {
     background: #3CA960;
     color: #CBFBCF;
@@ -64,6 +65,11 @@ body {
 
 .btn-primary.gradient {
 	background: linear-gradient(to bottom,  #33a6cc 50%,#0099cc 50%);
+}
+
+.btn-primary.ellipsis {
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 
 .btn-primary.gradient:hover, .btn-primary.gradient:focus, .btn-primary.gradient:active, .btn-primary.gradient.active, .open > .dropdown-toggle.btn-primary {
