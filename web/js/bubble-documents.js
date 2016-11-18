@@ -30,20 +30,7 @@ $.getJSON("data/media_files_list.json", function(result) {
     }).appendTo("#files_list");
     btn.html(mediaItem.title);
     btn.on("click", function() {
-      var selection = $(this).val();
-      $("#video_elm").empty(); // clear previous source element
-      var video_src = $("<source/>", {
-        "src": getMediaFilePath(mediaItem),
-        "type": "video/mp4"
-      }).appendTo("#video_elm");
-      $("#video_elm").load();
+      window.location = getMediaFilePath(mediaItem);
     });
   });
 }); // end of getJSON()
-
-/*
- * Pause the video when bootstrap modal is hidden.
- */
-$("#video_modal").on("hide.bs.modal", function(e) {
-  $("#video_elm")[0].pause();
-});
