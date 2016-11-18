@@ -18,7 +18,7 @@ function renderPdf(mediaItem) {
  */
 $.getJSON("data/media_files_list.json", function(result) {
   var mediaFiles = $(result).filter(function() {
-    return this.category == "documents";
+    return this.category == "books";
   });
   $.each(mediaFiles, function(i, mediaItem) {
     var btn = $("<button></button>", {

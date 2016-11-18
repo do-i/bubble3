@@ -8,6 +8,14 @@ function getMediaFilePath(mediaItem) {
     mediaItem.file_ext;
 }
 
+function renderVideo(mediaItem) {
+  $("#video_elm").empty(); // clear previous source element
+  var video_src = $("<source/>", {
+    "src": getMediaFilePath(mediaItem),
+    "type": "video/mp4"
+  }).appendTo("#video_elm");
+  $("#video_elm").load();
+}
 /*
  * Load media_list from the json file
  */
@@ -25,13 +33,7 @@ $.getJSON("data/media_files_list.json", function(result) {
     }).appendTo("#files_list");
     btn.html(mediaItem.title);
     btn.on("click", function() {
-      var selection = $(this).val();
-      $("#video_elm").empty(); // clear previous source element
-      var video_src = $("<source/>", {
-        "src": getMediaFilePath(mediaItem),
-        "type": "video/mp4"
-      }).appendTo("#video_elm");
-      $("#video_elm").load();
+      renderVideo(mediaItem);
     });
   });
 }); // end of getJSON()

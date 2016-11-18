@@ -8,27 +8,39 @@ function getMediaFilePath(mediaItem) {
     mediaItem.file_ext;
 }
 
-function renderPdf(mediaItem) {
-  // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
-  window.location = getMediaFilePath(mediaItem);
+function renderAudio(mediaItem) {
+  $("#audio_elm").empty(); // clear previous source element
+  var video_src = $("<source/>", {
+    "src": getMediaFilePath(mediaItem),
+    "type": "audio/mp3"
+  }).appendTo("#audio_elm");
+  $("#audio_elm").load();
 }
-
 /*
  * Load media_list from the json file
  */
 $.getJSON("data/media_files_list.json", function(result) {
   var mediaFiles = $(result).filter(function() {
-    return this.category == "documents";
+    return this.category == "music";
   });
   $.each(mediaFiles, function(i, mediaItem) {
     var btn = $("<button></button>", {
       "type": "button",
       "class": "btn btn-primary btn-lg gradient round btn-block ellipsis",
+      "data-toggle": "modal",
+      "data-target": "#audio_modal",
       "value": mediaItem
     }).appendTo("#files_list");
     btn.html(mediaItem.title);
     btn.on("click", function() {
-      renderPdf(mediaItem);
+      renderAudio(mediaItem);
     });
   });
 }); // end of getJSON()
+
+/*
+ * Pause the audio when bootstrap modal is hidden.
+ */
+$("#audio_modal").on("hide.bs.modal", function(e) {
+  $("#audio_elm")[0].pause();
+});
