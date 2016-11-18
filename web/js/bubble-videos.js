@@ -29,16 +29,16 @@ $.getJSON("data/media_files_list.json", function(result) {
   });
   console.log(videoFiles);
   $.each(videoFiles, function(i, mediaItem) {
-    var btnDiv = $("<div></div>", {
-      "class": "col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-1"
-    }).appendTo("#files_list");
+    // var btnDiv = $("<div></div>", {
+    //   "class": "col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-1"
+    // }).appendTo("#files_list");
     var btn = $("<button></button>", {
       "type": "button",
       "class": "btn btn-primary btn-lg gradient round btn-block ellipsis",
       "data-toggle": "modal",
       "data-target": "#video_modal",
       "value": mediaItem
-    }).appendTo(btnDiv);
+    }).appendTo("#files_list");
     btn.html(mediaItem.title);
     btn.on("click", function() {
       var selection = $(this).val();
@@ -50,11 +50,11 @@ $.getJSON("data/media_files_list.json", function(result) {
       $("#video_elm").load();
     });
   });
-  // $.each(result, function() {
-  //   if (this.category == "videos") {
-  //     console.log(this.title);
-  //   } else {
-  //     console.log(this.category);
-  //   }
-  // });
 }); // end of getJSON()
+
+/*
+ * Pause the video when bootstrap modal is hidden.
+ */
+$("#video_modal").on("hide.bs.modal", function(e) {
+  $("#video_elm")[0].pause();
+});
