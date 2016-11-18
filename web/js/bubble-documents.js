@@ -8,12 +8,17 @@ function getMediaFilePath(mediaItem) {
     mediaItem.file_ext;
 }
 
+function renderPdf(mediaItem) {
+  // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
+  window.location = getMediaFilePath(mediaItem);
+}
+
 /*
  * Load media_list from the json file
  */
 $.getJSON("data/media_files_list.json", function(result) {
   var mediaFiles = $(result).filter(function() {
-    return this.category == "videos";
+    return this.category == "documents";
   });
   $.each(mediaFiles, function(i, mediaItem) {
     var btn = $("<button></button>", {
