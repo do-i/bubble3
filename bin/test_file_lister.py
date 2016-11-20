@@ -68,14 +68,23 @@ class TestFileLister(unittest.TestCase):
             {'category': 'documents', 'file_ext': '.pdf', 'id': 3, 'dir': 'Documents', 'title': 'sample02'},
             {'category': 'music', 'file_ext': '.mp3', 'id': 4, 'dir': 'Music', 'title': 'audio-1'},
             {'category': 'music', 'file_ext': '.ogg', 'id': 5, 'dir': 'Music', 'title': 'audio-2'},
-            {'category': 'photos', 'file_ext': '.jpg', 'id': 6, 'dir': 'Photos', 'title': 'contact-bg'},
-            {'category': 'photos', 'file_ext': '.png', 'id': 7, 'dir': 'Photos', 'title': 'favicon'},
-            {'category': 'photos', 'file_ext': '.png', 'id': 8, 'dir': 'Photos', 'title': 'header-bg-ppl-8s'},
-            {'category': 'tv', 'file_ext': '.mp4', 'id': 9, 'dir': 'TV', 'title': 'white space'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 10, 'dir': 'Videos', 'title': 'video-1'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 11, 'dir': 'Videos', 'title': 'video-2'},
-            {'category': 'videos', 'file_ext': '.mp4', 'id': 12, 'dir': 'Videos', 'title': 'video-3'},
-            {'category': 'videos', 'file_ext': '.webm', 'id': 13, 'dir': 'Videos', 'title': 'video-4'}]
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 6, 'dir': 'Photos', 'title': 'sample01'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 7, 'dir': 'Photos', 'title': 'sample02'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 8, 'dir': 'Photos', 'title': 'sample03'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 9, 'dir': 'Photos', 'title': 'sample04'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 10, 'dir': 'Photos', 'title': 'sample05'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 11, 'dir': 'Photos', 'title': 'sample06'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 12, 'dir': 'Photos', 'title': 'sample07'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 13, 'dir': 'Photos', 'title': 'sample08'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 14, 'dir': 'Photos', 'title': 'sample09'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 15, 'dir': 'Photos', 'title': 'sample10'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 16, 'dir': 'Photos', 'title': 'sample11'},
+            {'category': 'photos', 'file_ext': '.jpg', 'id': 17, 'dir': 'Photos', 'title': 'sample12'},
+            {'category': 'tv', 'file_ext': '.mp4', 'id': 18, 'dir': 'TV', 'title': 'white space'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 19, 'dir': 'Videos', 'title': 'video-1'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 20, 'dir': 'Videos', 'title': 'video-2'},
+            {'category': 'videos', 'file_ext': '.mp4', 'id': 21, 'dir': 'Videos', 'title': 'video-3'},
+            {'category': 'videos', 'file_ext': '.webm', 'id': 22, 'dir': 'Videos', 'title': 'video-4'}]
 
         media_list = file_lister.list_media_files('../test', ['Books', 'Documents', 'Music', 'Photos', 'TV', 'Videos'])
         self.assertEqual(len(media_list), len(expected_json))
