@@ -8,11 +8,6 @@ function getMediaFilePath(mediaItem) {
     mediaItem.file_ext;
 }
 
-function renderImages(mediaItem) {
-  // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
-  window.location = getMediaFilePath(mediaItem);
-}
-
 /*
  * Load media_list from the json file
  */
@@ -21,14 +16,15 @@ $.getJSON("data/media_files_list.json", function(result) {
     return this.category == "photos";
   });
   $.each(mediaFiles, function(i, mediaItem) {
-    var btn = $("<button></button>", {
-      "type": "button",
-      "class": "btn btn-primary btn-lg gradient round btn-block ellipsis",
-      "value": mediaItem
+    var img = $("<img/>", {
+      "src": getMediaFilePath(mediaItem)
     }).appendTo("#files_list");
-    btn.html(mediaItem.title);
-    btn.on("click", function() {
-      renderImages(mediaItem);
-    });
   });
+  Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+  $(".galleria").galleria({
+    responsive: true,
+    height: 0.5
+  });
+  Galleria.run('.galleria');
+
 }); // end of getJSON()

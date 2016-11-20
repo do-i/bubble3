@@ -43,7 +43,7 @@ body {
     color: #CACACA;
     opacity: 1.0;
 }
-.close-bubble:hover {    
+.close-bubble:hover {
     color: #CACACA;
     opacity: 0.5;
 }
@@ -73,6 +73,13 @@ body {
 
 .btn-primary.gradient:active, .btn-primary.gradient.active {
 	background: linear-gradient(to bottom,  #267c99 50%,#007299 50%);
+}
+
+/***************************************/
+/* below are for Galleria styles */
+.galleria {  
+  width: 100%;
+  background: #000000;
 }
 
 /***************************************/
