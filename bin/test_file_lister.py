@@ -3,6 +3,7 @@ import file_lister
 import shutil
 import os
 import json
+import filecmp
 
 class TestFileLister(unittest.TestCase):
     """
@@ -89,6 +90,21 @@ class TestFileLister(unittest.TestCase):
         media_list = file_lister.list_media_files('../test', ['Books', 'Documents', 'Music', 'Photos', 'TV', 'Videos'])
         self.assertEqual(len(media_list), len(expected_json))
         self.assertEqual(media_list, expected_json)
+
+    def test_customize_ui_background_image__custom_image(self):
+        file_lister.customize_ui_background_image('../test', TestFileLister.TMP_BUBBLE_DIR)
+        self.assertTrue(filecmp.cmp(
+            os.path.join(TestFileLister.TMP_BUBBLE_DIR, 'background.jpg'),
+            os.path.join('../test', 'background.jpg')))
+
+    def test_customize_ui_background_image__default_image(self):
+        shutil.copyfile(
+            os.path.join('../test/Photos', 'sample03.jpg'),
+            os.path.join(TestFileLister.TMP_BUBBLE_DIR, 'background_default.jpg'))
+        file_lister.customize_ui_background_image('../test/Photos', TestFileLister.TMP_BUBBLE_DIR)
+        self.assertTrue(filecmp.cmp(
+            os.path.join(TestFileLister.TMP_BUBBLE_DIR, 'background.jpg'),
+            os.path.join(TestFileLister.TMP_BUBBLE_DIR, 'background_default.jpg')))
 
 if __name__ == '__main__':
     unittest.main()
