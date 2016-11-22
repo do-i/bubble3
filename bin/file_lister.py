@@ -5,6 +5,7 @@
 import argparse
 import os
 import json
+import shutil
 
 """
   /usr/local/bin/file_lister.py
@@ -80,15 +81,35 @@ def list_media_files(media_root, media_folders):
             id += 1
     return output
 
+def customize_ui_background_image(media_root, web_image_dir):
+    """
+        If background.jpg file is provided in Media root directory, use this file.
+        If not, then use background_default.jpg
+    """
+    src = os.path.join(web_image_dir, 'background_default.jpg')
+    background_files = [ bg_file for bg_file in os.listdir(media_root)
+        if os.path.isfile(os.path.join(media_root, bg_file))
+            and bg_file.lower() == 'background.jpg' ]
+    if len(background_files) > 0:
+        custom_bg_img = background_files[0]
+        src = os.path.join(media_root, custom_bg_img)
+    dest = os.path.join(web_image_dir, 'background.jpg')
+    shutil.copyfile(src, dest)
+    os.chmod(dest, 0644)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Media File Lister script parses')
     parser.add_argument('-m', '--media-root', default='/mnt', help='Media root location')
     parser.add_argument('-o', '--output-dir', default='/var/www/html/data',
         help='output json file')
+    parser.add_argument('-i', '--image-dir', default='/var/www/html/img',
+        help='directory for background.jpg to be created also contains background_default.jpg ')
     args = parser.parse_args()
     media_root = args.media_root
     output_dir = args.output_dir
+    web_image_dir = args.image_dir
 
     media_folders = list_media_dirs(media_root)
     create_file_list_json(output_dir, list_media_files(media_root, media_folders))
+    customize_ui_background_image(media_root, web_image_dir)
