@@ -3,16 +3,6 @@
  * Licensed under MIT
  */
 
-html {
-	height: 100%;
-  min-height: 100%;
-}
-
-body {
-  min-height: 100%;
-	background: url('../img/background.jpg');
-}
-
 .btn-bubble, .btn-bubble:focus, .btn-bubble:active {
     font-weight: bold;
     background: none;
@@ -81,6 +71,7 @@ body {
   width: 100%;
   background: #000000;
 }
+
 
 /***************************************/
 /* below are for webix carousel styles */
