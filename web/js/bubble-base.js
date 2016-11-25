@@ -4,9 +4,14 @@
  */
 
 $(function() {
+  var scriptEls = document.getElementsByTagName('script');
+  var thisScriptEl = scriptEls[scriptEls.length - 1];
+  var scriptPath = thisScriptEl.src;
+  var bubbleHome = scriptPath.substr(0, scriptPath.lastIndexOf('/js/') + 1);
+  var background = bubbleHome + 'img/background.jpg'
   $.supersized({
     slides: [{
-      image: '../img/background.jpg',
+      image: background,
       title: 'Custom Be G'
     }]
   });
