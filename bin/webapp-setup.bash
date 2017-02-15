@@ -53,12 +53,25 @@ sudo chmod +x /home/pi/file_lister.py
 # create systemd service file (aka Unit File)
 sudo cp ${BUBBLE_DIR}/bin/config/media-discovery.service /lib/systemd/system
 
-# enable the systemd service
-sudo systemctl daemon-reload
-sudo systemctl enable media-discovery.service
+# copy thumbs-gen.bash to ~/thumbs-gen.bash
+sudo cp ${BUBBLE_DIR}/bin/thumbs-gen.bash /home/pi/thumbs-gen.bash
+
+# ensure the python script is executable
+sudo chmod +x /home/pi/thumbs-gen.bash
+
+# create systemd service file for thumbnail generation
+sudo cp ${BUBBLE_DIR}/bin/config/thumbs-gen.service /lib/systemd/system
 
 # mount the usb device so that web page can acess to files on the usb thumb
 sudo mount -a
 
+# enable the systemd services
+sudo systemctl daemon-reload
+sudo systemctl enable media-discovery.service
+sudo systemctl enable thumbs-gen.service
+
 # kick off generate script to create data file in json format
 /home/pi/file_lister.py
+
+# kick off thumbnail generation script
+/home/pi/thumbs-gen.bash
