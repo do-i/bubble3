@@ -2,18 +2,22 @@
 #
 # Copyright (c) 2017 Joji Doi
 #
-# This install script is ment to be executed in Raspberry Pi3 (Raspbian) to download files from github
-# and configure Bubble
-# Usage: export BUBBLE_DIR=<bubble directory> && bash thumbs-up.bash
+# Batch thumbnail generation script.
+# Usage: export IMAGE_DIR=/mnt/photos && bash thumbs-up.bash
 
 # setup variables
-IMAGE_DIR='/mnt/photos'
-THUMBS_DIR='/mnt/photos/thumbs'
+if [ "${IMAGE_DIR}" == "" ]; then
+  IMAGE_DIR=/mnt/photos
+fi
+
+THUMBS_DIR=${IMAGE_DIR}/thumbs
 
 # create thumbnail output dir
 if [ -d ${THUMBS_DIR} ]; then
   echo 'thumbnails are already there. todo: check number of files to match source if numbers are different regenerate???'
 else
   sudo mkdir -p ${THUMBS_DIR}
-  sudo mogrify -format jpg -path ${THUMBS_DIR} -thumbnail 100x100 ${IMAGE_DIR}/*.jpg
+  # suports case-insensitive extensions for jpg and png files
+  sudo find ${IMAGE_DIR} -type f \( -iname '*.jpg' -or -iname '*.png' \) -execdir \
+  mogrify -auto-orient -format jpg -path thumbs -thumbnail 100x100 {} \;
 fi
