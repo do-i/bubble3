@@ -1,0 +1,2 @@
+SUBSYSTEMS=="usb", ACTION=="add", RUN+="/home/pi/usb-motion.bash ADDED"
+SUBSYSTEMS=="usb", ACTION=="remove", RUN+="/home/pi/usb-motion.bash REMOVED"

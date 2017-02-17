@@ -44,16 +44,4 @@ fi
 bash ${BUBBLE_DIR}/bin/network-setup.bash  \
 && bash ${BUBBLE_DIR}/bin/webapp-setup.bash
 
-
-# Install imagemagick
-sudo apt-get install -y imagemagick
-
-# check mogrify is installed
-if which mogrify; then
-  echo 'mogrify is installed'
-else
-  echo 'imagemagick installation failed.'
-  exit 1
-fi
-
 echo "[Ok] End of install script. Check for any errors."
