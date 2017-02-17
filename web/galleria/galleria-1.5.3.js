@@ -1,5 +1,5 @@
 /**
- * Galleria v1.4.7 2016-09-17
+ * Galleria v1.5.3 2017-02-13
  * http://galleria.io
  *
  * Copyright (c) 2010 - 2016 worse is better UG
@@ -21,7 +21,7 @@ var doc    = window.document,
     protoArray = Array.prototype,
 
 // internal constants
-    VERSION = 1.47,
+    VERSION = 1.53,
     DEBUG = true,
     TIMEOUT = 30000,
     DUMMY = false,
@@ -5683,6 +5683,11 @@ Galleria.addTheme = function( theme ) {
         Galleria.raise('No theme name specified');
     }
 
+    // make sure it's compatible
+    if ( !theme.version || parseInt(Galleria.version*10) > parseInt(theme.version*10) ) {
+        Galleria.raise('This version of Galleria requires '+theme.name+' theme version '+Galleria.version.toFixed(1)+' or later', true);
+    }
+
     if ( typeof theme.defaults !== 'object' ) {
         theme.defaults = {};
     } else {
@@ -5780,7 +5785,7 @@ Galleria.loadTheme = function( src, options ) {
         err;
 
     // start listening for the timeout onload
-    $( window ).load( function() {
+    $( window ).on('load', function() {
         if ( !loaded ) {
             // give it another 20 seconds
             err = window.setTimeout(function() {
@@ -6157,7 +6162,7 @@ Galleria.Picture.prototype = {
     */
 
     preload: function( src ) {
-        $( new Image() ).load((function(src, cache) {
+        $( new Image() ).on( 'load', (function(src, cache) {
             return function() {
                 cache[ src ] = src;
             };
@@ -6201,7 +6206,7 @@ Galleria.Picture.prototype = {
 
             this.container.appendChild( this.image );
 
-            $('#'+id).load( (function( self, callback ) {
+            $('#'+id).on( 'load', (function( self, callback ) {
                 return function() {
                     window.setTimeout(function() {
                         $( self.image ).css( 'visibility', 'visible' );
@@ -6298,7 +6303,7 @@ Galleria.Picture.prototype = {
                                 },
                                 error: function() {
                                     if ( !resort ) {
-                                        $(new Image()).load( onload ).attr( 'src', img.src );
+                                        $(new Image()).on( 'load', onload ).attr( 'src', img.src );
                                         resort = true;
                                     } else {
                                         Galleria.raise('Could not extract width/height from image: ' + img.src +
@@ -6329,7 +6334,7 @@ Galleria.Picture.prototype = {
         });
 
         // begin load and insert in cache when done
-        $image.load( onload ).on( 'error', onerror ).attr( 'src', src );
+        $image.on( 'load', onload ).on( 'error', onerror ).attr( 'src', src );
 
         // return the container
         return this.container;
