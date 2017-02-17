@@ -30,7 +30,6 @@ $.getJSON("data/media_files_list.json", function(result) {
     img.appendTo(aTag);
     aTag.appendTo("#files_list");
   });
-  Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
   $(".galleria").galleria({
     responsive: true,
     height: 0.5
