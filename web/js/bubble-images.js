@@ -21,7 +21,6 @@ $.getJSON("data/media_files_list.json", function(result) {
     return this.category == "photos";
   });
   $.each(mediaFiles, function(i, mediaItem) {
-    // TODO add <a/> around <img> tag
     var aTag = $("<a/>", {
       "href": getMediaFilePath(mediaItem)
     });
