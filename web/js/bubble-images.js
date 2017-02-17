@@ -9,7 +9,8 @@ function getMediaFilePath(mediaItem) {
 }
 
 function getMediaThumbFilePath(mediaItem) {
-  return "ext-content/" + mediaItem.dir + '/thumbs/' + mediaItem.title + ".jpg";
+  return "ext-content/" + mediaItem.dir + '/thumbs/' + mediaItem.title +
+    mediaItem.file_ext;
 }
 
 /*
