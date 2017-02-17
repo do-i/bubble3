@@ -6,6 +6,17 @@
 # and configure Bubble
 # Usage: export BUBBLE_DIR=<bubble directory> && bash webapp-setup.bash
 
+# Install imagemagick
+sudo apt-get install -y imagemagick
+
+# check mogrify is installed
+if which mogrify; then
+  echo 'mogrify is installed'
+else
+  echo 'imagemagick installation failed.'
+  exit 1
+fi
+
 if [ "${BUBBLE_DIR}" == "" ]; then
   echo "Set BUBBLE_DIR variable"
   exit 1
@@ -61,6 +72,18 @@ sudo chmod +x /home/pi/thumbs-gen.bash
 
 # create systemd service file for thumbnail generation
 sudo cp ${BUBBLE_DIR}/bin/config/thumbs-gen.service /lib/systemd/system
+
+# copy usb-motion.bash to ~/usb-motion.bash
+sudo cp ${BUBBLE_DIR}/bin/usb-motion.bash /home/pi/usb-motion.bash
+
+# ensure script is executable
+sudo chmod +x /home/pi/usb-motion.bash
+
+# copy 88-local.rules to /etc/udev/rules.d
+sudo cp ${BUBBLE_DIR}/bin/config/88-local.rules /etc/udev/rules.d
+
+# activate udev rules
+sudo udevadm control --reload-rules
 
 # mount the usb device so that web page can acess to files on the usb thumb
 sudo mount -a
