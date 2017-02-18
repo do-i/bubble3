@@ -37,6 +37,21 @@ $.getJSON("data/media_files_list.json", function(result) {
 
   // lazy load small chunks of thumbnails at a time
   Galleria.ready(function() {
-    this.lazyLoadChunks(30, 1000); // 30 thumbs per second
-  })
+    var thumbCheck = setInterval(fff, 3000);
+    var gal = this;
+
+    function fff() {
+      $.getJSON("data/thumb-gen.json", function(result) {
+        if (result.thumbs == "DONE") {
+          clearInterval(thumbCheck);
+          $("label[for='thumbs']").text("");
+          gal.lazyLoadChunks(30, 1000); // 30 thumbs per second
+        } else {
+          $("label[for='thumbs']").text(
+            "Bubble is creating thumbnails. This may take long time for the first time."
+          );
+        }
+      });
+    } // end of fff
+  }); // end of annonymous function in ready
 }); // end of getJSON()
