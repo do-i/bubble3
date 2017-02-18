@@ -28,9 +28,15 @@ $.getJSON("data/media_files_list.json", function(result) {
     });
   });
   Galleria.run('.galleria', {
+    thumbnails: "lazy",
     dataSource: datas,
     responsive: true,
     height: 0.5,
     autoplay: true
   });
+
+  // lazy load small chunks of thumbnails at a time
+  Galleria.ready(function() {
+    this.lazyLoadChunks(30, 1000);
+  })
 }); // end of getJSON()
