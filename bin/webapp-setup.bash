@@ -10,8 +10,8 @@
 sudo apt-get install -y imagemagick
 
 # check mogrify is installed
-if which mogrify; then
-  echo 'mogrify is installed'
+if which convert; then
+  echo 'imagemagick is installed'
 else
   echo 'imagemagick installation failed.'
   exit 1
