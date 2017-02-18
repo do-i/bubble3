@@ -5,8 +5,15 @@
 # Batch thumbnail generation script.
 # Usage: export IMAGE_DIR=/mnt/photos && bash thumbs-gen.bash
 
+OUTPUT_DIR=/var/www/html/data
+
+# create a marker file
+echo '{"thumbs":"WIP"}' > ${OUTPUT_DIR}/thumb-gen.json
+chmod 644 ${OUTPUT_DIR}/thumb-gen.json
+
 # setup variables
 if [ "${IMAGE_DIR}" == "" ]; then
+  ### TODO support case-insensitive for `photos` dir
   IMAGE_DIR=/mnt/photos
 fi
 
@@ -42,3 +49,6 @@ done
 
 # restore original IFS value
 IFS=${IFS_ORIG}
+
+# update a marker file
+echo '{"thumbs":"DONE"}' > ${OUTPUT_DIR}/thumb-gen.json
