@@ -20,18 +20,15 @@ $.getJSON("data/media_files_list.json", function(result) {
   var mediaFiles = $(result).filter(function() {
     return this.category == "photos";
   });
+  var datas = [];
   $.each(mediaFiles, function(i, mediaItem) {
-    var aTag = $("<a/>", {
-      "href": getMediaFilePath(mediaItem)
+    datas.push({
+      image: getMediaFilePath(mediaItem),
+      thumb: getMediaThumbFilePath(mediaItem)
     });
-    var img = $("<img/>", {
-      "src": getMediaThumbFilePath(mediaItem)
-    });
-    img.appendTo(aTag);
-    aTag.appendTo("#files_list");
   });
-
   Galleria.run('.galleria', {
+    dataSource: datas,
     responsive: true,
     height: 0.5,
     autoplay: true
