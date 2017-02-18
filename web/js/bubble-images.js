@@ -30,10 +30,10 @@ $.getJSON("data/media_files_list.json", function(result) {
     img.appendTo(aTag);
     aTag.appendTo("#files_list");
   });
-  $(".galleria").galleria({
-    responsive: true,
-    height: 0.5
-  });
-  Galleria.run('.galleria');
 
+  Galleria.run('.galleria', {
+    responsive: true,
+    height: 0.5,
+    autoplay: true
+  });
 }); // end of getJSON()
