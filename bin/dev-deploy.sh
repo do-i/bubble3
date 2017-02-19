@@ -14,4 +14,5 @@ mkdir -p ${DESTINATION}/ext-content
 cd $_
 cp -r ${WORK_DIR}/test/* .
 cd ${WORK_DIR}
+echo '{"thumbs":"WIP"}' > ${DESTINATION}/data/thumb-gen.json
 cp ${DESTINATION}/img/background_default.jpg ${DESTINATION}/img/background.jpg
