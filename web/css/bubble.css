@@ -15,6 +15,10 @@
     text-overflow: ellipsis;
 }
 
+.bubble-audio-title {
+  color: #CACACA;
+}
+
 .btn-bubble:hover {
     background: #3CA960;
     color: #CBFBCF;

@@ -9,6 +9,7 @@ function getMediaFilePath(mediaItem) {
 }
 
 function renderAudio(mediaItem) {
+  $(".bubble-audio-title").text(mediaItem.title);
   $("#audio_elm").empty(); // clear previous source element
   var video_src = $("<source/>", {
     "src": getMediaFilePath(mediaItem),
