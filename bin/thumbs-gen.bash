@@ -5,16 +5,18 @@
 # Batch thumbnail generation script.
 # Usage: export IMAGE_DIR=/mnt/photos && bash thumbs-gen.bash
 
-OUTPUT_DIR=/var/www/html/data
+if [ "${OUTPUT_DIR}" == "" ]; then
+  OUTPUT_DIR=/var/www/html/data
+fi
 
-# create a marker file
+# create a marker file. used by UI to decide when to load thumbs
 echo '{"thumbs":"WIP"}' > ${OUTPUT_DIR}/thumb-gen.json
 chmod 644 ${OUTPUT_DIR}/thumb-gen.json
 
 # setup variables
 if [ "${IMAGE_DIR}" == "" ]; then
-  ### TODO support case-insensitive for `photos` dir
-  IMAGE_DIR=/mnt/photos
+  # support case-insensitive for `photos` dir
+  IMAGE_DIR=$(find /mnt -iname photos)
 fi
 
 # set thumbnail destination dir
