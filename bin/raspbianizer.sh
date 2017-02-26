@@ -91,6 +91,13 @@ function copy_image_to_device() {
   sync
 }
 
+function create_ssh_file() {
+  local BUBBLE=/tmp/bubble
+  sudo mkdir -p ${BUBBLE}
+  sudo mount ${DEVICE_NAME}1 ${BUBBLE}
+  sudo touch ${BUBBLE}/ssh
+}
+
 if [ "${OS}" == "Darwin" ]; then
   find_partition_count_mac && check_device_status && delete_partitions_mac
 elif [ "${OS}" == "Linux" ]; then
@@ -101,7 +108,7 @@ else
 fi
 
 ## TODO check return status code from the previous command.
-download_upzip && copy_image_to_device \
+download_upzip && copy_image_to_device && create_ssh_file \
   && echo "Script completed. Check for errors in case there is any." \
   && exit 0
 
