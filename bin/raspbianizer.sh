@@ -4,8 +4,8 @@
 # Require sdcard to be unmounted and no partition should be allocated
 OS=$(uname)
 DEVICE_NAME="${1}"
-RASPBIAN="2016-09-23-raspbian-jessie-lite"
-RASPBIAN_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-09-28/2016-09-23-raspbian-jessie-lite.zip"
+RASPBIAN="2017-01-11-raspbian-jessie-lite"
+RASPBIAN_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-01-10/2017-01-11-raspbian-jessie-lite.zip"
 WORK_DIR=$(pwd)
 
 ## check if the ${DEVICE_NAME} exists
