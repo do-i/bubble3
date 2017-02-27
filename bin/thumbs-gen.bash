@@ -44,8 +44,9 @@ IFS=$(echo -en "\n\b")
 for fullname in $(find ${THUMBS_DIR} -maxdepth 1 -type f \( -iname '*.jpg' -or -iname '*.png' \)); do
   basename="${fullname##*/}"
   if [ ! -f ${IMAGE_DIR}/${basename} ]; then
+    echo "${basename} thumbnail deleting..." >> ${LOG_FILE}
     sudo rm "${THUMBS_DIR}/${basename}"
-    echo "${basename} thumbnail deleted" >> ${LOG_FILE}
+    echo "${basename} thumbnail deleted." >> ${LOG_FILE}
   fi
 done
 
@@ -54,8 +55,9 @@ for fullname in $(find ${IMAGE_DIR}/* -maxdepth 0 -type f \( -iname '*.jpg' -or 
   # note that this script skips hidden files with dot prefixed files
   basename="${fullname##*/}"
   if [ ! -f ${THUMBS_DIR}/${basename} ]; then
+    echo "${basename} thumbnail creating..." >> ${LOG_FILE}
     sudo convert "${IMAGE_DIR}/${basename}" -auto-orient -thumbnail 100x100 "${THUMBS_DIR}/${basename}"
-    echo "${basename} thumbnail created" >> ${LOG_FILE}
+    echo "${basename} thumbnail created." >> ${LOG_FILE}
   fi
 done
 
