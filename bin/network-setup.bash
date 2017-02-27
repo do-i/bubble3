@@ -14,6 +14,16 @@ fi
 # Update package list
 sudo apt-get -y update
 
+# Upgrade packages to the latest
+sudo apt-get -y upgrade
+
+# Install rpi-update
+sudo apt-get -y install rpi-update
+
+# Run firmware upadte with rpi-update
+# TODO test some more this update also find a way to run non-interactive way
+# sudo rpi-update
+
 # Install dnsmasq hostapd for access point
 sudo apt-get install -y dnsmasq hostapd
 
