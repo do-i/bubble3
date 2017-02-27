@@ -3,7 +3,6 @@ Description=Thumbnail Generation Service
 After=multi-user.target
 
 [Service]
-Type=forking
 PIDFile=/home/pi/thumbs-gen.pid
 ExecStart=/bin/bash /home/pi/thumbs-gen.bash
 
