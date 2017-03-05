@@ -93,7 +93,7 @@ function copy_image_to_device() {
 
 function create_ssh_file() {
   local BUBBLE=/tmp/bubble
-  local BOOT_MNT=${BUBBLE}1
+  local BOOT_MNT=${DEVICE_NAME}1
   sudo mkdir -p ${BUBBLE}
   sudo mount ${BOOT_MNT} ${BUBBLE}
   sudo touch ${BUBBLE}/ssh
