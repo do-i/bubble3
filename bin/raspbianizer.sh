@@ -96,7 +96,7 @@ function create_ssh_file() {
   local BOOT_MNT=${DEVICE_NAME}1
   sudo mkdir -p ${BUBBLE}
   sudo mount ${BOOT_MNT} ${BUBBLE}
-  sudo touch ${BUBBLE}/ssh
+  touch ${BUBBLE}/ssh
   if [ -f ${BUBBLE}/ssh ]; then
     echo "Enable sshd"
   else
