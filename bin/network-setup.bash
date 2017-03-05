@@ -12,13 +12,23 @@ if [ "${BUBBLE_DIR}" == "" ]; then
 fi
 
 # Update package list
-sudo apt-get -y update
+if [ "${UPDATE}" == "NO" ]; then
+  echo "skip update"
+else
+  sudo apt-get -y update
 
-# Upgrade packages to the latest
-sudo apt-get -y upgrade
+  # Upgrade packages to the latest
+  if [ "${UPGRADE}" == "NO" ]; then
+    echo "skip upgrade"
+  else
+    sudo apt-get -y upgrade
+  fi
 
-# Install rpi-update
-sudo apt-get -y install rpi-update
+  # Install rpi-update
+  sudo apt-get -y install rpi-update
+fi
+
+
 
 # Run firmware upadte with rpi-update
 # TODO test some more this update also find a way to run non-interactive way
