@@ -11,104 +11,67 @@ if [ "${BUBBLE_DIR}" == "" ]; then
   exit 1
 fi
 
-# Update package list
-if [ "${UPDATE}" == "NO" ]; then
-  echo "skip update"
-else
-  sudo apt-get -y update
-
-  # Upgrade packages to the latest
-  if [ "${UPGRADE}" == "NO" ]; then
-    echo "skip upgrade"
-  else
-    sudo apt-get -y upgrade
-  fi
-
-  # Install rpi-update
-  sudo apt-get -y install rpi-update
-fi
-
-
-
-# Run firmware upadte with rpi-update
-# TODO test some more this update also find a way to run non-interactive way
-# sudo rpi-update
-
-# Install dnsmasq hostapd for access point
-sudo apt-get install -y dnsmasq hostapd
-
-# Check dnsmasq installation
-if [ -f /etc/dnsmasq.conf ]; then
-  echo "[Ok] dnsmasq"
-else
-  echo "[Error] dnsmasq is not installed correctly"
-  exit 1
-fi
+# Install hostapd and dnsmasq for access point
+sudo apt-get install -y hostapd dnsmasq
 
 # Check hostapd installation
 if [ -d /etc/hostapd ]; then
-  echo "[Ok] hostapd"
+  echo "[INFO] Installed hostapd"
 else
   echo "[Error] hostapd is not installed correctly"
   exit 1
 fi
 
-# Disable DHCP
-if grep -q "denyinterfaces wlan0" /etc/dhcpcd.conf
-then
-  echo "[Skip] Disabled DHCP on wlan0 interfaces"
+# Check dnsmasq installation
+if [ -f /etc/dnsmasq.conf ]; then
+  echo "[INFO] Installed dnsmasq"
 else
-  echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
-fi
-
-# Static IP Address configuration
-sudo mv /etc/network/interfaces /etc/network/interfaces.old
-sudo cp ${BUBBLE_DIR}/bin/config/interfaces /etc/network/interfaces
-
-# Restart dhcpcd
-sudo service dhcpcd restart
-
-# Reload the configuration for wlan0
-sudo ifdown wlan0; sudo ifup wlan0
-
-# Check the wlan0 interface
-if ifconfig | grep -q 2.4.8.16; then
-  echo "wlan0 interface is up!"
-else
-  echo "[Error] wlan0 interface configuration. Check the interfaces."
+  echo "[Error] dnsmasq is not installed correctly"
   exit 1
 fi
 
+# Disable DHCP
+if grep -q "denyinterfaces uap0" /etc/dhcpcd.conf
+then
+  echo "[Skip] Disabled DHCP on uap0 interfaces"
+else
+  echo "denyinterfaces uap0" | sudo tee -a /etc/dhcpcd.conf
+fi
+
+# Static IP Address configuration
+echo "[INFO] Configure /etc/network/interfaces"
+sudo mv /etc/network/interfaces /etc/network/interfaces.old
+sudo cp ${BUBBLE_DIR}/bin/config/interfaces /etc/network/interfaces
+
 # Configure hostapd
+echo "[INFO] Configure /etc/hostapd/hostapd.conf"
 source ${BUBBLE_DIR}/bin/override.bash && copy_hostapd_conf
 
 # Update hostapd
+echo "[INFO] Configure /etc/default/hostapd"
 sudo mv /etc/default/hostapd /etc/default/hostapd.old
 sudo cp ${BUBBLE_DIR}/bin/config/hostapd /etc/default/hostapd
 
+# Custom script to set the interface to AP mode, start hostapd and set some iptables
+echo "[INFO] Configure /usr/local/bin/hostapdstart"
+sudo cp ${BUBBLE_DIR}/bin/config/hostapdstart /usr/local/bin/hostapdstart
+sudo chmod 755 /usr/local/bin/hostapdstart
+
 # Configure dnsmasq
-# TODO reconsider DNS server IP Address
+# TODO reconsider DNS server IP Address 8.8.8.8
+echo "[INFO] Configure dnsmasq.conf"
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old
 sudo cp ${BUBBLE_DIR}/bin/config/dnsmasq.conf /etc/dnsmasq.conf
 
-# Set up IPV4 Forwarding so that device connected to pi via wlan0 can use eth0
-sudo mv /etc/sysctl.conf /etc/sysctl.conf.old
-sudo cp ${BUBBLE_DIR}/bin/config/sysctl.conf /etc/sysctl.conf
-
-# Activate IP Forwarding
-sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-
-# Allow wifi clients to access to internet via eth0
-sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-
-# Save iptables in file so the config is applied every time we reboot the Pi
-sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
+# Edit rc.local to start hostapdstart at boot
+echo "[INFO] Configure /etc/rc.local"
 sudo mv /etc/rc.local /etc/rc.local.orig
 sudo cp ${BUBBLE_DIR}/bin/config/rc.local /etc/rc.local
 
-# Restart Services
-sudo service hostapd start
+# Start dnsmasq service
+echo "[INFO] Start dnsmasq service"
 sudo service dnsmasq start
+
+echo "============================="
+echo "End of Network Configurations"
+echo "============================="

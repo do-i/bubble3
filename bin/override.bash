@@ -27,10 +27,10 @@ function replace_ssid() {
     if grep -q ${SSID} /etc/hostapd/hostapd.conf; then
       echo "Override SSID to ${SSID}."
     else
-      echo "Failed to override SSID ${SSID}."
+      echo "[ERROR] Failed to override SSID ${SSID}."
     fi
   else
-    echo "valid SSID not specified: ${SSID}."
+    echo "[WARN] Skip overriding AP SSID. Use default SSID SimpleBubble."
   fi
 }
 
@@ -41,10 +41,10 @@ function replace_pass() {
     if grep -q ${PASS} /etc/hostapd/hostapd.conf; then
       echo "Override wpa_passphrase."
     else
-      echo "Failed to override wpa_passphrase."
+      echo "[ERROR] Failed to override wpa_passphrase."
     fi
   else
-    echo "valid wpa_passphrase not specified."
+    echo "[WARN] Skip overriding AP PASS. Use default passphrase."
   fi
 }
 ##TESTS

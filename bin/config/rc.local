@@ -1,7 +1,8 @@
 #!/bin/sh -e
+/bin/bash /usr/local/bin/hostapdstart
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
-iptables-restore < /etc/iptables.ipv4.nat
+
 exit 0

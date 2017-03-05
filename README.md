@@ -2,10 +2,11 @@
 ### Setup Raspberry Pi with Raspbian Jessie Lite (headless mode)
 #### Step 1: Run raspbianizer.sh
 - Specify the correct device path to the fresh SD card (e.g. /dev/sdd, /dev/sde, or /dev/sdx)
-- Check that the SD card does not have partitions
+- Specify SSID_CLIENT where there is an internet connection is available
+- Specify PASS_CLIENT Passphrase for the SSID_CLIENT
 - Example:
 ```sh
-export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/raspbianizer.sh" | sudo bash -s /dev/sdx
+export BRANCH=v1.0.0 && export SSID_CLIENT="homenet" && export PASS_CLIENT="homenetpass" && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/raspbianizer.sh" | sudo -E bash -s /dev/sdx
 ```
 
 #### Step 2: Boot-up Raspberry Pi3 using SD card & SSH
@@ -18,7 +19,7 @@ ssh pi@<IP Address>
 
 #### Step 3: Install & Configure
 ```sh
-export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
+export BRANCH=v1.0.0 && export UPDATE=YES && UPGRADE=YES && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: Thanks for a [great instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd) for WiFi configuration.
 - Override Options

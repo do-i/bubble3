@@ -3,15 +3,17 @@ source-directory /etc/network/interfaces.d
 auto lo
 iface lo inet loopback
 
-iface eth0 inet manual
+auto wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
-allow-hotplug wlan0
-iface wlan0 inet static
+auto uap0
+iface uap0 inet static
     address 2.4.8.16
     netmask 255.255.255.0
     network 2.4.8.0
     broadcast 2.4.8.255
+    gateway 2.4.8.16
 
-allow-hotplug wlan1
-iface wlan1 inet manual
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+auto eth0
+iface eth0 inet manual
