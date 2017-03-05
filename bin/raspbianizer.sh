@@ -97,6 +97,12 @@ function create_ssh_file() {
   sudo mkdir -p ${BUBBLE}
   sudo mount ${BOOT_MNT} ${BUBBLE}
   sudo touch ${BUBBLE}/ssh
+  if [ -f ${BUBBLE}/ssh ]; then
+    echo "Enable sshd"
+  else
+    echo "Failed to create ssh file in boot partition."
+    exit 1
+  fi
   sudo umount ${BOOT_MNT}
 }
 
@@ -106,7 +112,7 @@ elif [ "${OS}" == "Linux" ]; then
   find_partition_count_linux && check_device_status && delete_partitions_linux
 else
   echo "This is unsupported OS"
-  exit 1;
+  exit 1
 fi
 
 ## TODO check return status code from the previous command.
