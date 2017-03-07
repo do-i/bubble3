@@ -18,7 +18,7 @@ ssh pi@<IP Address>
 
 #### Step 3: Install & Configure
 ```sh
-export BRANCH=v1.0.0 && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
+export BRANCH=v1.0.0 && UPDATE=YES && UPGRADE=YES && curl -skL "https://raw.githubusercontent.com/do-i/bubble3/${BRANCH}/bin/install.sh" | bash
 ```
 - Note: Thanks for a [great instructional article](https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd) for WiFi configuration.
 - Override Options
