@@ -15,11 +15,8 @@ class TestFileLister(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        os.makedirs(TestFileLister.TMP_BUBBLE_DIR)
-
-    @classmethod
-    def tearDownClass(cls):
         shutil.rmtree(TestFileLister.TMP_BUBBLE_DIR)
+        os.makedirs(TestFileLister.TMP_BUBBLE_DIR)
 
     def test_list_media_dirs(self):
         self.assertEqual(file_lister.list_media_dirs('../test'), ['Books', 'Documents', 'Music', 'Photos', 'TV', 'Videos'])
