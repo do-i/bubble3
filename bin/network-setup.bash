@@ -28,11 +28,11 @@ else
   sudo apt-get -y install rpi-update
 fi
 
-
-
 # Run firmware upadte with rpi-update
 # TODO test some more this update also find a way to run non-interactive way
 # sudo rpi-update
+
+sudo apt-get install -y tree
 
 # Install dnsmasq hostapd for access point
 sudo apt-get install -y dnsmasq hostapd
