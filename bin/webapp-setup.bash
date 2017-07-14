@@ -57,6 +57,7 @@ cd ${BUBBLE_DIR}/bin
 
 # copy file_lister.py to ~/file_lister.py
 sudo cp ${BUBBLE_DIR}/bin/file_lister.py /home/pi/file_lister.py
+sudo cp ${BUBBLE_DIR}/bin/file_lister_v2.py /home/pi/file_lister_v2.py
 
 # ensure the python script is executable
 sudo chmod +x /home/pi/file_lister.py
@@ -91,10 +92,12 @@ sudo mount -a
 # enable the systemd services
 sudo systemctl daemon-reload
 sudo systemctl enable media-discovery.service
+sudo systemctl enable media-discovery2.service
 sudo systemctl enable thumbs-gen.service
 
 # kick off generate script to create data file in json format
 /home/pi/file_lister.py
+/home/pi/file_lister_v2.py
 
 # kick off thumbnail generation script
 /home/pi/thumbs-gen.bash
