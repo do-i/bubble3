@@ -11,7 +11,7 @@ class FileListerV2Test(unittest.TestCase):
     Usage: $ python -m unittest file_lister_v2_test
     """
     TMP_BUBBLE_DIR = '/tmp/bubble'
-    MEDIA_FILES_LIST = TMP_BUBBLE_DIR + '/media_files_list.json'
+    MEDIA_FILES_LIST = TMP_BUBBLE_DIR + '/media_files_list_v2.json'
 
     @classmethod
     def setUpClass(cls):

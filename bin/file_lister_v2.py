@@ -25,7 +25,7 @@ def create_file_list_json(output_dir, media_files):
         Create a media file list in json format.
         Example output
     """
-    with open(output_dir + '/media_files_list.json', 'w') as the_file:
+    with open(output_dir + '/media_files_list_v2.json', 'w') as the_file:
         the_file.write(json.dumps(media_files))
 
 
