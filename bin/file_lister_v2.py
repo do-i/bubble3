@@ -1,5 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (c) 2017 Joji Doi
 
+import argparse
 import json
 import os
 import shutil
@@ -30,6 +33,7 @@ def create_file_list_json(output_dir, media_files):
 
 
 def walk_dir(dir_name, level):
+    dir_offset = len(dir_name)
     output = []
     id = 1
     # depth_delta is an offset to directory depth.
@@ -46,7 +50,7 @@ def walk_dir(dir_name, level):
                 "category": category,
                 "title": name,
                 "file_ext": ext,
-                "dir": root
+                "dir": root[dir_offset:]
                 })
             id += 1
     return output
@@ -76,7 +80,7 @@ if __name__ == "__main__":
         help='output json file')
     parser.add_argument('-i', '--image-dir', default='/var/www/html/img',
         help='directory for background.jpg to be created also contains background_default.jpg')
-    parser.add_argument('-L', '--level', default=1,
+    parser.add_argument('-L', '--level', default=8,
         help='Max display depth of the directory tree')
     args = parser.parse_args()
     media_root = args.media_root

@@ -61,9 +61,11 @@ sudo cp ${BUBBLE_DIR}/bin/file_lister_v2.py /home/pi/file_lister_v2.py
 
 # ensure the python script is executable
 sudo chmod +x /home/pi/file_lister.py
+sudo chmod +x /home/pi/file_lister_v2.py
 
 # create systemd service file (aka Unit File)
 sudo cp ${BUBBLE_DIR}/bin/config/media-discovery.service /lib/systemd/system
+sudo cp ${BUBBLE_DIR}/bin/config/media-discovery2.service /lib/systemd/system
 
 # copy thumbs-gen.bash to ~/thumbs-gen.bash
 sudo cp ${BUBBLE_DIR}/bin/thumbs-gen.bash /home/pi/thumbs-gen.bash
