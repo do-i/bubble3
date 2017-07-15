@@ -58,14 +58,17 @@ cd ${BUBBLE_DIR}/bin
 # copy file_lister.py to ~/file_lister.py
 sudo cp ${BUBBLE_DIR}/bin/file_lister.py /home/pi/file_lister.py
 sudo cp ${BUBBLE_DIR}/bin/file_lister_v2.py /home/pi/file_lister_v2.py
+sudo cp ${BUBBLE_DIR}/bin/tree_helper.sh /home/pi/tree_helper.sh
 
 # ensure the python script is executable
 sudo chmod +x /home/pi/file_lister.py
 sudo chmod +x /home/pi/file_lister_v2.py
+sudo chmod +x /home/pi/tree_helper.sh
 
 # create systemd service file (aka Unit File)
 sudo cp ${BUBBLE_DIR}/bin/config/media-discovery.service /lib/systemd/system
 sudo cp ${BUBBLE_DIR}/bin/config/media-discovery2.service /lib/systemd/system
+sudo cp ${BUBBLE_DIR}/bin/config/media-discovery3.service /lib/systemd/system
 
 # copy thumbs-gen.bash to ~/thumbs-gen.bash
 sudo cp ${BUBBLE_DIR}/bin/thumbs-gen.bash /home/pi/thumbs-gen.bash
@@ -100,6 +103,7 @@ sudo systemctl enable thumbs-gen.service
 # kick off generate script to create data file in json format
 /home/pi/file_lister.py
 /home/pi/file_lister_v2.py
+/home/pi/tree_helper.sh
 
 # kick off thumbnail generation script
 /home/pi/thumbs-gen.bash
