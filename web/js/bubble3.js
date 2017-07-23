@@ -1,5 +1,5 @@
 /*!
- * Copyright 2017 Joji Doi, Greg Mendez
+ * Copyright 2017 Joji Doi, Greg Mendez-Weeks
 
  * Licensed under the MIT license
  */
