@@ -5,6 +5,27 @@
  */
 var jsonResult;
 
+var mq = window.matchMedia( "(min-width: 40em)" );
+ var barContainer = document.getElementById("myScrollspy");
+    var bar = document.getElementById("navBar");
+
+function resizeContent(){
+
+    if (mq.matches) {
+
+        bar.className ="nav nav-pills nav-stacked ";
+        barContainer.className = "col-sm-1 bg-faded sidebar";
+      // window width is at least 40em
+
+    } else {
+
+       bar.className ="breadcrumb";
+        barContainer.className = "col-sm-1 bg-faded breadcrumb-item"; 
+      // window width is less than 40em
+    }
+}
+
+
 function getMediaFilePath(mediaItem, dirName) {
   return "ext-content" + dirName + "/" + mediaItem.name;
 }
