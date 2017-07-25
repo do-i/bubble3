@@ -1,30 +1,30 @@
 /*!
  * Copyright 2017 Joji Doi, Greg Mendez-Weeks
-
  * Licensed under the MIT license
+ *
+ * Format: http://jsbeautifier.org/
+ * - with Indent with 2 spaces
+ * - Remove all extra newlines
+ * - Wrap lines near 110 characters
+ * - Braces with control statement
+ * - Add one indent level
  */
 var jsonResult;
+var mq = window.matchMedia("(min-width: 40em)");
+var barContainer = document.getElementById("myScrollspy");
+var bar = document.getElementById("navBar");
 
-var mq = window.matchMedia( "(min-width: 40em)" );
- var barContainer = document.getElementById("myScrollspy");
-    var bar = document.getElementById("navBar");
-
-function resizeContent(){
-
-    if (mq.matches) {
-
-        bar.className ="nav nav-pills nav-stacked ";
-        barContainer.className = "col-sm-1 bg-faded sidebar";
-      // window width is at least 40em
-
-    } else {
-
-       bar.className ="breadcrumb";
-        barContainer.className = "col-sm-1 bg-faded breadcrumb-item"; 
-      // window width is less than 40em
-    }
+function resizeContent() {
+  if (mq.matches) {
+    bar.className = "nav nav-pills nav-stacked ";
+    barContainer.className = "col-sm-1 bg-faded sidebar";
+    // window width is at least 40em
+  } else {
+    bar.className = "breadcrumb";
+    barContainer.className = "col-sm-1 bg-faded breadcrumb-item";
+    // window width is less than 40em
+  }
 }
-
 
 function getMediaFilePath(mediaItem, dirName) {
   return "ext-content" + dirName + "/" + mediaItem.name;
@@ -149,7 +149,8 @@ function getImageFilePathsFromCache() {
  */
 function cacheImageFilePaths(media_file_list) {
   function img(obj) {
-    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' + obj.name + '</div>';
+    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' + obj
+      .name + '</div>';
   }
   console.log("This should be called only once.");
   var imageFilePaths = [];
