@@ -89,7 +89,6 @@ img.bubble_thumb.active {
 .search-form .form-group input.form-control:-ms-input-placeholder {
     display: none;
 }
-
 .search-form .form-group span.form-control-feedback {
     position: absolute;
     top: -1px;
@@ -447,4 +446,9 @@ img.hover-shadow {
     text-align: center;
     top: 30em;
     padding-top: 2em;
+}
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+    color: #fff;
+    background: #66ccff;
 }
