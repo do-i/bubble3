@@ -14,6 +14,10 @@ var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
 
+function decode(string) {
+  return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+}
+
 function resizeContent() {
   if (mq.matches) {
     bar.className = "nav nav-pills nav-stacked ";
@@ -27,7 +31,7 @@ function resizeContent() {
 }
 
 function getMediaFilePath(mediaItem, dirName) {
-  return "ext-content" + dirName + "/" + mediaItem.name;
+  return "ext-content" + decode(dirName + "/" + mediaItem.name);
 }
 
 function getExt(mediaItem) {
