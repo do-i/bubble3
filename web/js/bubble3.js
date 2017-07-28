@@ -305,7 +305,7 @@ function getFilesInDir(dir, title) {
           break;
       }
     }
-    var img = $("<div></div>", {
+    var wrapper = $("<div></div>", {
       "class": "thumbContainer"
     });
     var image = $("<" + divType + "></" + divType + ">", {
@@ -330,9 +330,9 @@ function getFilesInDir(dir, title) {
     image.on("click", function() {
       renderMediaDynamic(mediaItem, title);
     });
-    img.append(image);
-    img.append(lnk);
-    img.appendTo(directory);
+    wrapper.append(image);
+    wrapper.append(lnk);
+    wrapper.appendTo(directory);
   });
 }
 $.getJSON("data/media_files_list_v3.json", function(result) {
