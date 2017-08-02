@@ -1,16 +1,18 @@
-/* Use http://www.cleancss.com/css-beautify/ */
+/*
+ * Format with http://www.cleancss.com/css-beautify/
+ */
 
 .bubble_thumb {
     border: 2px solid white;
     border-radius: 20px;
     -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     max-width: 80%;
     max-height: 80%;
     margin: auto;
     cursor: pointer;
     text-align: center;
+    -ms-flex-line-pack: center;
     align-content: center;
 }
 .body {
@@ -25,7 +27,7 @@ img.bubble_thumb.active {
     position: relative;
     margin: 1em;
     /* border: 1px solid; */
-
+    
     text-align: center;
     width: 100%;
     height: 100%;
@@ -40,27 +42,24 @@ img.bubble_thumb.active {
 }
 .thumbContainer {
     vertical-align: top;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
     display: inline-flex;
     width: 20%;
     min-width: 100px;
     max-width: 170px;
     height: 170px;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
+    -webkit-justify-content: center;
     justify-content: center;
     -webkit-animation: fadein .5s;
     /* Safari, Chrome and Opera > 12.1 */
-
-    -moz-animation: fadein .5s;
     /* Firefox < 16 */
-
-    -ms-animation: fadein .5s;
     /* Internet Explorer */
-
-    -o-animation: fadein .5s;
     /* Opera < 12.1 */
-
+    
     animation: fadein .5s;
-}
 }
 @keyframes fadein {
     from {
@@ -71,15 +70,6 @@ img.bubble_thumb.active {
     }
 }
 /* Firefox < 16 */
-
-@-moz-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 /* Safari, Chrome and Opera > 12.1 */
 
 @-webkit-keyframes fadein {
@@ -91,25 +81,8 @@ img.bubble_thumb.active {
     }
 }
 /* Internet Explorer */
-
-@-ms-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 /* Opera < 12.1 */
 
-@-o-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 @keyframes fadeout {
     from {
         opacity: 1;
@@ -119,15 +92,6 @@ img.bubble_thumb.active {
     }
 }
 /* Firefox < 16 */
-
-@-moz-keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
 /* Safari, Chrome and Opera > 12.1 */
 
 @-webkit-keyframes fadeout {
@@ -139,29 +103,13 @@ img.bubble_thumb.active {
     }
 }
 /* Internet Explorer */
-
-@-ms-keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
 /* Opera < 12.1 */
 
-@-o-keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
 .search-form .form-group {
     margin: -4.5em;
     margin-left: 30em;
     float: left !important;
+    -webkit-transition: all 0.35s, border-radius 0s;
     transition: all 0.35s, border-radius 0s;
     width: 2.5em;
     height: 32px;
@@ -182,12 +130,12 @@ img.bubble_thumb.active {
 }
 .search-form .form-group input.form-control:-moz-placeholder {
     /* Firefox 18- */
-
+    
     display: none;
 }
 .search-form .form-group input.form-control::-moz-placeholder {
     /* Firefox 19+ */
-
+    
     display: none;
 }
 .search-form .form-group input.form-control:-ms-input-placeholder {
@@ -227,7 +175,7 @@ img.bubble_thumb.active {
 
 .breadcrumb > li {
     /* With less: .text-overflow(); */
-
+    
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -322,7 +270,7 @@ body {
         padding: 0px;
         overflow-x: hidden;
         /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
-
+        
         height: 30px;
         padding-left: 0;
         padding-right: 0;
@@ -367,7 +315,7 @@ body {
         padding: 0px;
         overflow-x: hidden;
         /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
-
+        
         height: 300px;
         border-right: 1px solid #eee;
         padding-left: 0;
@@ -411,16 +359,10 @@ body {
     text-align: center;
     -webkit-animation: fadein .5s;
     /* Safari, Chrome and Opera > 12.1 */
-
-    -moz-animation: fadein .5s;
     /* Firefox < 16 */
-
-    -ms-animation: fadein .5s;
     /* Internet Explorer */
-
-    -o-animation: fadein .5s;
     /* Opera < 12.1 */
-
+    
     animation: fadein .5s;
 }
 .sidebar .nav-link {
@@ -481,7 +423,6 @@ body {
     padding: 0;
     max-width: 100%;
 }
-}
 /* The Close Button */
 
 .close {
@@ -514,8 +455,11 @@ body {
     color: white;
     font-weight: bold;
     font-size: 20px;
+    -webkit-transition: 0.6s ease;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -529,10 +473,7 @@ body {
 
 .prev:hover,
 .next:hover {
-    background-color: rgba(0,
-    0,
-    0,
-    0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 /* Number text (1/3 etc) */
 
@@ -545,10 +486,7 @@ body {
 }
 .caption-container {
     text-align: center;
-    background-color: rgba(0,
-    0,
-    0,
-    0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 16px;
     color: white;
 }
@@ -560,17 +498,11 @@ img.demo {
     opacity: 1;
 }
 img.hover-shadow {
+    -webkit-transition: 0.3s;
     transition: 0.3s
 }
 .hover-shadow:hover {
-    box-shadow: 0 4px 8px 0 rgba(0,
-    0,
-    0,
-    0.2),
-    0 6px 20px 0 rgba(0,
-    0,
-    0,
-    0.19)
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 .footerBar {
     height: 7em;
@@ -584,4 +516,89 @@ img.hover-shadow {
 .nav-pills > li > a:focus {
     color: #fff;
     background: #66ccff;
+}
+@media not all and (min-resolution: .001dpcm) {
+    @supports (-webkit-appearance: none) {
+        .breadcrumb {
+            padding: 8px 15px;
+            margin-bottom: 0;
+            list-style: none;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            width: 2000000px;
+        }
+        .breadcrumb > li {
+            display: inline-block;
+        }
+        .breadcrumb > li + li:before {
+            padding: 0 5px;
+            color: #ccc;
+            content: "/\00a0";
+        }
+        .breadcrumb > .active {
+            color: #777;
+        }
+        .body {
+            margin-top: 1em;
+        }
+        .boxIcon {
+            max-width: 0%;
+            min-width: 0px;
+            position: relative;
+            margin-top: -1em;
+        }
+        .categories {
+            margin-left: 1em;
+            margin-bottom: 40em;
+        }
+        .sidebar {
+            z-index: 100;
+            padding: 0px;
+            overflow-x: hidden;
+            /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
+            
+            height: 30px;
+            padding-left: 0;
+            padding-right: 0;
+            width: 15%;
+            min-width: 9em;
+            max-width: 13em;
+            overflow: hidden;
+        }
+        .sidebar .nav {
+            margin-bottom: 20px;
+            margin-left: 20px;
+            top: 8em;
+            border-right: 1px solid #eee;
+            background-color: #eee;
+            border-radius: 5px;
+            width: 15%;
+            min-width: 50px;
+            max-width: 10em;
+            height: 23px;
+        }
+        .navbar-nav {
+            height: 4em;
+            width: 100%;
+            margin-left: 1em;
+        }
+        .fileName {
+            display: inline-flex;
+            width: 20%;
+            min-width: 100px;
+            max-width: 170px;
+            height: 170px;
+            -webkit-align-items: flex-end;
+            align-items: flex-end;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-animation: fadein .5s;
+            /* Safari, Chrome and Opera > 12.1 */
+            /* Firefox < 16 */
+            /* Internet Explorer */
+            /* Opera < 12.1 */
+            
+            animation: fadein .5s;
+        }
+    }
 }

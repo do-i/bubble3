@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <!-- Formated by http://jsbeautifier.org/ with 2 indent -->
+
 <head>
   <meta charset="utf-8">
   <title>Bubble</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="This is UI for BUBBLE">
   <meta name="author" content="dusteacup">
+  <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen" />
   <!-- bootstrap -->
   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
   <!-- supersized -->
   <link rel="stylesheet" href="css/supersized.core.css" type="text/css" media="screen" />
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="css/bubble.css">
-  <!-- favicon Bubble icon -->
+  <link rel="stylesheet" href="css/bubble.css" type="text/css" media="screen">
+  <!-- favicon Bubble icjon -->
   <link rel="shortcut icon" href="img/favicon.png">
   <!-- Add any other renderers you need; see Use Renderers for more information -->
   <link rel="stylesheet" href="css/mediaelementplayer.css" />
@@ -21,28 +23,27 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/mediaelement-and-player.min.js"></script>
 </head>
-<div class="container-fluid">
-  <nav class="navbar navbar-toggleable-md navbar-inverse navbar-fixed-top bg-inverse"> <img src="img/BubbleIcon.png" class="headIcon" alt="Responsive image"> <img src="img/bubbleBox.png" class="boxIcon">
-    <nav class="col-sm-1 bg-faded sidebar fixed" id="myScrollspy">
-      <ul class="nav nav-pills nav-stacked" id="navBar"> </ul>
-    </nav>
-    <div class="collapse navbar-collapse">
-      <div class="row">
-        <div class="col-md-4 "> </div>
-      </div>
-    </div>
-  </nav>
-</div>
 
 <body class="body" onresize="resizeContent()">
+  <div class="container-fluid">
+    <nav class="navbar navbar-toggleable-md navbar-inverse navbar-fixed-top bg-inverse"> <img src="img/BubbleIcon.png" class="headIcon" alt="Responsive image"> <img src="img/bubbleBox.png" class="boxIcon">
+      <nav class="col-sm-1 bg-faded sidebar fixed" id="myScrollspy">
+        <ul class="nav nav-pills nav-stacked" id="navBar"> </ul>
+      </nav>
+      <div class="collapse navbar-collapse">
+        <div class="row">
+          <div class="col-md-4 "> </div>
+        </div>
+      </div>
+    </nav>
+  </div>
   <div id="files_list" class=" categories">
     <!-- Video Modal Dialog -->
     <div id="video_modal" class="modal fade">
       <div class="modal-dialog modal-dialog-bubble">
         <div class="modal-content modal-content-bubble">
-          <div class="modal-body"> <button type="button" class="close close-bubble" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <video id="video_elm" width="100%" controls></video>
-          </div>
+          <div class="modal-body"> <button type="button" class="close close-bubble" data-dismiss="modal" aria-hidden="true">&times;</button>            <video id="video_elm" width="100%" controls>
+                     </video> </div>
         </div>
       </div>
     </div>
@@ -63,7 +64,7 @@
           <div class="modal-header">
             <h4 class="modal-title bubble-audio-title"></h4>
           </div>
-          <div class="modal-body"> <button type="button" class="close close-bubble" data-dismiss="modal" aria-hidden="true">&times;</button> <audio id="audio_elm" controls></audio> </div>
+          <div class="modal-body"> <button type="button" class="close close-bubble" data-dismiss="modal" aria-hidden="true">&times;</button>            <audio id="audio_elm" controls></audio> </div>
         </div>
       </div>
     </div>

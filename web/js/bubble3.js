@@ -1,4 +1,4 @@
-/*!
+*!
  * Copyright 2017 Joji Doi, Greg Mendez-Weeks
  * Licensed under the MIT license
  *
@@ -13,19 +13,29 @@ var jsonResult;
 var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
+var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1;
+if (mq.matches && !isSafari) {
+  bar.className = "nav nav-pills nav-stacked ";
+  barContainer.className = "col-sm-1 bg-faded sidebar";
+  // window width is at least 40em
+} else {
+  bar.className = "breadcrumb";
+  barContainer.className = "breadcrumb-item";
+  // window width is less than 40em
+}
 
 function decode(string) {
   return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
 function resizeContent() {
-  if (mq.matches) {
+  if (mq.matches && !isSafari) {
     bar.className = "nav nav-pills nav-stacked ";
     barContainer.className = "col-sm-1 bg-faded sidebar";
     // window width is at least 40em
   } else {
     bar.className = "breadcrumb";
-    barContainer.className = "col-sm-1 bg-faded breadcrumb-item";
+    barContainer.className = "breadcrumb-item";
     // window width is less than 40em
   }
 }
@@ -246,13 +256,13 @@ function addNavBar(name) {
   var nam = name + "bar";
   var nav = $("<li></li>", {
     "class": "",
-    "id": nam
+    "id": nam,
   });
   var txt = $("<a></a>", {
     "href": "#" + name
   });
   txt.html(getCurrentDir(name));
-  nav.append(txt);
+  txt.appendTo(nav);
   nav.appendTo("#navBar");
 }
 
@@ -306,7 +316,7 @@ function getFilesInDir(dir, title) {
       }
     }
     var wrapper = $("<div></div>", {
-      "class": "thumbContainer"
+      "class": "thumbContainer",
     });
     var image = $("<" + divType + "></" + divType + ">", {
       "id": mediaItem.name + "Icon",
@@ -330,9 +340,11 @@ function getFilesInDir(dir, title) {
     image.on("click", function() {
       renderMediaDynamic(mediaItem, title);
     });
-    wrapper.append(image);
-    wrapper.append(lnk);
+    // wrapper.append(image);
+    //wrapper.append(lnk);
     wrapper.appendTo(directory);
+    lnk.appendTo(wrapper);
+    image.appendTo(wrapper);
   });
 }
 $.getJSON("data/media_files_list_v3.json", function(result) {
