@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+/*!
+=======
 /*
+>>>>>>> 50cc56289e1f7e26f4085b74fe89468ad79476b2
  * Copyright 2017 Joji Doi, Greg Mendez-Weeks
  * Licensed under the MIT license
  *
@@ -112,59 +116,59 @@ function renderVideo(mediaItem, dir) {
 }
 
 function renderPhoto(mediaItem, dir) {
-  $("#img_elm").empty(); // clear previous source element
-  var video_src = $("<img/>", {
-    "src": getMediaFilePath(mediaItem, dir),
-    "class": "modal-content"
-  }).appendTo("#img_elm");
-  $("#img_elm").load();
-}
-//
-// Photo viewer is still under construction.
-//
+    $("#img_elm").empty(); // clear previous source element
+    var video_src = $("<img/>", {
+      "src": getMediaFilePath(mediaItem, dir),
+      "class": "modal-content"
+    }).appendTo("#img_elm");
+    $("#img_elm").load();
+  }
+  //
+  // Photo viewer is still under construction.
+  //
 function renderPhotoOld(mediaItem) {
-  webix.ui({
-    view: "window",
-    id: "image_window",
-    fullscreen: true,
-    head: {
-      view: "toolbar",
-      margin: -10,
-      cols: [{
-        view: "label",
-        label: "~~ Images Beta ~~"
-      }, {
-        view: "icon",
-        icon: "times-circle",
-        click: function() {
-          $$('image_window').close();
-        }
-      }]
-    },
-    body: {
-      view: "carousel",
-      id: "bubble_carousel",
+    webix.ui({
+      view: "window",
+      id: "image_window",
       fullscreen: true,
-      cols: getImageFilePathsFromCache()
-    }
-  });
-  $$("bubble_carousel").setActive(mediaItem.id);
-  $$("image_window").show();
-}
-/*
- * Retrieve cached image file path data.
- * See cacheImageFilePaths(media_file_list) function for cache creation.
- */
+      head: {
+        view: "toolbar",
+        margin: -10,
+        cols: [{
+          view: "label",
+          label: "~~ Images Beta ~~"
+        }, {
+          view: "icon",
+          icon: "times-circle",
+          click: function() {
+            $$('image_window').close();
+          }
+        }]
+      },
+      body: {
+        view: "carousel",
+        id: "bubble_carousel",
+        fullscreen: true,
+        cols: getImageFilePathsFromCache()
+      }
+    });
+    $$("bubble_carousel").setActive(mediaItem.id);
+    $$("image_window").show();
+  }
+  /*
+   * Retrieve cached image file path data.
+   * See cacheImageFilePaths(media_file_list) function for cache creation.
+   */
 function getImageFilePathsFromCache() {
-  return $("body").data("image file list");
-}
-/*
- * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
- */
+    return $("body").data("image file list");
+  }
+  /*
+   * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
+   */
 function cacheImageFilePaths(media_file_list) {
   function img(obj) {
-    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' + obj
-      .name + '</div>';
+    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' +
+      obj.name + '</div>';
   }
   console.log("This should be called only once.");
   var imageFilePaths = [];
@@ -253,17 +257,31 @@ function getCurrentDir(title) {
 }
 
 function addNavBar(name) {
-  var nam = name + "bar";
-  var nav = $("<li></li>", {
-    "class": "",
-    "id": nam,
-  });
-  var txt = $("<a></a>", {
-    "href": "#" + name
-  });
-  txt.html(getCurrentDir(name));
-  txt.appendTo(nav);
-  nav.appendTo("#navBar");
+  if (name != "") {
+    var nam = name + "bar";
+    var nav = $("<li></li>", {
+      "class": "",
+      "id": nam,
+    });
+    var txt = $("<a></a>", {
+      "href": "#" + name
+    });
+    txt.html(getCurrentDir(name));
+    txt.appendTo(nav);
+    nav.appendTo("#navBar");
+  } else {
+    var nam = "Root" + "bar";
+    var nav = $("<li></li>", {
+      "class": "",
+      "id": nam,
+    });
+    var txt = $("<a></a>", {
+      "href": "#" + ""
+    });
+    txt.html(getCurrentDir("Root"));
+    txt.appendTo(nav);
+    nav.appendTo("#navBar");
+  }
 }
 
 function getFilesInDir(dir, title) {
@@ -271,9 +289,14 @@ function getFilesInDir(dir, title) {
   var currentDir = getCurrentDir(title);
   var directory = $("<div></div>", {
     "id": title,
+    "class": "container"
   });
   directory.appendTo("#files_list");
-  var name = $("<h2>" + currentDir + "</h2>", {});
+  if (title != "") {
+    var name = $("<h2>" + currentDir + "</h2>", {});
+  } else {
+    var name = $("<h2>Root</h2>", {});
+  }
   name.appendTo(directory);
   $.each(dir, function(i, mediaItem) {
     var mediaSrc = getMediaFilePath(mediaItem, title);
@@ -326,7 +349,7 @@ function getFilesInDir(dir, title) {
       "value": mediaItem,
       "src": mediaSrc
     });
-    var lnk = $("<a></a>", {
+    var lnk = $("<span></span>", {
       "class": "fileName",
       "data-toggle": "modal",
       "data-target": "#" + modalType + "_modal",
@@ -343,8 +366,8 @@ function getFilesInDir(dir, title) {
     // wrapper.append(image);
     //wrapper.append(lnk);
     wrapper.appendTo(directory);
-    lnk.appendTo(wrapper);
     image.appendTo(wrapper);
+    lnk.appendTo(wrapper);
   });
 }
 $.getJSON("data/media_files_list_v3.json", function(result) {
