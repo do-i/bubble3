@@ -17,23 +17,13 @@ var jsonResult;
 var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
-var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1;
-if (mq.matches && !isSafari) {
-  bar.className = "nav nav-pills nav-stacked ";
-  barContainer.className = "col-sm-1 bg-faded sidebar";
-  // window width is at least 40em
-} else {
-  bar.className = "breadcrumb";
-  barContainer.className = "breadcrumb-item";
-  // window width is less than 40em
-}
 
 function decode(string) {
   return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
 function resizeContent() {
-  if (mq.matches && !isSafari) {
+  if (mq.matches) {
     bar.className = "nav nav-pills nav-stacked ";
     barContainer.className = "col-sm-1 bg-faded sidebar";
     // window width is at least 40em
@@ -116,59 +106,59 @@ function renderVideo(mediaItem, dir) {
 }
 
 function renderPhoto(mediaItem, dir) {
-    $("#img_elm").empty(); // clear previous source element
-    var video_src = $("<img/>", {
-      "src": getMediaFilePath(mediaItem, dir),
-      "class": "modal-content"
-    }).appendTo("#img_elm");
-    $("#img_elm").load();
-  }
-  //
-  // Photo viewer is still under construction.
-  //
+  $("#img_elm").empty(); // clear previous source element
+  var video_src = $("<img/>", {
+    "src": getMediaFilePath(mediaItem, dir),
+    "class": "modal-content"
+  }).appendTo("#img_elm");
+  $("#img_elm").load();
+}
+//
+// Photo viewer is still under construction.
+//
 function renderPhotoOld(mediaItem) {
-    webix.ui({
-      view: "window",
-      id: "image_window",
+  webix.ui({
+    view: "window",
+    id: "image_window",
+    fullscreen: true,
+    head: {
+      view: "toolbar",
+      margin: -10,
+      cols: [{
+        view: "label",
+        label: "~~ Images Beta ~~"
+      }, {
+        view: "icon",
+        icon: "times-circle",
+        click: function() {
+          $$('image_window').close();
+        }
+      }]
+    },
+    body: {
+      view: "carousel",
+      id: "bubble_carousel",
       fullscreen: true,
-      head: {
-        view: "toolbar",
-        margin: -10,
-        cols: [{
-          view: "label",
-          label: "~~ Images Beta ~~"
-        }, {
-          view: "icon",
-          icon: "times-circle",
-          click: function() {
-            $$('image_window').close();
-          }
-        }]
-      },
-      body: {
-        view: "carousel",
-        id: "bubble_carousel",
-        fullscreen: true,
-        cols: getImageFilePathsFromCache()
-      }
-    });
-    $$("bubble_carousel").setActive(mediaItem.id);
-    $$("image_window").show();
-  }
-  /*
-   * Retrieve cached image file path data.
-   * See cacheImageFilePaths(media_file_list) function for cache creation.
-   */
+      cols: getImageFilePathsFromCache()
+    }
+  });
+  $$("bubble_carousel").setActive(mediaItem.id);
+  $$("image_window").show();
+}
+/*
+ * Retrieve cached image file path data.
+ * See cacheImageFilePaths(media_file_list) function for cache creation.
+ */
 function getImageFilePathsFromCache() {
-    return $("body").data("image file list");
-  }
-  /*
-   * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
-   */
+  return $("body").data("image file list");
+}
+/*
+ * Save image file paths data in cache for later reuse via getImageFilePathsFromCache() function.
+ */
 function cacheImageFilePaths(media_file_list) {
   function img(obj) {
-    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' +
-      obj.name + '</div>';
+    return '<img src="' + obj.src + '" class="content" ondragstart="return false"/><div class="title">' + obj
+      .name + '</div>';
   }
   console.log("This should be called only once.");
   var imageFilePaths = [];
@@ -191,20 +181,13 @@ var folderStack = [];
 
 function renderMediaDynamic(mediaItem, title) {
   if (mediaItem.type == "directory") {
-    var opened = false;
-    var pos;
     var elementIcon;
     var element;
-    var len = folderStack.length;
     elementIcon = document.getElementById(mediaItem.name + "Icon");
+    var opened = false;
     for (var i = 0; i < folderStack.length; i++) {
-      if (elementIcon.parentElement.parentElement.id + "/" + mediaItem.name == folderStack[i]) {
-        opened = true;
-        pos = i;
-      }
-    }
-    if (opened) {
-      for (var i = pos; i < len; i++) {
+      if ((folderStack[i].indexOf("/" + mediaItem.name + "/") > -1) || (folderStack[i].substring(folderStack[
+          i].lastIndexOf("/") + 1) == mediaItem.name)) {
         element = document.getElementById(folderStack[i]);
         element.outerHTML = "";
         delete element;
@@ -212,15 +195,17 @@ function renderMediaDynamic(mediaItem, title) {
         elephant.outerHTML = "";
         delete elephant;
         elementIcon.src = "img/folder.png";
+        folderStack.splice(i, 1);
+        i--;
+        opened = true;
       }
-      for (var i = pos; i < len; i++) {
-        folderStack.pop();
-      }
-    } else {
+    }
+    if (!opened) {
       elementIcon.src = "img/openFolder.png";
       folderStack.push(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
-      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
+      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name, elementIcon.parentElement.parentElement);
       getFilesInDir(mediaItem.contents, elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
+      elementIcon.parentElement.parentElement.scrollIntoView();
     }
   } else {
     switch (getExt(mediaItem)) {
@@ -256,16 +241,14 @@ function getCurrentDir(title) {
   return title.substring(title.lastIndexOf("/") + 1);
 }
 
-function addNavBar(name) {
+function addNavBar(name, parent) {
   if (name != "") {
     var nam = name + "bar";
     var nav = $("<li></li>", {
       "class": "",
       "id": nam,
     });
-    var txt = $("<a></a>", {
-      "href": "#" + name
-    });
+    var txt = $("<a></a>", {});
     txt.html(getCurrentDir(name));
     txt.appendTo(nav);
     nav.appendTo("#navBar");
@@ -282,6 +265,9 @@ function addNavBar(name) {
     txt.appendTo(nav);
     nav.appendTo("#navBar");
   }
+  nav.on("click", function() {
+    parent.scrollIntoView();
+  });
 }
 
 function getFilesInDir(dir, title) {
