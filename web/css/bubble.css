@@ -18,6 +18,7 @@ img.bubble_thumb.active {
     color: #3596e0;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .bubble_thumb {
