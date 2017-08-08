@@ -13,17 +13,28 @@ var jsonResult;
 var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
+var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1;
+if (mq.matches && !isSafari) {
+  bar.className = "nav nav-pills nav-stacked ";
+  barContainer.className = "col-sm-1 bg-faded sidebar";
+  // window width is at least 40em
+} else {
+  bar.className = "breadcrumb";
+  barContainer.className = " breadcrumb-item";
+  // window width is less than 40em
+}
 resizeContent();
 var isMobile = false;
+
 function decode(string) {
   return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-isMobile = true;
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  isMobile = true;
 }
 
 function resizeContent() {
-  if (mq.matches) {
+  if (mq.matches && !isSafari) {
     bar.className = "nav nav-pills nav-stacked ";
     barContainer.className = "col-sm-1 bg-faded sidebar";
     // window width is at least 40em
@@ -39,29 +50,30 @@ function getMediaFilePath(mediaItem, dirName) {
 }
 
 function getExt(mediaItem) {
-  if(mediaItem.name != null){
+  if (mediaItem.name != null) {
     var end = mediaItem.name.toString().toLowerCase();
     var ind = end.lastIndexOf(".");
     end = end.substring(ind);
     return end;
-  }return;
+  }
+  return;
 }
 
 function renderPdf(mediaItem, dir) {
   // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
   //window.location = getMediaFilePath(mediaItem, dir);
-    if(!isMobile){   
-      $(".bubble-audio-title").text(mediaItem.name);
-      $("#pdf_elm").empty(); // clear previous source element
-      var pdf_src = $("<iframe></iframe>", {
-        "src": getMediaFilePath(mediaItem, dir),
-        "type": "application/pdf",
-        "class": "txt",
-        }).appendTo("#pdf_elm");
-      $("#pdf_elm").load(); 
-    }else{
-        window.location = getMediaFilePath(mediaItem, dir);
-    }
+  if (!isMobile) {
+    $(".bubble-audio-title").text(mediaItem.name);
+    $("#pdf_elm").empty(); // clear previous source element
+    var pdf_src = $("<iframe></iframe>", {
+      "src": getMediaFilePath(mediaItem, dir),
+      "type": "application/pdf",
+      "class": "txt",
+    }).appendTo("#pdf_elm");
+    $("#pdf_elm").load();
+  } else {
+    window.location = getMediaFilePath(mediaItem, dir);
+  }
 }
 
 function renderText(mediaItem, dir) {
@@ -312,9 +324,9 @@ function getFilesInDir(dir, title) {
           break;
         case ".webm":
         case ".mp4":
-              modalType = "video";
-              divType = "img";
-              mediaSrc = "img/videoFile.png";
+          modalType = "video";
+          divType = "img";
+          mediaSrc = "img/videoFile.png";
           break;
         case ".png":
         case ".jpg":
