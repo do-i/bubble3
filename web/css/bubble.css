@@ -16,6 +16,8 @@ img.bubble_thumb.active {
     cursor: pointer;
     font-weight: 500;
     color: #3596e0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bubble_thumb {
@@ -263,7 +265,7 @@ body {
 
 .container:hover {
   box-shadow: 0 4px 15px rgba(0,0,0,0.15), 0 5px 3px rgba(0,0,0,0.10);
-  border-radius: 10px;
+   border-radius: 10px;
   padding-bottom: 30px;
   margin-bottom: 10px;
   width: 98%;
@@ -306,7 +308,6 @@ body {
     }
     .categories {
         margin-top: 1.5em;
-        margin-left: 1em;
         margin-bottom: 40em;
     }
     .sidebar {
@@ -343,9 +344,9 @@ body {
 }
 @media only screen and (min-width: 40em) {
     .headIcon {
-        z-index: 0;
-        max-height: 7em;
-        display: block;
+    z-index: 0;
+    max-height: 7em;
+    display: block;
 }
     .body {
         margin-top: 0;

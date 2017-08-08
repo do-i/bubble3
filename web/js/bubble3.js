@@ -14,8 +14,12 @@ var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
 resizeContent();
+var isMobile = false;
 function decode(string) {
   return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+}
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+isMobile = true;
 }
 
 function resizeContent() {
@@ -46,14 +50,18 @@ function getExt(mediaItem) {
 function renderPdf(mediaItem, dir) {
   // Note embed nor iframe works great to render pdf. So, this is workaround until better alternative is found.
   //window.location = getMediaFilePath(mediaItem, dir);
-  $(".bubble-audio-title").text(mediaItem.name);
-  $("#pdf_elm").empty(); // clear previous source element
-  var pdf_src = $("<iframe></iframe>", {
-    "src": getMediaFilePath(mediaItem, dir),
-    "type": "application/pdf",
-    "class": "txt",
-  }).appendTo("#pdf_elm");
-  $("#pdf_elm").load();
+    if(!isMobile){   
+      $(".bubble-audio-title").text(mediaItem.name);
+      $("#pdf_elm").empty(); // clear previous source element
+      var pdf_src = $("<iframe></iframe>", {
+        "src": getMediaFilePath(mediaItem, dir),
+        "type": "application/pdf",
+        "class": "txt",
+        }).appendTo("#pdf_elm");
+      $("#pdf_elm").load(); 
+    }else{
+        window.location = getMediaFilePath(mediaItem, dir);
+    }
 }
 
 function renderText(mediaItem, dir) {
@@ -304,8 +312,14 @@ function getFilesInDir(dir, title) {
           break;
         case ".webm":
         case ".mp4":
-          modalType = "video";
-          divType = "video";
+          if(!isMobile){  
+            modalType = "video";
+              divType = "video";
+          } 
+          else{
+            modalType = "video";
+            mediaSrc = "img/musicFile.png";
+          }
           break;
         case ".png":
         case ".jpg":
