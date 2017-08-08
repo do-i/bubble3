@@ -317,8 +317,9 @@ function getFilesInDir(dir, title) {
               divType = "video";
           } 
           else{
-            modalType = "video";
-            mediaSrc = "img/musicFile.png";
+              modalType = "video";
+              divType = "img";
+              mediaSrc = "img/videoFile.png";
           }
           break;
         case ".png":

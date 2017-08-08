@@ -19,6 +19,8 @@ img.bubble_thumb.active {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-right: 2px;
+    padding-left: 2px;
 }
 
 .bubble_thumb {
@@ -170,28 +172,43 @@ img.bubble_thumb.active {
     margin-left: 1px;
     margin-right: 1px;
     height: 3.6em;
-    padding-top: 1em;
+    padding-top: .4em;
     background-color: rgba(0,0,0,0.30);
     cursor: pointer;
-   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* The responsive part */
+.nav > li > a{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .breadcrumb > li {
     /* With less: .text-overflow(); */
-
-    margin-top: 1px;
+    display: inline-block;
     margin: 2px;
     padding: .6em;
-    padding-right: 1em;
+    padding-right:1em;
     padding-left: 1em;
+    margin-bottom: 2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 5px;
-     box-shadow: 0 1px 1px rgba(0,0,1,0.30),  1px 0px rgba(0,0,0,0.01);
+    box-shadow: 0 1px 1px rgba(0,0,1,0.30),  1px 0px rgba(0,0,0,0.01);
     background-color: #eee;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    max-width: 7em;
+    float: left;
+}
+
+.breadcrumb > li > a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .breadcrumb > li:hover {
@@ -256,7 +273,11 @@ h2 {
     border-bottom: 1px solid lightgrey;
     margin-right: 6em;
     color: #3596e0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
 
 
 body {
