@@ -38,19 +38,7 @@ img.bubble_thumb.active {
     padding: 7px;
 }
 
-.thumbContainer {
-    vertical-align: top;
-    position: relative;
-    padding: 1px;
-    display: inline-block;
-    width: 20%;
-    min-width: 100px;
-    max-width: 170px;
-    height: 170px;
-    text-align: center;
-    animation: fadein .5s;
-    padding-bottom: 20px;
-}
+
 
 
 .thumbContainer:before {
@@ -173,11 +161,12 @@ img.bubble_thumb.active {
     margin-right: 1px;
     height: 3.6em;
     padding-top: .4em;
-    background-color: rgba(0,0,0,0.30);
+    background-color: rgba(0,0,0,0);
     cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-left: 5px;
 }
 /* The responsive part */
 .nav > li > a{
@@ -204,7 +193,7 @@ audio {
     text-overflow: ellipsis;
     border-radius: 5px;
     box-shadow: 0 1px 1px rgba(0,0,1,0.30),  1px 0px rgba(0,0,0,0.01);
-    background-color: #eee;
+    background-color: white;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     max-width: 7em;
     float: left;
@@ -320,8 +309,24 @@ body {
     height: 50px;
 }
 @media only screen and (min-width: 1em) {
+    
+    .thumbContainer {
+    vertical-align: top;
+    position: relative;
+    padding: 0px;
+    display: inline-block;
+    width: 20%;
+    min-width: 100px;
+    max-width: 170px;
+    height: 170px;
+    max-height: 130px;
+    text-align: center;
+    animation: fadein .5s;
+    padding-bottom: 20px;
+}
+    
     .headIcon {
-    max-height: 7em;
+    max-height: 3em;
     margin-left: 10px;
 }
     .body {
@@ -334,7 +339,7 @@ body {
         margin-top: -1em;
     }
     .categories {
-        margin-top: 1.5em;
+        margin-top: -1em;
         margin-bottom: 40em;
     }
     .sidebar {
@@ -370,6 +375,21 @@ body {
     }
 }
 @media only screen and (min-width: 40em) {
+    
+    .thumbContainer {
+    vertical-align: top;
+    position: relative;
+    padding: 1px;
+    display: inline-block;
+    width: 20%;
+    min-width: 100px;
+    max-width: 170px;
+    height: 170px;
+    text-align: center;
+    animation: fadein .5s;
+    padding-bottom: 20px;
+}
+    
     .headIcon {
     z-index: 0;
     max-height: 7em;
