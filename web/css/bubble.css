@@ -21,6 +21,7 @@ img.bubble_thumb.active {
     white-space: nowrap;
     padding-right: 2px;
     padding-left: 2px;
+    font-size: 12px;
 }
 
 .bubble_thumb {
@@ -37,9 +38,6 @@ img.bubble_thumb.active {
     
     padding: 7px;
 }
-
-
-
 
 .thumbContainer:before {
     content: ' ';
@@ -203,6 +201,7 @@ audio {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 12px;
 }
 
 .breadcrumb > li:hover {
@@ -310,6 +309,8 @@ body {
 }
 @media only screen and (min-width: 1em) {
     
+    
+    
     .thumbContainer {
     vertical-align: top;
     position: relative;
@@ -375,6 +376,10 @@ body {
     }
 }
 @media only screen and (min-width: 40em) {
+   
+    .fileName{
+    font-size: 14px;
+}
     
     .thumbContainer {
     vertical-align: top;
