@@ -186,6 +186,11 @@ img.bubble_thumb.active {
     text-overflow: ellipsis;
 }
 
+audio {
+    margin-top: 1em;
+    width: 100%; 
+}
+
 .breadcrumb > li {
     /* With less: .text-overflow(); */
     display: inline-block;
