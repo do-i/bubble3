@@ -312,11 +312,6 @@ function getFilesInDir(dir, title) {
           break;
         case ".webm":
         case ".mp4":
-          if(!isMobile){  
-            modalType = "video";
-              divType = "video";
-          } 
-          else{
               modalType = "video";
               divType = "img";
               mediaSrc = "img/videoFile.png";
