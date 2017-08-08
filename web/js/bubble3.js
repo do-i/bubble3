@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright 2017 Joji Doi, Greg Mendez-Weeks
  * Licensed under the MIT license
  *
@@ -13,7 +13,7 @@ var jsonResult;
 var mq = window.matchMedia("(min-width: 40em)");
 var barContainer = document.getElementById("myScrollspy");
 var bar = document.getElementById("navBar");
-
+resizeContent();
 function decode(string) {
   return string.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
@@ -35,10 +35,12 @@ function getMediaFilePath(mediaItem, dirName) {
 }
 
 function getExt(mediaItem) {
-  var end = mediaItem.name.toString().toLowerCase();
-  var ind = end.lastIndexOf(".");
-  end = end.substring(ind);
-  return end;
+  if(mediaItem.name != null){
+    var end = mediaItem.name.toString().toLowerCase();
+    var ind = end.lastIndexOf(".");
+    end = end.substring(ind);
+    return end;
+  }return;
 }
 
 function renderPdf(mediaItem, dir) {
@@ -354,7 +356,8 @@ function getFilesInDir(dir, title) {
 }
 $.getJSON("data/media_files_list_v3.json", function(result) {
   jsonResult = result;
-  addNavBar("")
+  var parent = document.getElementById("files_list");
+  addNavBar("", parent);
   getFilesInDir(result, "");
 }); // end of getJSON()
 $("#audio_modal").on("hide.bs.modal", function(e) {
