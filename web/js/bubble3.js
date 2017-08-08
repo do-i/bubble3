@@ -315,7 +315,6 @@ function getFilesInDir(dir, title) {
               modalType = "video";
               divType = "img";
               mediaSrc = "img/videoFile.png";
-          }
           break;
         case ".png":
         case ".jpg":
