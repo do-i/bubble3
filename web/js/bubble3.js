@@ -223,7 +223,7 @@ function renderMediaDynamic(mediaItem, title) {
       folderStack.push(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
       addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name, elementIcon.parentElement.parentElement);
       getFilesInDir(mediaItem.contents, elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
-      elementIcon.parentElement.parentElement.scrollIntoView();
+      elementIcon.parentElement.scrollIntoView();
     }
   } else {
     switch (getExt(mediaItem)) {
