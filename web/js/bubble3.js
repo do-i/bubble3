@@ -331,6 +331,8 @@ function getFilesInDir(dir, title) {
         case ".png":
         case ".jpg":
           modalType = "img";
+          // TODO This is bit hacky now, let make this less hacky by removing /mnt
+          mediaSrc = "ext-content/.thumbs/mnt" + title + "/" + mediaItem.name;
           break;
         case ".txt":
           mediaSrc = "img/textFile.png";
