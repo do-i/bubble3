@@ -238,8 +238,11 @@ function renderMediaDynamic(mediaItem, title) {
       case ".mp4":
         renderVideo(mediaItem, title);
         break;
-      case ".png":
+      case ".gif":
       case ".jpg":
+      case ".png":
+      case ".tif":
+      case ".tiff":
         renderPhoto(mediaItem, title);
         break;
       case ".txt":
@@ -328,8 +331,11 @@ function getFilesInDir(dir, title) {
           divType = "img";
           mediaSrc = "img/videoFile.png";
           break;
-        case ".png":
+        case ".gif":
         case ".jpg":
+        case ".png":
+        case ".tif":
+        case ".tiff":
           modalType = "img";
           // TODO This is bit hacky now, let make this less hacky by removing /mnt
           mediaSrc = "ext-content/.thumbs/mnt" + title + "/" + mediaItem.name;
