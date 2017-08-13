@@ -221,10 +221,11 @@ function renderMediaDynamic(mediaItem, title) {
     if (!opened) {
       elementIcon.src = "img/openFolder.png";
       folderStack.push(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
-      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name, mediaItem.name);
+      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
       getFilesInDir(mediaItem.contents, elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
       //elementIcon.parentElement.parentElement.scrollIntoView();
-        document.getElementById("/" + mediaItem.name).scrollIntoView({block: "start", behavior: "smooth"});
+        document.getElementById(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name).scrollIntoView({block: "start", behavior: "smooth"});
+        window.scrollBy(0, -100);
     }
   } else {
     switch (getExt(mediaItem)) {
@@ -263,7 +264,7 @@ function getCurrentDir(title) {
   return title.substring(title.lastIndexOf("/") + 1);
 }
 
-function addNavBar(name, parent) {
+function addNavBar(name) {
   if (name != "") {
     var nam = name + "bar";
     var nav = $("<li></li>", {
@@ -289,9 +290,10 @@ function addNavBar(name, parent) {
   }
   nav.on("click", function() {
     if(parent != null){
-      var obj = document.getElementById("/" + parent);
+      var obj = document.getElementById(name)
       if (obj != null) {
         obj.scrollIntoView({block: "start", behavior: "smooth"});
+        window.scrollBy(0, -100);
       }
     }
   });
@@ -391,8 +393,7 @@ function getFilesInDir(dir, title) {
 }
 $.getJSON("data/media_files_list_v3.json", function(result) {
   jsonResult = result;
-  var parent = document.getElementById("files_list");
-  addNavBar("", parent);
+  addNavBar("");
   getFilesInDir(result, "");
 }); // end of getJSON()
 $("#audio_modal").on("hide.bs.modal", function(e) {
