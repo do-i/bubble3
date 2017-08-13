@@ -127,7 +127,7 @@ function renderPhoto(mediaItem, dir) {
   $("#img_elm").empty(); // clear previous source element
   var video_src = $("<img/>", {
     "src": getMediaFilePath(mediaItem, dir),
-    "class": "modal-content"
+    "class": "modal-img"
   }).appendTo("#img_elm");
   $("#img_elm").load();
 }

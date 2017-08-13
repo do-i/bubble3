@@ -5,11 +5,13 @@
 .body {
     background-color: white;
 }
+
 img.bubble_thumb:hover,
 img.bubble_thumb:focus,
 img.bubble_thumb.active {
     /* border-color: #5385d6 !important;*/
 }
+
 .fileName {
     display: block;
     cursor: pointer;
@@ -22,9 +24,7 @@ img.bubble_thumb.active {
     padding-left: 2px;
     font-size: 12px;
 }
-.modal-dialog-bubble {
-    width: 85%;
-}
+
 .bubble_thumb {
     display: inline-block;
     border: 2px solid white;
@@ -38,15 +38,18 @@ img.bubble_thumb.active {
     vertical-align: middle;
     padding: 7px;
 }
+
 .thumbContainer:before {
     content: ' ';
     display: inline-block;
     vertical-align: middle;
     height: 100%;
 }
+
 .bubble_thumb:hover {
     padding: 0px;
 }
+
 @keyframes fadein {
     from {
         opacity: 0;
@@ -104,6 +107,7 @@ img.bubble_thumb.active {
     border-radius: 25px;
     border: 1px solid #ccc;
 }
+
 .search-form .form-group input.form-control {
     padding-left: 2em;
     border: 0 none;
@@ -111,22 +115,27 @@ img.bubble_thumb.active {
     box-shadow: none;
     display: block;
 }
+
 .search-form .form-group input.form-control::-webkit-input-placeholder {
     display: none;
 }
+
 .search-form .form-group input.form-control:-moz-placeholder {
     /* Firefox 18- */
-
+    
     display: none;
 }
+
 .search-form .form-group input.form-control::-moz-placeholder {
     /* Firefox 19+ */
-
+    
     display: none;
 }
+
 .search-form .form-group input.form-control:-ms-input-placeholder {
     display: none;
 }
+
 .search-form .form-group span.form-control-feedback {
     position: absolute;
     top: -1px;
@@ -141,19 +150,24 @@ img.bubble_thumb.active {
     right: initial;
     font-size: 14px;
 }
+
 #searchControl {
     display: none;
 }
+
 #searchControl:checked + label {
     width: 50%;
 }
+
 .col-sm-9 {
     height: 50em;
 }
+
 .nav-pills {
     position: fixed;
     cursor: pointer;
 }
+
 .breadcrumb {
     z-index: 100;
     position: relative;
@@ -175,13 +189,15 @@ img.bubble_thumb.active {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 audio {
     margin-top: 1em;
     width: 100%;
 }
+
 .breadcrumb > li {
     /* With less: .text-overflow(); */
-
+    
     display: inline-block;
     margin: 2px;
     padding: .6em;
@@ -198,29 +214,35 @@ audio {
     max-width: 7em;
     float: left;
 }
+
 .breadcrumb > li > a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 12px;
 }
+
 .breadcrumb > li:hover {
     /* With less: .text-overflow(); */
-
+    
     background: #66ccff;
 }
+
 .breadcrumb > li > a:hover {
     /* With less: .text-overflow(); */
-
+    
     color: aliceblue;
     text-decoration: none;
 }
+
 .breadcrumb > li + li:before {
     content: ""
 }
+
 .breadcrumb > *:nth-child(n+1) {
     display: none;
 }
+
 .invisible {
     display: none;
 }
@@ -254,12 +276,14 @@ audio {
         max-width: 170px;
     }
 }
+
 .navbar {
     height: 7em;
     background-color: #eee;
     border-bottom: 1px solid #eee;
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.30), 1px 10px rgba(0, 0, 0, 0.01);
 }
+
 h2 {
     margin-bottom: 0px;
     padding-bottom: 9px;
@@ -272,10 +296,12 @@ h2 {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 body {
     min-height: 12em;
     padding-top: 8em;
 }
+
 .container:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 5px 3px rgba(0, 0, 0, 0.10);
     border-radius: 10px;
@@ -283,6 +309,7 @@ body {
     margin-bottom: 10px;
     width: 98%;
 }
+
 .container {
     border-radius: 10px;
     padding-bottom: 30px;
@@ -302,6 +329,7 @@ body {
     padding-right: 1em;
     height: 50px;
 }
+
 @media only screen and (min-width: 1em) {
     .thumbContainer {
         vertical-align: top;
@@ -317,29 +345,34 @@ body {
         animation: fadein .5s;
         padding-bottom: 20px;
     }
+    
     .headIcon {
         max-height: 3em;
         margin-left: 10px;
     }
+    
     .body {
         margin-top: 1em;
     }
+    
     .boxIcon {
         max-width: 0%;
         min-width: 0px;
         position: relative;
         margin-top: -1em;
     }
+    
     .categories {
         margin-top: -1em;
         margin-bottom: 40em;
     }
+    
     .sidebar {
         z-index: 100;
         padding: 0px;
         overflow-x: hidden;
         /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
-
+        
         height: 30px;
         padding-left: 0;
         padding-right: 0;
@@ -348,6 +381,7 @@ body {
         max-width: 13em;
         overflow: hidden;
     }
+    
     .sidebar .nav {
         margin-bottom: 20px;
         margin-left: 20px;
@@ -360,16 +394,19 @@ body {
         max-width: 10em;
         height: 23px;
     }
+    
     .navbar-nav {
         height: 4em;
         width: 100%;
         margin-left: 1em;
     }
 }
+
 @media only screen and (min-width: 40em) {
     .fileName {
         font-size: 14px;
     }
+    
     .thumbContainer {
         vertical-align: top;
         position: relative;
@@ -383,14 +420,17 @@ body {
         animation: fadein .5s;
         padding-bottom: 20px;
     }
+    
     .headIcon {
         z-index: 0;
         max-height: 7em;
         display: block;
     }
+    
     .body {
         margin-top: 0;
     }
+    
     .boxIcon {
         display: block;
         max-width: 3%;
@@ -400,15 +440,17 @@ body {
         margin-top: -7em;
         margin-left: 22em;
     }
+    
     .categories {
         margin-left: 12em;
         margin-bottom: 40em;
     }
+    
     .sidebar {
         padding: 0px;
         overflow-x: hidden;
         /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
-
+        
         height: 300px;
         border-right: 1px solid #eee;
         padding-left: 0;
@@ -419,6 +461,7 @@ body {
         max-width: 13em;
         height: 0em;
     }
+    
     .sidebar .nav {
         margin-bottom: 20px;
         margin-left: 20px;
@@ -430,11 +473,13 @@ body {
         min-width: 50px;
         max-width: 10em;
     }
+    
     .navbar-nav {
         height: 2em;
         width: 100%;
         margin-left: 1em;
     }
+    
     @media not all and (min-resolution: .001dpcm) {
         @supports (-webkit-appearance: none) {
             .thumbContainer {
@@ -474,7 +519,7 @@ body {
                 padding: 0px;
                 overflow-x: hidden;
                 /* overflow-y: auto;  Scrollable contents if viewport is shorter than content. */
-
+                
                 height: 30px;
                 padding-left: 0;
                 padding-right: 0;
@@ -508,9 +553,11 @@ body {
 .sidebar .nav-item {
     width: 100%;
 }
+
 .sidebar .nav-item + .nav-item {
     margin-left: 0;
 }
+
 .nav-stacked > li {
     margin-bottom: 0.5em;
     overflow: hidden;
@@ -524,16 +571,19 @@ body {
     /* Firefox < 16 */
     /* Internet Explorer */
     /* Opera < 12.1 */
-
+    
     animation: fadein .5s;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
+
 .nav-stacked > li:hover {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.55), 1px 2px rgba(0, 0, 0, 0.10);
 }
+
 .sidebar .nav-link {
     border-radius: 0;
 }
+
 .files {
     padding-left: 10px;
 }
@@ -546,14 +596,17 @@ body {
     margin-left: 55em;
     margin-top: -5.5em;
 }
+
 .row > .column {
     padding: 0 8px;
 }
+
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
+
 .column {
     float: left;
     width: 25%;
@@ -567,11 +620,13 @@ body {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
 .audio-modal {
     display: none;
     position: relative;
     overflow: hidden;
 }
+
 .txt {
     position: relative;
     padding: 0;
@@ -585,12 +640,30 @@ body {
 .modal-title {
     color: transparent;
 }
+
+.modal-dialog{
+    width: 90%;
+    text-align: center;
+}
+
 .modal-content {
     position: relative;
     background-color: black;
+    border: 0;
+    margin: auto;
+    padding-top: 15px;
+    width: 100%;
+    max-height: 87vh;
+}
+
+.modal-img {
+    position: relative;
+    background-color: black;
+    border: 0;
     margin: auto;
     padding-top: 15px;
     max-width: 100%;
+    max-height: 80vh;
 }
 /* The Close Button */
 
@@ -601,6 +674,7 @@ body {
     font-size: 35px;
     font-weight: bold;
 }
+
 .close-bubble {
     color: white;
     position: absolute;
@@ -609,12 +683,14 @@ body {
     font-weight: bold;
     top: -15px;
 }
+
 .close:hover,
 .close:focus {
     color: #999;
     text-decoration: none;
     cursor: pointer;
 }
+
 .mySlides {
     display: none;
 }
@@ -660,26 +736,32 @@ body {
     position: absolute;
     top: 0;
 }
+
 .caption-container {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 16px;
     color: white;
 }
+
 img.demo {
     opacity: 0.6;
 }
+
 .active,
 .demo:hover {
     opacity: 1;
 }
+
 img.hover-shadow {
     -webkit-transition: 0.3s;
     transition: 0.3s
 }
+
 .hover-shadow:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
+
 .footerBar {
     height: 7em;
     background-color: #eee;
@@ -688,11 +770,13 @@ img.hover-shadow {
     top: 30em;
     padding-top: 2em;
 }
+
 .nav-pills > li > a:hover,
 .nav-pills > li > a:focus {
     color: #fff;
     background: #66ccff;
 }
+
 @media not all and (min-resolution: .001dpcm) {
     @supports (-webkit-appearance: none) {
         @media only screen and (min-width: 40em) {
