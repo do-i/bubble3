@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2017 Joji Doi, Greg Mendez-Weeks
  * Licensed under the MIT license
  *
@@ -221,9 +221,10 @@ function renderMediaDynamic(mediaItem, title) {
     if (!opened) {
       elementIcon.src = "img/openFolder.png";
       folderStack.push(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
-      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name, elementIcon.parentElement.parentElement);
+      addNavBar(elementIcon.parentElement.parentElement.id + "/" + mediaItem.name, mediaItem.name);
       getFilesInDir(mediaItem.contents, elementIcon.parentElement.parentElement.id + "/" + mediaItem.name);
-      elementIcon.parentElement.scrollIntoView();
+      //elementIcon.parentElement.parentElement.scrollIntoView();
+        document.getElementById("/" + mediaItem.name).scrollIntoView({block: "start", behavior: "smooth"});
     }
   } else {
     switch (getExt(mediaItem)) {
@@ -287,7 +288,12 @@ function addNavBar(name, parent) {
     nav.appendTo("#navBar");
   }
   nav.on("click", function() {
-    parent.scrollIntoView();
+  if(parent != null){
+     var obj = document.getElementById("/" + parent);
+     if (obj != null) {
+        obj.scrollIntoView({block: "start", behavior: "smooth"});
+     }
+}
   });
 }
 
