@@ -288,12 +288,12 @@ function addNavBar(name, parent) {
     nav.appendTo("#navBar");
   }
   nav.on("click", function() {
-  if(parent != null){
-     var obj = document.getElementById("/" + parent);
-     if (obj != null) {
+    if(parent != null){
+      var obj = document.getElementById("/" + parent);
+      if (obj != null) {
         obj.scrollIntoView({block: "start", behavior: "smooth"});
-     }
-}
+      }
+    }
   });
 }
 
